@@ -151,30 +151,27 @@
 </p>
 <p>
 <a target="_blank" href="http://syncope.apache.org">Apache Syncope</a> can manage users,
-              groups and memberships (memberOf/member attribute) on external Active Directory
-              via <a target="_blank" href="http://tirasa.github.io/ConnId/">ConnId</a>'s
+groups and memberships (memberOf/member attribute) on external Active Directory
+via <a target="_blank" href="http://tirasa.github.io/ConnId/">ConnId</a>'s
 <a target="_blank" href="https://github.com/Tirasa/ConnIdADBundle">Active Directory (JNDI)
-              connector</a>. Think you manage users and roles on Apache Syncope as centralized
-              IdM, and have all these entities automatically kept in sync with your Active
-              Directory users and groups: few simple steps onto the Apache Syncope
-              administration console will help you to succesfully aim your goals ....</p>
+connector</a>. Think you manage users and roles on Apache Syncope as centralized
+IdM, and have all these entities automatically kept in sync with your Active
+Directory users and groups: few simple steps onto the Apache Syncope
+administration console will help you to succesfully aim your goals ....</p>
 <p>
 <strong>Step 1: Add your custom synchronization action to synchronize
-              memberships</strong>
+memberships</strong>
 </p>
 <p>Memberships won't be synchronized without adding an ad-hoc synchronization
-              action.</p>
-<p> 
-</p>
+action.</p>
+<p>&nbsp;</p>
 <p>The simplest way to implement your sync action is to extend
-              org.apache.syncope.core.sync.impl.LDAPMembershipSyncActions by overriding
-              getGroupMembershipAttrName() method.</p>
-<p> 
-</p>
+org.apache.syncope.core.sync.impl.LDAPMembershipSyncActions by overriding
+getGroupMembershipAttrName() method.</p>
+<p>&nbsp;</p>
 <p>This method have to be returned the value of the connector configuration
-              property <em>groupMemberReferenceAttribute</em>.</p>
-<p> 
-</p>
+property <em>groupMemberReferenceAttribute</em>.</p>
+<p>&nbsp;</p>
 <p>See the sample below.</p>
 <pre class="prettyprint">              protected String getGroupMembershipAttrName(
               final Connector connector) {
@@ -202,20 +199,20 @@
 </pre>
 <p>
 <strong>Step 2: Create and configure your Active Directory connector
-              instance</strong>
+instance</strong>
 </p>
 <p>Apache Syncope 1.1.5 comes with ConnId Active Directory (JNDI) connector
-              bundle 1.1.1. Since this version doesn't support group management you have to
-              download
+bundle 1.1.1. Since this version doesn't support group management you have to
+download
 <a target="_blank" href="http://central.maven.org/maven2/org/connid/bundles/org.connid.bundles.ad/1.1.2/org.connid.bundles.ad-1.1.2.jar">org.connid.bundles.ad-1.1.2.jar</a>
-              (strongly recommended) and install it into your bundles location.</p>
+(strongly recommended) and install it into your bundles location.</p>
 <p>Go under <em>Resources</em> &gt; <em>Connectors</em> and click the
 <em>Create new connector</em> button on bottom: a window will appear.</p>
 <p>Set the name you like as <em>Display name</em>, choose the <em>Location</em>
-              where your Active Directory (JNDI) connector bundle is.</p>
+where your Active Directory (JNDI) connector bundle is.</p>
 <p>Then move to the <em>Configuration</em> tab and
 <a target="_blank" href="https://connid.atlassian.net/wiki/pages/viewpage.action?pageId=360482">configure</a>
-              your connector instance (see below a complete example).</p>
+your connector instance (see below a complete example).</p>
 <table style="width: 399px; height: 521px;" border="1">
 
 <tbody>
@@ -289,9 +286,9 @@
 <td>
 
 <p>top <br>
-              person <br>
-              organizationalPerson <br>
-              user</p>
+person <br>
+organizationalPerson <br>
+user</p>
 
 </td>
 
@@ -349,24 +346,24 @@
 
 </p>
 <p>Move back to the Resources tab and click the <em>Create new resource</em>
-              button on bottom: a window will appear.</p>
+button on bottom: a window will appear.</p>
 <p>Set the name you like and choose the <em>Connector</em> created in the step
-              above.</p>
+above.</p>
 <p>Select <em>Propagation mode ONE_PHASE.</em>
 </p>
 <p>Select <em>Propagation primary.</em>
 </p>
 <p>Configure mappigs (<em>User mapping</em>) between syncope user profile
-              attributes and Active Directory user profile attributes.</p>
+attributes and Active Directory user profile attributes.</p>
 <p>Configure mappigs (<em>Role mapping</em>) between syncope role profile
-              attributes and Active Directory group profile attributes.</p>
+attributes and Active Directory group profile attributes.</p>
 <p>After setting user and role mappings (see above for an example) click the
 <em>Save</em> button.</p>
 <p>
 <strong>User mapping sample</strong>
 </p>
 <p>You may need to define some attribute schema on Apache Syncope before being
-              able to complete the configuration below.</p>
+able to complete the configuration below.</p>
 <img style="margin: 10px;" src="/"><p>
 <strong>Role mapping sample</strong>
 </p>
@@ -374,73 +371,42 @@
 <strong>Step 4: Propagation testing</strong>
 </p>
 <p>With configuration above Apache Syncope is fully enabled to manage users and
-              roles on Active Directory:</p>
+roles on Active Directory:</p>
 <ul>
 
 <li>create user user1, fill all required information and give the AD resource:
-              you will find the AD entry CN=user1,CN=Users,DC=tirasa,DC=net</li>
+you will find the AD entry CN=user1,CN=Users,DC=tirasa,DC=net</li>
 
 <li>create role role1 and give the AD resource: you will find the AD entry
-              CN=role1,CN=Users,DC=tirasa,dc=net</li>
+CN=role1,CN=Users,DC=tirasa,dc=net</li>
 
 <li>create user2 and assign him to role role1: you will find
-              CN=user2,CN=Users,DC=tirasa,DC=net among members attribute values of
-              CN=role1,CN=Users,DC=tirasa,dc=net and, viceversa,
-              CN=role1,CN=Users,DC=tirasa,dc=net among memberOf attribute values of
-              CN=user2,CN=Users,DC=tirasa,DC=net</li>
+CN=user2,CN=Users,DC=tirasa,DC=net among members attribute values of
+CN=role1,CN=Users,DC=tirasa,dc=net and, viceversa,
+CN=role1,CN=Users,DC=tirasa,dc=net among memberOf attribute values of
+CN=user2,CN=Users,DC=tirasa,DC=net</li>
 
 </ul>
 <p>
 <strong>Step 5: Synchronization testing</strong>
 </p>
 <p>Some additional configuration is needed for enabling synchronization, e.g.
-              ability to pull data from external Active Directory.</p>
+ability to pull data from external Active Directory.</p>
 <p>Go under <em>Tasks</em> &gt; <em>Synchronization Tasks</em> and and click the
 <em>Create new task</em> button on bottom: a window will appear.</p>
 <p>Set name and description you like more.</p>
 <p>Specify <em>Actions class</em> provided at the <em>step 1</em>.</p>
 <p>After flagging any checkbox (check <em>Full reconciliation</em> if and only
-              if you want to perform a full reconciliation), click the Save button.</p>
+if you want to perform a full reconciliation), click the Save button.</p>
 <p>At this point Apache Syncope is fully enabled to manage users and groups from
-              Active Directory.</p>
+Active Directory.</p>
 <p>IMPORTANT: if you are not performing a full reconciliation, execute once the
 <em>Synchronization Task</em> created above in order to initialize the
 <em>latestSyncToken</em> at the current date.</p>
 <p>Create some sample users and groups in Active Directory, then go back to
-              Apache Syncope admin console and execute again the <em>Synchronization Task</em>
-              created above: you will find both users, roles and memberships in Apache
-              Syncope, created according to data provided in Active Directory.</p>
-<p> 
-</p>
-<p>---</p>
-<p>Signatures &amp; references:</p>
-<ul>
-
-<li>
-<a target="_blank" href="http://www.linkedin.com/pub/fabio-martelli/1/974/a44">My linkedin
-              profile</a>
-</li>
-
-<li>
-<a target="_blank" href="http://www.tirasa.net">Tirasa - Open Source Excellence</a>
-</li>
-
-<li>
-
-<a target="_blank" href="http://syncope.tirasa.net/support.html">Apache
-              Syncope &amp; ConnId enterprise support, services and training</a>
-</li>
-
-<li>
-<a target="_blank" href="http://syncope.apache.org/mail-lists.html">Apache Syncope community
-              support</a>
-</li>
-
-<li>
-<a target="_blank" href="http://tirasa.github.io/ConnId/">ConnId community support</a>
-</li>
-
-</ul>
+Apache Syncope admin console and execute again the <em>Synchronization Task</em>
+created above: you will find both users, roles and memberships in Apache
+Syncope, created according to data provided in Active Directory.</p>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/configure-active-directory-external-resource.html&title=Configure Active Directory in Apache Syncope 1.1.5&summary=Apache Syncope can manage users, groups and memberships (memberOf/members attribute) on external Active Directory via ConnId's Active Directory (JNDI) connector.    Think you manage users and roles on Apache Syncope as centralized IdM, and have all these entities automatically kept in sync with your Active Directory users and groups: few simple steps onto the Apache Syncope administration console will help you to succesfully aim your goals ...."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/configure-active-directory-external-resource.html&text=Configure Active Directory in Apache Syncope 1.1.5"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/configure-active-directory-external-resource.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;

@@ -150,87 +150,57 @@
 <p>Written by<a href="/author/fabio/index.html"><i> fabio</i></a>
 </p>
 <p>It has been long time since I have been listening always to the usual
-              complains about the big mess caused by the attempt to reflect and manage own
-              organization using Active Directory groups.</p>
+complains about the big mess caused by the attempt to reflect and manage own
+organization using Active Directory groups.</p>
 <p>Often Active Directory is used to centralize all the information about
-              authentication and access to the services/resources of a certain network domain.
+authentication and access to the services/resources of a certain network domain.
 </p>
 <p>Problem always arises when the number of such resources becomes so that high
-              that groups are not an handful mean any more. Provisioning, deprovisioning and
-              [business] roles management easily become expensive (in terms of effort and
-              time) and risky (in terms of access permissions) operations.</p>
-<p> 
-</p>
+that groups are not an handful mean any more. Provisioning, deprovisioning and
+[business] roles management easily become expensive (in terms of effort and
+time) and risky (in terms of access permissions) operations.</p>
+<p>&nbsp;</p>
 <p>Unfortunately, problems coming from this typical scenario often impact both
-              on the productivity, causing avoidable delays, and on the transparency, in terms
-              of access permissions granted to the users, thus making auditing activities
-              difficult and sometimes impossible to accomplish.</p>
+on the productivity, causing avoidable delays, and on the transparency, in terms
+of access permissions granted to the users, thus making auditing activities
+difficult and sometimes impossible to accomplish.</p>
 <p>Finally, this BIG MESS becomes easily a not negligible cost to be budgeted
-              ...</p>
+...</p>
 <p>Probably someone doesn't know that <strong> the solution to the BIG MESS
-              exist yet! </strong>
+exist yet! </strong>
 </p>
 <p>Simply by putting in place a good <strong>Identity Manager </strong>all your
-              problems will disappear.</p>
+problems will disappear.</p>
 <p>
 <a target="_blank" href="http://syncope.apache.org">Syncope IdM</a> is an open source (Apache
-              2.0 license) identity manager, well integrated with Active Directory (AD)
-              through a Java implementation of the <strong>AD DirSync protocol</strong>. This
-              implementation is provided by
+2.0 license) identity manager, well integrated with Active Directory (AD)
+through a Java implementation of the <strong>AD DirSync protocol</strong>. This
+implementation is provided by
 <a target="_blank" href="http://code.google.com/p/connid/wiki/ActiveDirectoryJava">Active
-              Directory connector</a> available among
+Directory connector</a> available among
 <a target="_blank" href="http://code.google.com/p/connid/wiki/AvailableConnectorBundles">ConnId
-              bundles</a> .</p>
+bundles</a> .</p>
 <p>The solution that I want to suggest using Syncope IdM is not invasive: it is
-              completely agentless. <br>
-              Robustness, flexibility, reliability, feasibility and affordability are the
-              major five advantages of adopting a Syncope solution.</p>
+completely agentless. <br>
+Robustness, flexibility, reliability, feasibility and affordability are the
+major five advantages of adopting a Syncope solution.</p>
 <p>To put in place this solution only few steps are needed. By registering an
-              Active Directory (AD) resource, giving a mapping for profile attributes between
-              Syncope and AD and assigning AD groups to specific business roles, you should
-              have all needed to implement your personal solution including:</p>
+Active Directory (AD) resource, giving a mapping for profile attributes between
+Syncope and AD and assigning AD groups to specific business roles, you should
+have all needed to implement your personal solution including:</p>
 <ol>
 
 <li>initial users loading from Active Directory based on assigned groups;</li>
 
 <li>provisioning and deprovisioning from Syncope administration console and
-              propagation of changes on Active Directory and, maybe, other linked
-              repositories, based on assigned roles or resources;</li>
+propagation of changes on Active Directory and, maybe, other linked
+repositories, based on assigned roles or resources;</li>
 
 <li>data synchronization between Active Directory, Syncope and, maybe, other
-              linked repositories.</li>
+linked repositories.</li>
 
 </ol>
 <p>Do not hesitate, check it out and try to solve your big mess.</p>
-<p>---</p>
-<p>Signatures &amp; references:</p>
-<ul>
-
-<li>
-<a target="_blank" href="http://www.linkedin.com/pub/fabio-martelli/1/974/a44">My linkedin
-              profile</a>
-</li>
-
-<li>
-<a target="_blank" href="http://www.tirasa.net">Tirasa - Open Source Excellence</a>
-</li>
-
-<li>
-
-<a target="_blank" href="http://syncope.tirasa.net/support.html">Apache
-              Syncope &amp; ConnId enterprise support, services and training</a>
-</li>
-
-<li>
-<a target="_blank" href="http://syncope.apache.org/mail-lists.html">Apache Syncope community
-              support</a>
-</li>
-
-<li>
-<a target="_blank" href="http://tirasa.github.io/ConnId/">ConnId community support</a>
-</li>
-
-</ul>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/big-mess-solved-at-last.html&title=Big mess solved, at last&summary=There are few years that I listen always the usual complains about the big mess caused by an uncorrect use of Active Directory groups in order to reflect own organization and manage access permissions to the resources."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/big-mess-solved-at-last.html&text=Big mess solved, at last"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/big-mess-solved-at-last.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;

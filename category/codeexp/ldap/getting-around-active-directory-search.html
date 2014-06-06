@@ -149,46 +149,27 @@
 <h3 style="margin:0px; color: #9293c8;">Getting around Active Directory search size limit via ldapsearch</h3>
 <p>Written by<a href="/author/fabio/index.html"><i> fabio</i></a>
 </p>
-<p>If you ask for a large set of results to an <strong>Active Directory (AD)</strong> you will get a "<em>size limit exceeded</em>" error message: searches of Active Directory performed without <strong>paging</strong> are limited to returning a maximum of the first 1000 records.</p>
-<p>A way to get around this search size limit is getting "pages" of results, via ldapsearch as well.</p>
-<p></p>
-<p>Ldapsearch provides '<strong>-E</strong>' option that allows to perform <strong>paged searches</strong>.</p>
-<p>We can ask for all items of a large result set simply by providing the right paging policy.</p>
-<p>For example, we can use <em>-E</em> and provide a value of <em>pr=1000/noprompt</em> in order to return all pages, with 1000 result items per page, without further user interaction (noprompt).</p>
-<pre class="prettyprint">
-              ldapsearch -E pr=1000/noprompt -x
+<p>If you ask for a large set of results to an <strong>Active Directory
+(AD)</strong> you will get a "<em>size limit exceeded</em>" error message:
+searches of Active Directory performed without <strong>paging</strong> are
+limited to returning a maximum of the first 1000 records.</p>
+<p>A way to get around this search size limit is getting "pages" of results, via
+ldapsearch as well.</p>
+<p>&nbsp;</p>
+<p>Ldapsearch provides '<strong>-E</strong>' option that allows to perform
+<strong>paged searches</strong>.</p>
+<p>We can ask for all items of a large result set simply by providing the right
+paging policy.</p>
+<p>For example, we can use <em>-E</em> and provide a value of
+<em>pr=1000/noprompt</em> in order to return all pages, with 1000 result items
+per page, without further user interaction (noprompt).</p>
+<pre class="prettyprint">              ldapsearch -E pr=1000/noprompt -x
               -h adhost.domain.com
               -p 389
-              -D  cn=administrator,cn=users,dc=domain,dc=com 
+              -D  cn=administrator,cn=users,dc=domain,dc=com
               -w password
               -s sub -b  "OU=Users,DC=domain,DC=com"
-              "(objectClass=user)" dn
-</pre>
-<p>---</p>
-<p>Signatures &amp; references:</p>
-<ul>
-
-<li>
-<a target="_blank" href="http://www.linkedin.com/pub/fabio-martelli/1/974/a44">My linkedin profile</a>
-</li>
-
-<li>
-<a target="_blank" href="http://www.tirasa.net">Tirasa - Open Source Excellence</a>
-</li>
-
-<li>
-<a target="_blank" href="http://syncope.tirasa.net/support.html">Apache Syncope &amp; ConnId enterprise support, services and training</a>
-</li>
-
-<li>
-<a target="_blank" href="http://syncope.apache.org/mail-lists.html">Apache Syncope community support</a>
-</li>
-
-<li>
-<a target="_blank" href="http://tirasa.github.io/ConnId/">ConnId community support</a>
-</li>
-
-</ul>
+              "(objectClass=user)" dn</pre>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/getting-around-active-directory-search.html&title=Getting around Active Directory search size limit via ldapsearch&summary=Asking for a large set of results via ldapsearch to an Active Directory (AD) you will get a %22size limit exceeded%22 error message. Searches of Active Directory performed without paging are limited to returning a maximum of the first 1000 records."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/getting-around-active-directory-search.html&text=Getting around Active Directory search size limit via ldapsearch"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/getting-around-active-directory-search.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;

@@ -150,12 +150,12 @@
 <p>Written by<a href="/author/mdisabatino/index.html"><i> mdisabatino</i></a>
 </p>
 <p>Before storing/propagating/synchronizing a specific user or role, a
-              pre-processor can be called in order to allow any kind of manipulation before
-              any actual operation takes place.</p>
+pre-processor can be called in order to allow any kind of manipulation before
+any actual operation takes place.</p>
 <p>To make this, you must implement an interface into Apache Syncope overlay in
-              order to perform custom pre-processing operations.</p>
+order to perform custom pre-processing operations.</p>
 <p>For example, before an user is propagated or synchronized, the value of an
-              given attribute must be transformed:</p>
+given attribute must be transformed:</p>
 <p>AO &mdash;&gt; Administrative Office</p>
 <p>GAO &mdash;&gt; General Accounting Office</p>
 <p>ISSO &mdash;&gt; Information Systems Security Office</p>
@@ -163,12 +163,12 @@
 <ol>
 
 <li>Implementing a custom class for
-              org.apache.syncope.core.rest.data.DefaultAttributableTransformer interface.</li>
+org.apache.syncope.core.rest.data.DefaultAttributableTransformer interface.</li>
 
 <li>Replace in restContext.xml this line:
 <pre class="prettyprint">&lt;bean id="attrTransformer" class="org.apache.syncope.core.rest.data.DefaultAttributableTransformer"/&gt;
 </pre>
-              with
+with
 <pre class="prettyprint">&lt;bean id="attrTransformer" class="org.apache.syncope.core.rest.data.OUAttributableTransformer"/&gt;
 </pre>
 
@@ -187,11 +187,11 @@
               }
 </pre>
 <p>You can use a properties file, a database table or a particular algorithm for
-              the manipulation of the value. You can do anything you want.</p>
+the manipulation of the value. You can do anything you want.</p>
 <p>In my case, I preferred to use a database table, directly managed from the
-              Apache Syncope console. I have implemented a custom panel under Configuration
-              tab to manage translations and this is the result.</p>
-<img style="margin: 10px;" src="/"><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/apache-syncope-add-user-or-role-pre-processing-mechanism.html&title=Apache Syncope: add user or role pre-processing mechanism&summary=Before storing/propagating/synchronizing a specific user or role, a pre-processor can be called in order to allow any kind of manipulation before any actual operation takes place."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
+Apache Syncope console. I have implemented a custom panel under Configuration
+tab to manage translations and this is the result.</p>
+<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/apache-syncope-add-user-or-role-pre-processing-mechanism.html&title=Apache Syncope: add user or role pre-processing mechanism&summary=Before storing/propagating/synchronizing a specific user or role, a pre-processor can be called in order to allow any kind of manipulation before any actual operation takes place."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/apache-syncope-add-user-or-role-pre-processing-mechanism.html&text=Apache Syncope: add user or role pre-processing mechanism"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/apache-syncope-add-user-or-role-pre-processing-mechanism.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://plus.google.com/share?url=http://blog.tirasa.net/apache-syncope-add-user-or-role-pre-processing-mechanism.html"><img alt="" src="images/google_square-24.png"></a>&nbsp;

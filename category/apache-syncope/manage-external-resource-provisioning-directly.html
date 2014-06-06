@@ -154,97 +154,63 @@
 </p>
 <p>Provisioning operations can act on
 <a target="_blank" href="http://syncope.apache.org">Apache Syncope</a> only or be propagated
-              towards external resources as well
-              (<a target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Propagation">propagation</a>).
+towards external resources as well
+(<a target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Propagation">propagation</a>).
 </p>
 <p>Provisioning will occur on a certain
 <a target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Connectors+and+resources">external
-              resource</a> every time the operation involves users or roles assigned to that
-              resource.</p>
+resource</a> every time the operation involves users or roles assigned to that
+resource.</p>
 <p>By the way, Apache Syncope empowers the possibility to control the existence
-              of users/roles on external resources giving the possibility to manage remote
-              provisioning directly.</p>
-<p> 
-</p>
+of users/roles on external resources giving the possibility to manage remote
+provisioning directly.</p>
+<p>&nbsp;</p>
 <p>In fact, an authorized user (or an internal task - a sync task, for instance)
-              can ask for</p>
+can ask for</p>
 <ul>
 
 <li>
 <strong>link / unlink</strong> users/roles to/from specific resources (soft
-              link),</li>
+link),</li>
 
 <li>
 <strong>assign / unassign</strong> users/roles to/from specific resources
-              (hard link),</li>
+(hard link),</li>
 
 <li>
 <strong>provision / de-provision</strong> users/roles on/from specific
-              resources (maybe, without any link).</li>
+resources (maybe, without any link).</li>
 
 </ul>
-<p> 
-</p>
+<p>&nbsp;</p>
 <p>
 <strong>Link/Unlink</strong>
 </p>
 <p>Apache Syncope gives the possibility to create and remove a sort of soft
-              linking between users/roles and resources.</p>
+linking between users/roles and resources.</p>
 <p>This kind of link doesn't imply any propagation at link creation/deletion
-              time.</p>
-<p> 
-</p>
+time.</p>
+<p>&nbsp;</p>
 <p>
 <strong>Provision/De-Provision</strong>
 </p>
 <p>Apache Syncope gives the possibility to directly provision and de-provision
-              users/roles on/from resources, without any link in place.</p>
+users/roles on/from resources, without any link in place.</p>
 <p>This provisioning feature (disjoint from the resource link mechanisms) is
-              often very useful in case of reclaims.</p>
-<p> 
-</p>
+often very useful in case of reclaims.</p>
+<p>&nbsp;</p>
 <p>
 <strong>Assign/Unassign</strong>
 </p>
 <p>Apache Syncope gives the possibility to create and remove a sort of hard
-              linking between users/roles and resources.</p>
+linking between users/roles and resources.</p>
 <p>This kind of link implies propagation at link creation/deletion time: it is
-              the composition between link/unlink and provision/de-provision operations.</p>
-<p> 
-</p>
+the composition between link/unlink and provision/de-provision operations.</p>
+<p>&nbsp;</p>
 <p>Try out these new features into the
 <a target="_blank" href="http://syncope.apache.org/source-repository.html">trunk</a>: start
-              your<a target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Getting+started">
-              new project</a> and explore resource management features from users list.</p>
-<p>---</p>
-<p>Signatures &amp; references:</p>
-<ul>
-
-<li>
-<a target="_blank" href="http://www.linkedin.com/pub/fabio-martelli/1/974/a44">My linkedin
-              profile</a>
-</li>
-
-<li>
-<a target="_blank" href="http://www.tirasa.net">Tirasa - Open Source Excellence</a>
-</li>
-
-<li>
-
-<a target="_blank" href="http://syncope.tirasa.net/support.html">Apache
-              Syncope &amp; ConnId enterprise support, services and training</a>
-</li>
-
-<li>
-<a target="_blank" href="http://syncope.apache.org/mail-lists.html">Apache Syncope community
-              support</a>
-</li>
-
-<li>
-<a target="_blank" href="http://tirasa.github.io/ConnId/">ConnId community support</a>
-</li>
-
-</ul>
+your<a target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Getting+started">
+new project</a> and explore resource management features from users list.</p>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/manage-external-resource-provisioning-directly.html&title=Manage external resource provisioning directly with Apache Syncope&summary=The main purpose of identity management systems is to manage user and role provisioning. Provisioning operations can act on Apache Syncope only or be propagated towards external resources as well (propagation). Provisioning will occur on a certain external resource every time the operation involves users or roles assigned to that resource."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/manage-external-resource-provisioning-directly.html&text=Manage external resource provisioning directly with Apache Syncope"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/manage-external-resource-provisioning-directly.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;

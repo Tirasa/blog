@@ -150,14 +150,13 @@
 <p>Written by<a href="/author/fabio/index.html"><i> fabio</i></a>
 </p>
 <p>As is so often the case, working with SSL you need to configure and test a
-              strong authentication (SSL client authentication).</p>
+strong authentication (SSL client authentication).</p>
 <p>In all these cases, you need to provide an ad-hoc client certificate to
-              perform a succesful handshake.</p>
+perform a succesful handshake.</p>
 <p>
 <a target="_blank" href="http://www.openssl.org/">OpenSSL</a> can be used to create your
-              PKCS12 client certificate by peforming the following few steps.</p>
-<p> 
-</p>
+PKCS12 client certificate by peforming the following few steps.</p>
+<p>&nbsp;</p>
 <ul>
 
 <li>Create a new request</li>
@@ -165,8 +164,7 @@
 </ul>
 <pre class="prettyprint">openssl req -new -nodes -out req.pem -keyout key.pem -days 3650 -config openssl.cnf
 </pre>
-<p> 
-</p>
+<p>&nbsp;</p>
 <ul>
 
 <li>Sign the request with your certification authority (CA)</li>
@@ -174,52 +172,21 @@
 </ul>
 <pre class="prettyprint">openssl ca -out cert.pem -days 365 -config openssl.cnf -infiles req.pem
 </pre>
-<p> 
-</p>
+<p>&nbsp;</p>
 <ul>
 
 <li>Create you p12 certificate</li>
 
 </ul>
 <pre class="prettyprint">openssl pkcs12 -export -in cert.pem -inkey key.pem -certfile cacert.pem -name "Fabio Martelli" -out cert.p12 </pre>
-<p> 
-</p>
+<p>&nbsp;</p>
 <p>Now you can use your cert.p12 with client application.</p>
 <p>E.G. If your client is Firefox you can simply import your certificate as a
-              new "personal certificate".</p>
+new "personal certificate".</p>
 <p>
 <strong>IMPORTANT</strong>: the target peer (the application requiring strong
-              authentication) has to be provisioned with the CA which has signed your
-              certificate.</p>
-<p>---</p>
-<p>Signatures &amp; references:</p>
-<ul>
-
-<li>
-<a target="_blank" href="http://www.linkedin.com/pub/fabio-martelli/1/974/a44">My linkedin
-              profile</a>
-</li>
-
-<li>
-<a target="_blank" href="http://www.tirasa.net">Tirasa - Open Source Excellence</a>
-</li>
-
-<li>
-
-<a target="_blank" href="http://syncope.tirasa.net/support.html">Apache
-              Syncope &amp; ConnId enterprise support, services and training</a>
-</li>
-
-<li>
-<a target="_blank" href="http://syncope.apache.org/mail-lists.html">Apache Syncope community
-              support</a>
-</li>
-
-<li>
-<a target="_blank" href="http://tirasa.github.io/ConnId/">ConnId community support</a>
-</li>
-
-</ul>
+authentication) has to be provisioned with the CA which has signed your
+certificate.</p>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/create-pkcs12-client-certificate-via.html&title=Create PKCS12 client certificate via OpenSSL&summary=As is so often the case, working with SSL you need to configure and test a strong authentication (SSL client authentication). In all these cases, you need to provide an ad-hoc client certificate to perform a succesful handshake."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/create-pkcs12-client-certificate-via.html&text=Create PKCS12 client certificate via OpenSSL"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/create-pkcs12-client-certificate-via.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;

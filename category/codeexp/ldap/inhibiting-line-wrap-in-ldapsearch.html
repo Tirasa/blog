@@ -150,16 +150,15 @@
 <p>Written by<a href="/author/fabio/index.html"><i> fabio</i></a>
 </p>
 <p>As you should know, each ldapsearch line output is wrapped: the max size of a
-              line output is of 79 characters.</p>
+line output is of 79 characters.</p>
 <p>By the way, as is so often the case, ldapsearch output is retrieved to be
-              automatically processed by a script or something else: in these cases the line
-              wrapping usually is a big problem.</p>
+automatically processed by a script or something else: in these cases the line
+wrapping usually is a big problem.</p>
 <p>A way to get around this defauld behavior is to provide the option
 <em><strong>ldif-wrap</strong></em> to ldapsearch.</p>
-<p> 
-</p>
+<p>&nbsp;</p>
 <p>Think about the following query asking for <em>dn</em> and <em>title</em> of
-              the user Fabio Martelli.</p>
+the user Fabio Martelli.</p>
 <pre class="prettyprint">              ldapsearch -x
               -h adhost.domain.com
               -p 389
@@ -173,7 +172,7 @@
               title: developer
 </pre>
 <p>The line corresponding to the <em>dn</em> attribute will be wrapped as shown
-              above.</p>
+above.</p>
 <p>A specific option can be used to avoid wrapping:
 <em><strong>ldif-wrap=no</strong></em>.</p>
 <p>By changing the query as shown below we will solve our problem.</p>
@@ -188,35 +187,6 @@
 <pre class="prettyprint">dn: CN=Fabio Martelli,OU=Developers,OU=Identity Connectors,OU=Apache Syncope,DC=tirasa,DC=net
               title: developer
 </pre>
-<p>---</p>
-<p>Signatures &amp; references:</p>
-<ul>
-
-<li>
-<a target="_blank" href="http://www.linkedin.com/pub/fabio-martelli/1/974/a44">My linkedin
-              profile</a>
-</li>
-
-<li>
-<a target="_blank" href="http://www.tirasa.net">Tirasa - Open Source Excellence</a>
-</li>
-
-<li>
-
-<a target="_blank" href="http://syncope.tirasa.net/support.html">Apache
-              Syncope &amp; ConnId enterprise support, services and training</a>
-</li>
-
-<li>
-<a target="_blank" href="http://syncope.apache.org/mail-lists.html">Apache Syncope community
-              support</a>
-</li>
-
-<li>
-<a target="_blank" href="http://tirasa.github.io/ConnId/">ConnId community support</a>
-</li>
-
-</ul>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/inhibiting-line-wrap-in-ldapsearch.html&title=Inhibiting line-wrap in ldapsearch output&summary=As you should know, each ldapsearch line output is wrapped: the max size of a line output is of  79 characters. By the way, as is so often the case, ldapsearch output is retrieved to be automatically processed by a script or something else: in these cases the line wrapping usually is a big problem."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/inhibiting-line-wrap-in-ldapsearch.html&text=Inhibiting line-wrap in ldapsearch output"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/inhibiting-line-wrap-in-ldapsearch.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;

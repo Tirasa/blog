@@ -153,16 +153,16 @@
 <strong>Yes, Apache OpenJPA is really extensible!</strong>
 </p>
 <p>Recently, working on a library of OpenJPA's pluggable components providing
-              support for
+support for
 <a target="_blank" href="http://msdn.microsoft.com/en-us/library/windowsazure/ee336279.aspx">Microsoft
-              SQLAzure</a>, I needed to add some new configuration parameters.</p>
+SQLAzure</a>, I needed to add some new configuration parameters.</p>
 <p>Unfortunately, all the new parameters provided into <em>persistence.xml</em>
-              file will be ignored by OpenJPA: each configuration parameter must be explicitly
-              considered by the currently used OpenJPA Configuration implementation.</p>
+file will be ignored by OpenJPA: each configuration parameter must be explicitly
+considered by the currently used OpenJPA Configuration implementation.</p>
 <p>To extend OpenJPA configuration you have to provide your custom
-              implementation of <em>OpenJPAConfiguration</em> class. Unfortunately, this
-              component is not explicitly pluggable but you can provide it by overriding the
-              BrokerFactory.</p>
+implementation of <em>OpenJPAConfiguration</em> class. Unfortunately, this
+component is not explicitly pluggable but you can provide it by overriding the
+BrokerFactory.</p>
 <p>Following my simple solution to add a custom configuration parameter
 <em>openjpa.MyProp</em>.</p>
 <p>First of all the configuration interface</p>
@@ -202,37 +202,8 @@
 </pre>
 <p>Providing the parameter <em>openjpa.BrokerFactory</em> valued with
 <em>MyBrokerFactory</em>'s full name, the new configuration is in place and the
-              value of the property <em>openjpa.MyProp</em> is available through
+value of the property <em>openjpa.MyProp</em> is available through
 <em>MyConf</em>'s <em>getMyProp</em> method.</p>
-<p>---</p>
-<p>Signatures &amp; references:</p>
-<ul>
-
-<li>
-<a target="_blank" href="http://www.linkedin.com/pub/fabio-martelli/1/974/a44">My linkedin
-              profile</a>
-</li>
-
-<li>
-<a target="_blank" href="http://www.tirasa.net">Tirasa - Open Source Excellence</a>
-</li>
-
-<li>
-
-<a target="_blank" href="http://syncope.tirasa.net/support.html">Apache
-              Syncope &amp; ConnId enterprise support, services and training</a>
-</li>
-
-<li>
-<a target="_blank" href="http://syncope.apache.org/mail-lists.html">Apache Syncope community
-              support</a>
-</li>
-
-<li>
-<a target="_blank" href="http://tirasa.github.io/ConnId/">ConnId community support</a>
-</li>
-
-</ul>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/openjpa-configuration-extension.html&title=OpenJPA Configuration Extension&summary=OpenJPA is an object-relational mapping (ORM) solution, open source (distributed under the Apache 2.0 Licence) and extremely extensible."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/openjpa-configuration-extension.html&text=OpenJPA Configuration Extension"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/openjpa-configuration-extension.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
