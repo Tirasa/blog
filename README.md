@@ -1,4 +1,0 @@
-blog
-====
-
-blog.tirasa.net

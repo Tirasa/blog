@@ -1,0 +1,899 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:str="http://xsltsl.org/string" xmlns:g="http://base.google.com/ns/1.0" xmlns:i18n="http://apache.org/cocoon/i18n/3.0">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Tirasa Blog - How to get SSO in HippoCMS</title>
+<meta content="Tirasa Blog - How to get SSO in HippoCMS" property="og:title">
+<meta charset="UTF-8">
+<meta content="Think Open Source, create Open Source - Identity and Access management specialists - Apache Syncope main sponsor" name="description">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="off" http-equiv="x-dns-prefetch-control">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<meta content="302007795" property="twitter:account_id">
+<meta content="summary" name="twitter:card">
+<meta content="@syncopeidm" name="twitter:site">
+<meta content="@syncopeidm" name="twitter:site:id">
+<meta content="Tirasa" name="twitter:domain">
+<meta content="@syncopeidm" name="twitter:creator">
+<meta content="iam // identity management // access management // open source // apache syncope" name="twitter:description">
+<meta content="Tirasa" name="twitter:title">
+<meta content="http://www.tirasa.net/site/images/logo.png" name="twitter:image:src">
+<meta content="iam,identity management, access management, open source, apache syncope" name="keywords">
+<meta content="en_US, it_IT" property="og:locale">
+<meta content="iam // identity management // access management // open source // apache syncope" property="og:description">
+<meta content="http://www.tirasa.net/" property="og:url">
+<meta content="Tirasa" property="og:site_name">
+<meta content="article" property="og:type">
+<meta content="http://www.tirasa.net/images/logo.png" property="og:image">
+<meta content="https://www.facebook.com/tirasasrl" property="article:publisher">
+<meta content="https://www.facebook.com/tirasasrl" property="article:author">
+<meta content="2014-01-17T17:05:46+00:00" property="article:published_time">
+<meta content="2014-01-17T00:19:19+00:00" property="article:modified_time">
+<link href="http://www.tirasa.net/" rel="canonical">
+<link href="http://blog.tirasa.net/rss.xml" title="Tirasa Blog Feed" type="application/rss+xml" rel="alternate">
+<link type="image/vnd.microsoft.icon" href="images/favicon.png" rel="shortcut icon">
+<link href="https://plus.google.com/+TirasaNet/" rel="author">
+<link media="all" type="text/css" rel="stylesheet" href="css/main.css">
+<link media="all" type="text/css" rel="stylesheet" href="css/mediaqueries.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700">
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Loved+by+the+King">
+<script src="js/run_prettify.js"></script><script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&language=it"></script><script>
+      function initialize() {
+      var mapOptions = {
+      zoom: 16,
+      maxZoom: 16,
+      minZoom: 16,
+      center: new google.maps.LatLng(42.453845, 14.219460),
+      scaleControl: false,
+      
+      panControl: false,
+      zoomControl: false,
+      mapTypeControl: false,
+      scrollwheel: false,
+      streetViewControl: false,
+      overviewMapControl: false,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+      
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"),
+      mapOptions);
+      
+      
+      var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(42.453845, 14.219460),
+      map: map
+      
+      });
+      
+      }
+
+      google.maps.event.addDomListener(window, "load", initialize);
+
+    </script><script src="js/jquery-latest.min.js"></script><script src="js/jquery-ui.min.js"></script><script src="js/jquery-mobilemenu.min.js"></script><script src="js/custom.js"></script><script src="js/highslide.js" type="text/javascript"></script><script type="text/javascript">
+      hs.graphicsDir = 'css/graphics/';
+    </script><script type="text/javascript">
+      jQuery.noConflict()(function ($) {
+      $( "#accordion" ).accordion();
+      });
+    </script>
+<link media="all" href="css/highslide.css" type="text/css" rel="stylesheet">
+<link media="all" href="css/accordion.css" type="text/css" rel="stylesheet">
+<link href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+</head>
+<body>
+<div xmlns:hct="http://www.tirasa.net/hct/1.0" class="wrapper row0">
+<div id="header" class="full_width clear">
+<ul class="list none" style="margin: 0px;text-align: right;color: white;font-family: 'Montserrat';font-size: 12px;padding-top: 0.25%;;width: 100%;min-height: 17px;"></ul>
+</div>
+</div>
+<div style="padding-bottom: 15px;padding-top: 15px;" class="wrapper row1">
+<header class="full_width clear" id="header">
+<div style="position: relative;float: left;">
+<h1 style="margin-bottom: 0;">
+<a href="http://www.tirasa.net"><img style="width: 200px; margin-top: 1.5%; margin-right: 10px;" src="images/logo.png"></a>
+</h1>
+</div>
+<div style="position: relative;display: inline-flex;" id="topnav">
+<ul class="clear">
+<li>
+<a class="drop" style="width: 120%;" href="http://www.tirasa.net/businessproposition/index.html">Business Proposition</a>
+<ul>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/apache-syncope.html">Apache Syncope</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/identity-access-management.html">Identity &amp; Access Management</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/content-management-system.html">Enterprise Content Management</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/open-source.html">Open Source</a>
+</li>
+</ul>
+</li>
+<li>
+<a title="customers" href="#" class="drop disable_link">Who we are</a>
+<ul>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/mission-vision.html">Mission &amp; Vision</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/aboutus.html">Team</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/contacts.html">Contact</a>
+</li>
+</ul>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/customers.html">Customers</a>
+</li>
+<li>
+<a style="width: 120%;color: #9293c8;" href="http://blog.tirasa.net/index.html">Blog</a>
+</li>
+</ul>
+</div>
+<div class="social_header">
+<a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="https://github.com/Tirasa"><img alt="github" src="images/github_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.linkedin.com/company/2164993"><img alt="linkedin" src="images/linkedin_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.facebook.com/tirasasrl"><img alt="facebook" src="images/facebook_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px" href="http://www.google.com/+TirasaNet"><img alt="g+" src="images/google_plus.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="mailto:info@tirasa.net"><img alt="send an email" src="images/email.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.tirasa.net/rss.xml"><img alt="Blog Post" src="images/feed.png"></a>
+</div>
+</header>
+</div>
+<div class="wrapper row3">
+<div id="container">
+    
+<div style="margin-bottom: 50px;" class="three_quarter first contentbackground">
+<div id="missionvision">
+<section class="clear">08 May 2014<div style="border-top: 1px dotted #9293c8">&nbsp;</div>
+<h3 style="margin:0px; color: #9293c8;">How to get SSO in HippoCMS</h3>
+<p>Written by<a href="/author/massi/index.html"><i> massi</i></a>
+</p>
+<p>As you can imagine this post is about Single Sign On and
+<a target="_blank" href="http://www.onehippo.com">HippoCMS</a>. In particular, at the end of
+this post, we will be able to deploy Hippo CMS in Single Sign On in our
+environment.</p>
+<h2>First step: authentication manager </h2>
+<p>First of all we need an authentication manager representing the entry point
+in our environment. Its purpose, besides the obvious management of the
+authentication mechanism, is to set an http header attribute with authenticated
+username. This task is achievable in many different ways because the mechanism
+is always the same; personally I tried this scenario with:</p>
+<ul>
+
+<li>apache + mod_auth;</li>
+
+<li>CAS with SPNEGO module.</li>
+
+</ul>
+<h4>Apache + mod_auth - use case </h4>
+<pre class="prettyprint">&lt;location "/cms"&gt;
+  AuthType CAS
+  Require valid-user
+  CASScope /
+
+  ProxyPass http://xxx.tirasa.net:8080/cms
+  ProxyPassReverse http://xxx.tirasa.net:8080/cms
+  ProxyHTMLExtended On
+  ProxyHTMLURLMap /cms /cms
+
+  ProxyPassReverseCookiePath / /
+  RewriteEngine On
+  RewriteCond %{LA-U:REMOTE_USER} (.+)
+  RewriteRule . - [E=RU:%1,NS]
+  RequestHeader add X-Forwarded-User %{RU}e
+&lt;/location&gt;
+</pre>
+<h4>CAS + SPNEGO authentication module - use case </h4>
+<p>In this case the authentication on a Windows PC was the entry point so, to
+obtain the SSO in HippoCMS, we have to add a CAS filter to it. Trying to use the
+CMS, CAS filter puts the username of the authenticated user into the
+http-request RemoteUser attribute.</p>
+<h2>Second step: the theory </h2>
+<p>In order to et confidence with the authentication and the authorization in
+HippoCMS I suggest you to read
+<a target="_blank" href="http://www.onehippo.org/7_7/library/concepts/security/use-a-custom-authentication.html">this
+post</a> on hippo site.</p>
+<h2>Third step: the practice </h2>
+<p>Unfortunately following the Hippo documentation I could not achieve the
+expected result. So, from my point of view, this is the official practice guide
+to get SSO in HippoCMS:</p>
+<ol>
+
+<li>Replace
+/hippo:configuration/hippo:frontend/login/login/loginPage/plugin.class console
+property with: net.tirasa.hippo.cms.sso.SSOPlugin (see code at the end of the
+post);</li>
+
+<li>Disable the standard authentication by deleting the LoginModule row under
+this file:
+./cms/src/main/webapp/WEB-INF/classes/org/hippoecm/repository/repository.xml;
+</li>
+
+<li>Add -Djava.security.auth.login.config=/var/tmp/hipposso/hippo_jaas.conf as
+Java properties of your container (of course you can choose your favorite file
+path);</li>
+
+<li>Under the chosen file path create the file:
+<pre class="prettyprint">Jackrabbit {
+  net.tirasa.hippo.cms.sso.SSOModule optional;
+  org.hippoecm.repository.security.JAASLoginModule required preAuthorized=true;
+};
+</pre>
+
+</li>
+
+<li>Add this row java.security.auth.login.config =
+file:///var/tmp/hipposso/hippo_jaas.conf to
+site/src/main/webapp/WEB-INF/hst-config.properties file;</li>
+
+<li>Enjoy SSO.</li>
+
+</ol>
+<h2>Java classes </h2>
+<h3>SSOPlugin </h3>
+<pre class="prettyprint">package net.tirasa.hippo.cms.sso;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import javax.security.auth.callback.Callback;
+import javax.security.auth.callback.CallbackHandler;
+import javax.security.auth.callback.NameCallback;
+import javax.security.auth.callback.PasswordCallback;
+import javax.security.auth.callback.UnsupportedCallbackException;
+import javax.servlet.http.Cookie;
+import org.apache.jackrabbit.core.security.authentication.CredentialsCallback;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.apache.wicket.RequestCycle;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.DropDownChoice;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.protocol.http.WebRequest;
+import org.apache.wicket.protocol.http.WebResponse;
+
+import org.apache.wicket.PageParameters;
+import org.hippoecm.frontend.PluginPage;
+import org.hippoecm.frontend.model.UserCredentials;
+import org.hippoecm.frontend.plugin.IPluginContext;
+import org.hippoecm.frontend.plugin.config.IPluginConfig;
+import org.hippoecm.frontend.plugins.login.LoginPlugin;
+import org.hippoecm.frontend.service.render.RenderPlugin;
+import org.hippoecm.frontend.session.LoginException;
+import org.hippoecm.frontend.session.PluginUserSession;
+import org.hippoecm.frontend.util.WebApplicationHelper;
+import org.hippoecm.repository.WebCredentials;
+
+public class SSOPlugin extends RenderPlugin implements CallbackHandler {
+
+    private static final long serialVersionUID = 6971843172794119352L;
+
+    private static final Logger log = LoggerFactory.getLogger(SSOPlugin.class);
+
+    @SuppressWarnings("unused")
+    private final static String SVN_ID = "$Id$";
+
+    private static final String LOCALE_COOKIE = "loc";
+
+    private DropDownChoice locale;
+
+    public String selectedLocale;
+
+    public SSOPlugin(final IPluginContext context, final IPluginConfig config) throws LoginException {
+
+        super(context, config);
+        fromOfficialDocs();
+
+        login();
+    }
+
+    private void login() throws LoginException {
+        final PluginUserSession userSession = (PluginUserSession) getSession();
+        userSession.login(new UserCredentials(this));
+
+        userSession.setLocale(new Locale(selectedLocale));
+        userSession.getJcrSession();
+
+        setResponsePage(PluginPage.class, new PageParameters(RequestCycle.get().getRequest().getParameterMap()));
+    }
+
+    private void fromOfficialDocs() {
+        String[] localeArray = getPluginConfig().getStringArray("locales");
+        if (localeArray == null) {
+            localeArray = LoginPlugin.LOCALES;
+        }
+        final List locales = Arrays.asList(localeArray);
+
+        // by default, use the user's browser settings for the locale
+        selectedLocale = "en";
+        if (locales.contains(getSession().getLocale().getLanguage())) {
+            selectedLocale = getSession().getLocale().getLanguage();
+        }
+
+        // check if user has previously selected a locale
+        Cookie[] cookies = ((WebRequest) RequestCycle.get().getRequest()).getHttpServletRequest().getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (LOCALE_COOKIE.equals(cookie.getName())) {
+                    if (locales.contains(cookie.getValue())) {
+                        selectedLocale = cookie.getValue();
+                        getSession().setLocale(new Locale(selectedLocale));
+                    }
+                }
+            }
+        }
+
+        add(locale = new DropDownChoice("locale", new PropertyModel(this, "selectedLocale"), locales));
+
+        locale.add(new AjaxFormComponentUpdatingBehavior("onchange") {
+            private static final long serialVersionUID = -1107858522700306810L;
+
+            @Override
+            protected void onUpdate(AjaxRequestTarget target) {
+                //immediately set the locale when the user changes it
+                Cookie localeCookie = new Cookie(LOCALE_COOKIE, selectedLocale);
+                localeCookie.setMaxAge(365 * 24 * 3600); // expire one year from now
+                ((WebResponse) RequestCycle.get().getResponse()).addCookie(localeCookie);
+                getSession().setLocale(new Locale(selectedLocale));
+                setResponsePage(this.getFormComponent().getPage());
+            }
+        });
+
+        add(new FeedbackPanel("feedback").setEscapeModelStrings(false));
+        add(new Label("pinger"));
+    }
+
+    @Override
+    public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
+        for (Callback callback : callbacks) {
+            if (callback instanceof NameCallback) {
+                NameCallback nameCallback = (NameCallback) callback;
+                String username
+                        = (String) WebApplicationHelper.retrieveWebRequest().getHttpServletRequest().getRemoteUser();
+                if (username != null) {
+                    nameCallback.setName(username);
+                }
+            } else if (callback instanceof PasswordCallback) {
+            } else if (callback instanceof CredentialsCallback) {
+                CredentialsCallback credentialsCallback = (CredentialsCallback) callback;
+                credentialsCallback.setCredentials(
+                        new WebCredentials(((WebRequest) getRequest()).getHttpServletRequest()));
+            }
+        }
+    }
+}</pre>
+<h3>SSOModule </h3>
+<pre class="prettyprint">package net.tirasa.hippo.cms.sso;
+
+import java.util.Map;
+import javax.security.auth.Subject;
+import javax.security.auth.callback.CallbackHandler;
+import javax.security.auth.login.LoginException;
+import javax.security.auth.spi.LoginModule;
+import org.apache.wicket.RequestCycle;
+
+import org.hippoecm.frontend.util.WebApplicationHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class SSOModule implements LoginModule {
+
+    private static final Logger log = LoggerFactory.getLogger(SSOModule.class);
+
+    private final boolean validLogin = true;
+
+    @Override
+    public void initialize(final Subject subject, final CallbackHandler callbackHandler,
+            final Map sharedState, final Map options) {
+
+        if (RequestCycle.get() != null) {
+            final String session
+                    = WebApplicationHelper.retrieveWebRequest().getHttpServletRequest().getHeader("X-Forwarded-User");
+
+            ((Map) sharedState).put("javax.security.auth.login.name",
+                    session != null ? session : "anonymous");
+
+            log.debug("Set username with {}", session != null ? session : "anonymous");
+        }
+    }
+
+    @Override
+    public boolean login() throws LoginException {
+        log.debug("LOGIN");
+        return validLogin;
+    }
+
+    protected String validate(final String key) {
+        log.debug("VALIDATE");
+        return key;
+    }
+
+    @Override
+    public boolean commit() throws LoginException {
+        log.debug("COMMIT");
+        return validLogin;
+    }
+
+    @Override
+    public boolean abort() throws LoginException {
+        log.debug("ABORT");
+        return validLogin;
+    }
+
+    @Override
+    public boolean logout() throws LoginException {
+        log.debug("LOGOUT");
+        return validLogin;
+    }
+}
+</pre>
+<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/hippocms-in-sso.html&title=How to get SSO in HippoCMS&summary=As you can imagine this post is about Single Sign On and HippoCMS. In particular, at the end of this post, we will be able to deploy Hippo CMS in Single Sign On in our environment."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/hippocms-in-sso.html&text=How to get SSO in HippoCMS"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/hippocms-in-sso.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://plus.google.com/share?url=http://blog.tirasa.net/hippocms-in-sso.html"><img alt="" src="images/google_square-24.png"></a>&nbsp;
+          <ul class="list tagcloud rnd8">
+<li>
+<a href="/tags/HippoCMS/index.html">HippoCMS</a>
+</li>
+<li>
+<a href="/tags/opensource/index.html">opensource</a>
+</li>
+</ul>
+<p class="more">
+<a href="/index.html">&laquo; Return</a>
+</p>
+</section>
+</div>
+</div>
+  
+<div id="sidebar_1" class="sidebar one_quarter">
+<aside>
+<h2>Menu</h2>
+<nav>
+<ul>
+<li>
+<a href="http://www.tirasa.net">Home</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/index.html">Business Proposition</a>
+<ul>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/apache-syncope.html">Apache Syncope</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/identity-access-management.html">Identity &amp; Access Management</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/content-management-system.html">Enterprise Content Management</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/open-source.html">Open Source</a>
+</li>
+</ul>
+</li>
+<li>
+<a title="customers" href="#" class="drop disable_link">Who we are</a>
+<ul>
+<li>
+<a style="" href="http://www.tirasa.net/mission-vision.html">Mission &amp; Vision</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/aboutus.html">Team</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/contacts.html">Contact</a>
+</li>
+</ul>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/customers.html">Customers</a>
+</li>
+<li>
+<a style="width: 120%;color: #9293c8;" href="http://blog.tirasa.net/index.html">Blog</a>
+</li>
+</ul>
+</nav>
+</aside>
+<aside>
+<h2>Link</h2>
+<nav>
+<ul>
+<li>
+<a target="_blank" href="http://syncope.tirasa.net/index.php">Apache Syncope</a>
+</li>
+<li>
+<a target="_blank" href="http://connid.tirasa.net/">Connid</a>
+</li>
+<li>
+<a target="_blank" href="https://github.com/Tirasa/">Tirasa on GitHub</a>
+</li>
+<li>
+<a target="_blank" href="http://hct.tirasa.net/">Hippo Cocoon Toolkit</a>
+</li>
+</ul>
+</nav>
+</aside>
+    
+<aside>
+<h2>Categories</h2>
+<nav>
+<ul>
+<li>
+<a href="/category/apache-syncope/index.html">Apache Syncope</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/connid/index.html">ConnId</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/identity-management/index.html">Identity Management</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/open-source/index.html">Open Source</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/open-source/apache/index.html">Apache</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/open-source/linux/index.html">Linux</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/open-source/linux/bash-scripting/index.html">Bash Scripting</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/category/codeexp/index.html">DevOps</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/codeexp/maven/index.html">Maven</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/java/index.html">Java</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/jexl/index.html">Jexl</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/technology/index.html">Technology</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/openjpa/index.html">OpenJPA</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/ldap/index.html">ldap</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/active-directory/index.html">Active Directory</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/security/index.html">security</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/category/uncategorized/index.html">Uncategorized</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/uncategorized/estemporanea/index.html">Estemporanea</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/uncategorized/idee/index.html">Idee</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+    
+<aside xmlns:math="http://exslt.org/math">
+<h2>Tag Cloud</h2>
+<div class="tags">
+<li class="tag4">
+<a class="nuv" href="/tags/active+directory/index.html">active directory</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/apache+cocoon/index.html">apache cocoon</a>
+</li>
+<li class="tag9">
+<a class="nuv" href="/tags/apache+syncope/index.html">apache syncope</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/apache+wicket/index.html">apache wicket</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/asf/index.html">asf</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/certificate/index.html">certificate</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/connector/index.html">connector</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/connid/index.html">connid</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/exchange/index.html">exchange</a>
+</li>
+<li class="tag4">
+<a class="nuv" href="/tags/identity+management/index.html">identity management</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/interface/index.html">interface</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/java/index.html">java</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/ldap/index.html">ldap</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/ldapsearch/index.html">ldapsearch</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/ldif/index.html">ldif</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/linux/index.html">linux</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/maven/index.html">maven</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/microsoft/index.html">microsoft</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/openjpa/index.html">openjpa</a>
+</li>
+<li class="tag7">
+<a class="nuv" href="/tags/opensource/index.html">opensource</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/openssl/index.html">openssl</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/powershell/index.html">powershell</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/propagation/index.html">propagation</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/quartz/index.html">quartz</a>
+</li>
+<li class="tag4">
+<a class="nuv" href="/tags/release/index.html">release</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/resource/index.html">resource</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/rest/index.html">rest</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/roles/index.html">roles</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/spring/index.html">spring</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/ssl/index.html">ssl</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/tirasa/index.html">tirasa</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/tls/index.html">tls</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/users/index.html">users</a>
+</li>
+</div>
+</aside>
+    
+<div>
+<div class="wrapper row3">
+<section class="last clear">
+<aside>
+<h2>
+              News
+              <a target="_blank" style="color:#d6d5d5;padding-left:5px;" href="http://blog.tirasa.net/rss.xml"><img style="width:20px;padding-bottom:5px" alt="Tirasa News RSS" src="images/feed.png"></a>
+</h2>
+<ul class="nospace clear">
+<li>
+<article>
+<h1 style="font-size:16px; color: #9293c8">
+<a href="http://www.tirasa.net/news/syncope-compliance-dashboard.html">Syncope Compliance Dashboard</a>
+</h1>
+<p style="font-size:12px">Tirasa launches Syncope Compliance Dashboard (SCD), the analysis and compliance tool for Apache Syncope</p>
+</article>
+</li>
+<li>
+<article>
+<h1 style="font-size:16px; color: #9293c8">
+<a href="http://www.tirasa.net/news/developing-oasis-odata-4.0-platform.html">Developing OASIS OData 4.0 platform</a>
+</h1>
+<p style="font-size:12px">Tirasa working at Apache Olingo - with big names, for open data</p>
+</article>
+</li>
+<li>
+<article>
+<h1 style="font-size:16px; color: #9293c8">
+<a href="http://www.tirasa.net/news/new-communication-platform.html">New communication platform</a>
+</h1>
+<p style="font-size:12px">Tirasa unveils its renewed communication platform by showing a fully redesigned website and a brand new blog engine</p>
+</article>
+</li>
+<li>
+<article>
+<h1 style="font-size:16px; color: #9293c8">
+<a href="http://www.tirasa.net/news/proposal-integration-with-apache-camel.html">Proposal: integration with Apache Camel</a>
+</h1>
+<p style="font-size:12px">Tirasa trainee shows off at Syncope community with an interesting improvement</p>
+</article>
+</li>
+</ul>
+</aside>
+</section>
+</div>
+</div>
+  
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<div style="margin-top: 25px; margin-bottom: 25px;" class="wrapper row4">
+<div class="clear" id="footer">
+    
+<div xmlns:datetime="http://exslt.org/dates-and-times" xmlns:dfutils="xalan://net.tirasa.utils.DateFormatUtils" xmlns:java="http://xml.apache.org/xslt/java" class="one_quarter">
+<h2 class="footer_title">
+<a style="text-transform: uppercase;color: #d6d5d5" href="/index.html">Latest posts</a>&nbsp;&nbsp;</h2>
+<div class="tweet-container">
+<ul class="list none">
+<li>
+<strong><a href="/syncope-at-github.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Apache Syncope at GitHub</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
+<strong><a href="/hippocms-in-sso.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>How to get SSO in HippoCMS</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
+<strong><a href="/playing-with-olingo-on-android.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Playing with Apache Olingo on Android</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
+<strong><a href="/unlock-full-freeipa-features.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Unlock full FreeIPA features in Apache Syncope</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
+<strong><a href="/apache-syncope-1-0-9--1-1-7.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Apache Syncope 1.0.9 and 1.1.7 released</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
+<strong><a href="/apache-syncope-1-1-6.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Apache Syncope 1.1.6 (Ad libitum) released</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+</ul>
+</div>
+</div>
+    
+<div class="one_quarter">
+<h2 class="footer_title">Apache Syncope</h2>
+<p>We designed Syncope because we are IdM experts and Open Source enthusiasts.
+The idea was to create an agile Open Source Identity Manager, lightweight and
+incisive, able to meet the requirements of enterprise environments.</p>
+<p>We started Tirasa with the goal of accelerating the development and diffusion
+of Syncope IdM.</p>
+<p>In February 2012 we donated Syncope IdM to
+<a target="_blank" href="http://www.apache.org/">The Apache Software
+Foundation</a>.</p>
+</div>
+    
+<div class="two_quarter">
+  
+<h2 class="footer_title">Tweets</h2>
+  
+<a class="twitter-timeline" width="625" height="320" data-chrome="noheader nofooter noscrollbar transparent" data-theme="dark" data-related="syncopeidm" href="https://twitter.com/search?q=%23Tirasa+OR+%23HippoCocoonToolkit+OR+%23ConnId+OR+from%3Asyncopeidm+OR+to%3Asyncopeidm+OR+%40syncopeidm+include%3Aretweets" data-widget-id="344714180324118528">Tweet su "#Tirasa OR #HippoCocoonToolkit OR #ConnId OR from:syncopeidm OR to:syncopeidm OR @syncopeidm include:retweets"</a>
+  <script>!function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+      if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = p + "://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }
+    }(document, "script", "twitter-wjs");</script>
+  
+
+</div>
+  
+</div>
+</div>
+<div style="background-color: #9293c8;" class="wrapper row2">
+<div id="footer" class="clear">
+<div class="one_third">
+<p class="fl_left" style="font-size: 0.7em;">Tirasa S.r.l. - P.I. 01974100685<br>Powered by <a style="color: whitesmoke" href="http://hct.tirasa.net/" target="_blank">Hippo Cocoon Toolkit</a>
+</p>
+</div>
+<div class="one_third">
+<p style="font-size: 0.7em;">Apache, Syncope, Apache Syncope and the Apache Syncope logo are trademarks of The Apache Software Foundation.</p>
+</div>
+<script type="text/javascript">
+          function year() {
+          var theDate=new Date()
+          document.write(theDate.getFullYear())}
+        </script>
+<div class="one_third">
+<p class="fl_right" style="font-size: 0.7em;">Copyright &copy; 2011-
+            <script type="text/javascript">
+              var theDate=new Date();    
+              document.write(theDate.getFullYear());
+            </script>
+            Tirasa S.r.l.<br>All rights reserved<br>Template based on<a style="color: whitesmoke" title="Free Website Templates" href="http://www.os-templates.com/" target="_blank"> Os Template</a>
+</p>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.tirasa.net/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", "6"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+</body>
+</html>
