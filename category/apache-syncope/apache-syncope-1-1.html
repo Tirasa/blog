@@ -149,22 +149,57 @@
 <h3 style="margin:0px; color: #9293c8;">Apache Syncope 1.1.0 (Ad libitum) released</h3>
 <p>Written by<a href="/author/ilgrosso/index.html"><i> ilgrosso</i></a>
 </p>
-<p>The Apache Syncope team is proud to announce the general availability of Apache Syncope 1.1.0 Ad libitum.</p>
-<p>Besides a considerable amount of fixed bugs and improvements, the major changes introduced with this release can be summarized as follows:</p>
+<p>The Apache Syncope team is proud to announce the general availability of
+Apache Syncope 1.1.0 Ad libitum.</p>
+<p>Besides a considerable amount of fixed bugs and improvements, the major
+changes introduced with this release can be summarized as follows:</p>
 <ol>
 
 <li>
-<strong><em>New JAX-RS, Apache CXF based, REST interface is available.</em></strong> (<a target="_blank" href="https://issues.apache.org/jira/browse/SYNCOPE-231">SYNCOPE-231</a> and related) <br>In order to maintain compatibility with 1.0.X, the Spring MVC REST services stay in place in this version and the CXF based services are added using a different base URI: this allows users of the API to already start migrating to the new service layout. For more details see <a title="REST API upgrade" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/REST+API+upgrade">REST API upgrade</a>. In Apache Syncope 1.2.0 the Spring MVC REST services will be dropped.</li>
+<strong><em>New JAX-RS, Apache CXF based, REST interface is
+available.</em></strong>
+(<a target="_blank" href="https://issues.apache.org/jira/browse/SYNCOPE-231">SYNCOPE-231</a>
+and related) <br>
+In order to maintain compatibility with 1.0.X, the Spring MVC REST services stay
+in place in this version and the CXF based services are added using a different
+base URI: this allows users of the API to already start migrating to the new
+service layout. For more details see
+<a title="REST API upgrade" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/REST+API+upgrade">REST
+API upgrade</a>. In Apache Syncope 1.2.0 the Spring MVC REST services will be
+dropped.</li>
 
 <li>
-<strong><em>Role provisioning.</em></strong> (<a target="_blank" href="https://issues.apache.org/jira/browse/SYNCOPE-171">SYNCOPE-171</a> and related) <br>Apache Syncope is now able to manage <a title="User action flows" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/User+action+flows">users</a> (e.g. accounts) and <a style="color: #456634;" title="Role action flows" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Role+action+flows">roles</a> (e.g. groups) on <a target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Connectors+and+resources#Connectorsandresources-Externalresource">external resources</a>. Many user-related concepts are now also available for roles: <a title="Schema, attributes and mapping" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Schema%2C+attributes+and+mapping">schema mapping</a>, <a title="Propagation mode" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Propagation+mode">propagation</a>, synchronization, workflow, and so on.</li>
+<strong><em>Role provisioning.</em></strong>
+(<a target="_blank" href="https://issues.apache.org/jira/browse/SYNCOPE-171">SYNCOPE-171</a>
+and related) <br>
+Apache Syncope is now able to manage
+<a title="User action flows" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/User+action+flows">users</a>
+(e.g. accounts) and
+<a title="Role action flows" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Role+action+flows">roles</a>
+(e.g. groups) on
+<a target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Connectors+and+resources#Connectorsandresources-Externalresource">external
+resources</a>. Many user-related concepts are now also available for roles:
+<a title="Schema, attributes and mapping" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Schema%2C+attributes+and+mapping">schema
+mapping</a>,
+<a title="Propagation" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Propagation">propagation</a>,
+synchronization, workflow, and so on.</li>
 
 <li>
-<strong><em>New standalone distribution is provided.</em></strong> (<a target="_blank" href="https://issues.apache.org/jira/browse/SYNCOPE-206">SYNCOPE-206</a>). <br>For helping evaluating Apache Syncope, a new standalone distribution is linked from the <a target="_blank" href="http://syncope.apache.org/downloads.html">downloads</a> page; instructions on how to work with it are also <a title="Run Syncope standalone distribution" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Run+Syncope+standalone+distribution">available</a>.</li>
+<strong><em>New standalone distribution is provided.</em></strong>
+(<a target="_blank" href="https://issues.apache.org/jira/browse/SYNCOPE-206">SYNCOPE-206</a>).
+<br>
+For helping evaluating Apache Syncope, a new standalone distribution is linked
+from the <a target="_blank" href="http://syncope.apache.org/downloads.html">downloads</a> page;
+instructions on how to work with it are also
+<a title="Run Syncope standalone distribution" target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Run+Syncope+standalone+distribution">available</a>.
+</li>
 
 </ol>
-<p>For more information on how to report problems, and to get involved, visit the <a target="_blank" href="http://syncope.apache.org/">project website</a>.</p>
-<p>For full details of this release, check the official <a target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Ad+libitum#Adlibitum-1.1.0%28April5th%2C2013%29">release notes</a>.</p>
+<p>For more information on how to report problems, and to get involved, visit
+the <a target="_blank" href="http://syncope.apache.org/">project website</a>.</p>
+<p>For full details of this release, check the official
+<a target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Ad+libitum#Adlibitum-1.1.0%28April5th%2C2013%29">release
+notes</a>.</p>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/apache-syncope-1-1.html&title=Apache Syncope 1.1.0 (Ad libitum) released&summary=The Apache Syncope team is proud to announce the general availability of Apache Syncope 1.1.0 Ad libitum. Besides a considerable amount of fixed bugs and improvements, the major changes introduced with this release can be summarized as follows:"><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/apache-syncope-1-1.html&text=Apache Syncope 1.1.0 (Ad libitum) released"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/apache-syncope-1-1.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;

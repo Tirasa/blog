@@ -150,48 +150,37 @@
 <p>Written by<a href="/author/ilgrosso/index.html"><i> ilgrosso</i></a>
 </p>
 <p>
-<a target="_blank" href="http://www.syncope.apache.org">Syncope</a>
-<a target="_blank" href="http://code.google.com/p/syncope/issues/detail?id=240">recently</a>
-              gained official support for <a target="_blank" href="http://glassfish.java.net/">Glassfish</a>
-              3.1.1: since the JPA layer did - again recently - move to
-<a target="_blank" href="http://openjpa.apache.org">Apache OpenJPA</a>, we faced some issues
-              when trying to deploy Syncope - as OpenJPA-powered web application - to
-              Glassfish.</p>
-<p>Some tips that finally made us succeeding:</p>
+<a target="_blank" href="http://syncope.apache.org">Syncope</a> <a target="_blank" href="http://code.google.com/p/syncope/issues/detail?id=240">recently</a> gained official support for <a target="_blank" href="http://glassfish.java.net/">Glassfish</a> 3.1.1: since the JPA layer did - again recently - move to <a target="_blank" href="http://openjpa.apache.org">Apache OpenJPA</a>, we faced some issues when trying to deploy Syncope - as OpenJPA-powered web application - to Glassfish.
+</p>
+<p>Some tips that finally made us succeeding:
+</p>
 <ul>
-
+  
 <li>
-<a target="_blank" href="http://openjpa.apache.org/entity-enhancement.html">Enhance</a>
-              your Entity classes at build time</li>
-
-<li>Do not
-<a target="_blank" href="http://docs.oracle.com/cd/E18930_01/html/821-2418/beaft.html#beagb">delegate</a>
-              class loading</li>
-
+<a target="_blank" href="http://openjpa.apache.org/entity-enhancement.html">Enhance</a> your Entity classes at build time</li>
+  
+<li>Do not <a target="_blank" href="http://docs.oracle.com/cd/E18930_01/html/821-2418/beaft.html#beagb">delegate</a> class loading</li>
+  
 <li>If you have RESTful DELETE services, allow DELETE method for JSPs</li>
-
-<li>Kindly ask embedded EclipseLink not to try to dinamycally weave your Entity
-              classes for a couple of good reasons:
-<ul>
-
+  
+<li>Kindly ask embedded EclipseLink not to try to dinamycally weave your Entity classes for a couple of good reasons:
+  <ul>
+    
 <li>you are using OpenJPA not EclipseLink</li>
-
+    
 <li>your Entity classes were enhanced at build time - see above</li>
-
+  
 </ul>
-
 </li>
-
-<li>Try to avoid @ManyToMany bidirectional relationships by refactoring your
-              source code - this could be a temporary bug of OpenJPA 2.2.0, as
-<a target="_blank" href="http://openjpa.208410.n2.nabble.com/OpenJPA-2-2-0-SNAPSHOT-amp-Glassfish-3-1-1-td7227299.html">reported</a>
-              in dev mailing list</li>
+  
+<li>Try to avoid @ManyToMany bidirectional relationships by refactoring your source code - this could be a temporary bug of OpenJPA 2.2.0, as <a target="_blank" href="http://openjpa.208410.n2.nabble.com/OpenJPA-2-2-0-SNAPSHOT-amp-Glassfish-3-1-1-td7227299.html">reported</a> in dev mailing list</li>
 
 </ul>
-<p>Basically, you have to add the following property to persistence.xml:</p>
+<p>Basically, you have to add the following property to persistence.xml:
+</p>
 <pre class="prettyprint">&lt;property name="eclipselink.weaving" value="false"/&gt;</pre>
-<p>and to create a file called glassfish-web.xml with the following content
-              under WEB-INF folder:</p>
+<p>and to create a file called glassfish-web.xml with the following content under WEB-INF folder:
+</p>
 <pre class="prettyprint">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE glassfish-web-app PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Servlet 3.0//EN" "http://glassfish.org/dtds/glassfish-web-app_3_0-1.dtd"&gt;
 &lt;glassfish-web-app&gt;
@@ -200,7 +189,8 @@
         &lt;property name="httpMethods" value="GET,POST,HEAD,PUT,DELETE"/&gt;
     &lt;/jsp-config&gt;
 &lt;/glassfish-web-app&gt;</pre>
-<p>That's all :-)</p>
+<p>That's all :-)
+</p>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/openjpa-2-2-0-and.html&title=OpenJPA 2.2.0 and Glassfish 3.1.1&summary=Syncope recently gained official support for Glassfish 3.1.1: since the JPA layer did - again recently - move to Apache OpenJPA, we faced some issues when trying to deploy Syncope - as OpenJPA-powered web application - to Glassfish."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/openjpa-2-2-0-and.html&text=OpenJPA 2.2.0 and Glassfish 3.1.1"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/openjpa-2-2-0-and.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
