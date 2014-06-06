@@ -2,7 +2,8 @@
 <html xmlns:str="http://xsltsl.org/string" xmlns:g="http://base.google.com/ns/1.0" xmlns:i18n="http://apache.org/cocoon/i18n/3.0">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Tirasa Blog</title>
+<title>Tirasa Blog - Exec unix command with Java</title>
+<meta content="Tirasa Blog - Exec unix command with Java" property="og:title">
 <meta charset="UTF-8">
 <meta content="Think Open Source, create Open Source - Identity and Access management specialists - Apache Syncope main sponsor" name="description">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -142,238 +143,74 @@
 <div class="wrapper row3">
 <div id="container">
     
-<exception-report class="org.xml.sax.SAXParseException" timestamp="Thu, 05 Jun 2014 14:13:33 +0200">
-<message>The element type "code" must be terminated by the matching end-tag "&lt;/code&gt;".</message>
-<stacktrace>org.xml.sax.SAXParseException; lineNumber: 11; columnNumber: 120; The element type "code" must be terminated by the matching end-tag "&lt;/code&gt;".
-	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
-	at org.xml.sax.helpers.XMLFilterImpl.parse(XMLFilterImpl.java:357)
-	at net.tirasa.hct.cocoon.sax.HippoItemXMLDumper.dumpHtml(HippoItemXMLDumper.java:455)
-	at net.tirasa.hct.cocoon.sax.HippoRepositoryTransformer.document(HippoRepositoryTransformer.java:250)
-	at net.tirasa.hct.cocoon.sax.HippoRepositoryTransformer.endElement(HippoRepositoryTransformer.java:728)
-	at org.apache.xerces.parsers.AbstractSAXParser.endElement(Unknown Source)
-	at org.apache.xerces.parsers.AbstractXMLDocumentParser.emptyElement(Unknown Source)
-	at org.apache.xerces.impl.XMLNSDocumentScannerImpl.scanStartElement(Unknown Source)
-	at org.apache.xerces.impl.XMLNSDocumentScannerImpl$NSContentDispatcher.scanRootElementHook(Unknown Source)
-	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(Unknown Source)
-	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
-	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
-	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
-	at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
-	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
-	at org.apache.cocoon.stringtemplate.StringTemplateGenerator.execute(StringTemplateGenerator.java:156)
-	at org.apache.cocoon.pipeline.AbstractPipeline.invokeStarter(AbstractPipeline.java:154)
-	at org.apache.cocoon.pipeline.AbstractPipeline.execute(AbstractPipeline.java:83)
-	at sun.reflect.GeneratedMethodAccessor187.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:183)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
-	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:80)
-	at org.apache.cocoon.servlet.collector.ResponseHeaderCollector.interceptInvoke(ResponseHeaderCollector.java:94)
-	at sun.reflect.GeneratedMethodAccessor186.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:621)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:610)
-	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:65)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:91)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
-	at com.sun.proxy.$Proxy329.execute(Unknown Source)
-	at org.apache.cocoon.sitemap.InvocationImpl.execute(InvocationImpl.java:161)
-	at org.apache.cocoon.sitemap.node.PipelineNode.invoke(PipelineNode.java:69)
-	at org.apache.cocoon.sitemap.node.AbstractSitemapNode.invoke(AbstractSitemapNode.java:100)
-	at org.apache.cocoon.sitemap.node.PipelinesNode.invoke(PipelinesNode.java:50)
-	at org.apache.cocoon.sitemap.node.AbstractSitemapNode.invoke(AbstractSitemapNode.java:100)
-	at org.apache.cocoon.sitemap.node.Sitemap.invoke(Sitemap.java:43)
-	at org.apache.cocoon.servlet.RequestProcessor.invoke(RequestProcessor.java:245)
-	at org.apache.cocoon.servlet.RequestProcessor.sendSitemapResponse(RequestProcessor.java:313)
-	at org.apache.cocoon.servlet.RequestProcessor.service(RequestProcessor.java:92)
-	at org.apache.cocoon.servlet.XMLSitemapServlet.service(XMLSitemapServlet.java:49)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:722)
-	at sun.reflect.GeneratedMethodAccessor179.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:183)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
-	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:80)
-	at org.apache.cocoon.jnet.URLHandlerFactoryCollector.installURLHandlers(URLHandlerFactoryCollector.java:37)
-	at sun.reflect.GeneratedMethodAccessor178.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:621)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:610)
-	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:65)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:91)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
-	at com.sun.proxy.$Proxy311.service(Unknown Source)
-	at org.apache.cocoon.servletservice.ServletServiceContext$PathDispatcher.forward(ServletServiceContext.java:485)
-	at org.apache.cocoon.servletservice.ServletServiceContext$PathDispatcher.forward(ServletServiceContext.java:459)
-	at org.apache.cocoon.servletservice.spring.ServletFactoryBean$ServiceInterceptor.invoke(ServletFactoryBean.java:245)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
-	at com.sun.proxy.$Proxy324.service(Unknown Source)
-	at org.apache.cocoon.servletservice.AbsoluteServletConnection.performConnect(AbsoluteServletConnection.java:89)
-	at org.apache.cocoon.servletservice.AbstractServletConnection.connect(AbstractServletConnection.java:79)
-	at org.apache.cocoon.servletservice.url.ServletURLConnection.connect(ServletURLConnection.java:109)
-	at org.apache.cocoon.servletservice.url.ServletURLConnection.getInputStream(ServletURLConnection.java:147)
-	at org.apache.cocoon.sax.util.XMLUtils.toSax(XMLUtils.java:116)
-	at org.apache.cocoon.sax.component.XIncludeTransformer.processXIncludeElement(XIncludeTransformer.java:382)
-	at org.apache.cocoon.sax.component.XIncludeTransformer.startElement(XIncludeTransformer.java:257)
-	at org.apache.xerces.parsers.AbstractSAXParser.startElement(Unknown Source)
-	at org.apache.xerces.parsers.AbstractXMLDocumentParser.emptyElement(Unknown Source)
-	at org.apache.xerces.impl.XMLNSDocumentScannerImpl.scanStartElement(Unknown Source)
-	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(Unknown Source)
-	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
-	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
-	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
-	at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
-	at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
-	at org.apache.cocoon.stringtemplate.StringTemplateGenerator.execute(StringTemplateGenerator.java:156)
-	at org.apache.cocoon.pipeline.AbstractPipeline.invokeStarter(AbstractPipeline.java:154)
-	at org.apache.cocoon.pipeline.AbstractPipeline.execute(AbstractPipeline.java:83)
-	at sun.reflect.GeneratedMethodAccessor187.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:183)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
-	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:80)
-	at org.apache.cocoon.servlet.collector.ResponseHeaderCollector.interceptInvoke(ResponseHeaderCollector.java:94)
-	at sun.reflect.GeneratedMethodAccessor186.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:621)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:610)
-	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:65)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:91)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
-	at com.sun.proxy.$Proxy329.execute(Unknown Source)
-	at org.apache.cocoon.sitemap.InvocationImpl.execute(InvocationImpl.java:161)
-	at org.apache.cocoon.sitemap.node.PipelineNode.invoke(PipelineNode.java:69)
-	at org.apache.cocoon.sitemap.node.AbstractSitemapNode.invoke(AbstractSitemapNode.java:100)
-	at org.apache.cocoon.sitemap.node.PipelinesNode.invoke(PipelinesNode.java:50)
-	at org.apache.cocoon.sitemap.node.AbstractSitemapNode.invoke(AbstractSitemapNode.java:100)
-	at org.apache.cocoon.sitemap.node.Sitemap.invoke(Sitemap.java:43)
-	at org.apache.cocoon.servlet.RequestProcessor.invoke(RequestProcessor.java:245)
-	at org.apache.cocoon.servlet.RequestProcessor.sendSitemapResponse(RequestProcessor.java:313)
-	at org.apache.cocoon.servlet.RequestProcessor.service(RequestProcessor.java:92)
-	at org.apache.cocoon.servlet.XMLSitemapServlet.service(XMLSitemapServlet.java:49)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:722)
-	at sun.reflect.GeneratedMethodAccessor179.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:183)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
-	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:80)
-	at org.apache.cocoon.jnet.URLHandlerFactoryCollector.installURLHandlers(URLHandlerFactoryCollector.java:37)
-	at sun.reflect.GeneratedMethodAccessor178.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:621)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:610)
-	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:65)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:91)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
-	at com.sun.proxy.$Proxy311.service(Unknown Source)
-	at org.apache.cocoon.servletservice.ServletServiceContext$PathDispatcher.forward(ServletServiceContext.java:485)
-	at org.apache.cocoon.servletservice.ServletServiceContext$PathDispatcher.forward(ServletServiceContext.java:459)
-	at org.apache.cocoon.servletservice.spring.ServletFactoryBean$ServiceInterceptor.invoke(ServletFactoryBean.java:245)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
-	at com.sun.proxy.$Proxy324.service(Unknown Source)
-	at org.apache.cocoon.servletservice.AbsoluteServletConnection.performConnect(AbsoluteServletConnection.java:89)
-	at org.apache.cocoon.servletservice.AbstractServletConnection.connect(AbstractServletConnection.java:79)
-	at org.apache.cocoon.servletservice.url.ServletURLConnection.connect(ServletURLConnection.java:109)
-	at org.apache.cocoon.servletservice.url.ServletURLConnection.getInputStream(ServletURLConnection.java:147)
-	at org.apache.cocoon.sitemap.component.FileReaderComponent.execute(FileReaderComponent.java:64)
-	at org.apache.cocoon.pipeline.AbstractPipeline.invokeStarter(AbstractPipeline.java:154)
-	at org.apache.cocoon.pipeline.AbstractPipeline.execute(AbstractPipeline.java:83)
-	at sun.reflect.GeneratedMethodAccessor187.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:183)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
-	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:80)
-	at org.apache.cocoon.servlet.collector.ResponseHeaderCollector.interceptInvoke(ResponseHeaderCollector.java:94)
-	at sun.reflect.GeneratedMethodAccessor186.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:621)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:610)
-	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:65)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:91)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
-	at com.sun.proxy.$Proxy329.execute(Unknown Source)
-	at org.apache.cocoon.sitemap.InvocationImpl.execute(InvocationImpl.java:161)
-	at org.apache.cocoon.sitemap.node.PipelineNode.invoke(PipelineNode.java:69)
-	at org.apache.cocoon.sitemap.node.AbstractSitemapNode.invoke(AbstractSitemapNode.java:100)
-	at org.apache.cocoon.sitemap.node.PipelinesNode.invoke(PipelinesNode.java:50)
-	at org.apache.cocoon.sitemap.node.AbstractSitemapNode.invoke(AbstractSitemapNode.java:100)
-	at org.apache.cocoon.sitemap.node.Sitemap.invoke(Sitemap.java:43)
-	at org.apache.cocoon.servlet.RequestProcessor.invoke(RequestProcessor.java:245)
-	at org.apache.cocoon.servlet.RequestProcessor.sendSitemapResponse(RequestProcessor.java:313)
-	at org.apache.cocoon.servlet.RequestProcessor.service(RequestProcessor.java:92)
-	at org.apache.cocoon.servlet.XMLSitemapServlet.service(XMLSitemapServlet.java:49)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:722)
-	at sun.reflect.GeneratedMethodAccessor179.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:183)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
-	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:80)
-	at org.apache.cocoon.jnet.URLHandlerFactoryCollector.installURLHandlers(URLHandlerFactoryCollector.java:37)
-	at sun.reflect.GeneratedMethodAccessor178.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:606)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:621)
-	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:610)
-	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:65)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:91)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
-	at com.sun.proxy.$Proxy311.service(Unknown Source)
-	at org.apache.cocoon.servletservice.ServletServiceContext$PathDispatcher.forward(ServletServiceContext.java:485)
-	at org.apache.cocoon.servletservice.ServletServiceContext$PathDispatcher.forward(ServletServiceContext.java:459)
-	at org.apache.cocoon.servletservice.spring.ServletFactoryBean$ServiceInterceptor.invoke(ServletFactoryBean.java:245)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
-	at com.sun.proxy.$Proxy324.service(Unknown Source)
-	at org.apache.cocoon.servletservice.DispatcherServlet.service(DispatcherServlet.java:106)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:722)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:225)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:169)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:472)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:168)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:98)
-	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:927)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:407)
-	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:999)
-	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:565)
-	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:307)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-	at java.lang.Thread.run(Thread.java:744)
-</stacktrace>
-</exception-report>
+<div style="margin-bottom: 50px;" class="three_quarter first contentbackground">
+<div id="missionvision">
+<section class="clear">16 Jan 2013<div style="border-top: 1px dotted #9293c8">&nbsp;</div>
+<h3 style="margin:0px; color: #9293c8;">Exec unix command with Java</h3>
+<p>Written by<a href="/author/massi/index.html"><i> massi</i></a>
+</p>
+<p>To develop Unix connector of
+<a target="_blank" href="http://tirasa.github.com/ConnId/">ConnId</a> framework, I needed a good
+java library to execute unix command on remote server.</p>
+<p>After several tests, I choose
+<a target="_blank" href="https://github.com/vngx/vngx-jsch">vngx-jsch</a>, a library that,
+according to its developers, improves
+<a target="_blank" href="http://www.jcraft.com/jsch/">jsch</a> library.</p>
+<p>This is my first approach to this kind of development, so I could wrong my
+analysis, but... :)</p>
+<h3>Note </h3>
+<p>I don't found a library only to connect with ssh2 protocol on remote server
+(my requisite). All the ssh2 library emulate a complete ssh2 protocol, so thay
+offer, for examples, also a X11 tunnel or shell emulation.</p>
+<p>Having to use also personal computer as provisioning resource of Syncope,
+during test phase I found a library that its authenticate process fails on Appla
+machine (eg: <a target="_blank" href="http://sourceforge.net/projects/sshtools/">sshtools</a>)
+</p>
+<h3>Exec unix command with vngx-jsch </h3>
+<p>The methods shown below are the methods to execute a unix command and reads
+it result.</p>
+<p>The method getChannelExec open an ssh session and return a channel to execute
+unix command:</p>
+<p>private Channel getChannelExec() throws JSchException { session =
+sshClient.createSession(username, unixConfiguration.getHostname(),
+unixConfiguration.getPort());
+session.connect(DefaultProperties.SSH_SOCKET_TIMEOUT, password.getBytes());
+LOG.info("Connected to host " + unixConfiguration.getHostname()); return
+session.openChannel("exec"); }</p>
+<p>The method exec takes a string (unix command) and return a InputStream that
+represents, as a stream, the output of unix command:</p>
+<p>private InputStream exec(final String command) throws JSchException,
+IOException { LOG.info("Executing command: " + command); final Channel channel =
+getChannelExec(); ((ChannelExec) channel).setCommand(command);
+channel.setInputStream(null); ((ChannelExec) channel).setErrStream(System.err);
+final InputStream in = channel.getInputStream();
+channel.connect(DefaultProperties.SSH_SOCKET_TIMEOUT); channel.disconnect();
+return in; }</p>
+<p>Finally the method printOutput takes the InputStream generated by exec
+convert it into a String human readable:</p>
+<p>private String printOutput(final InputStream inputStream) throws IOException
+{ String line; BufferedReader br = new BufferedReader( new
+InputStreamReader(inputStream)); StringBuilder buffer = new StringBuilder();
+while ((line = br.readLine()) != null) { buffer.append(line).append("\n"); }
+session.disconnect(); return buffer.toString(); }</p>
+<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/exec-unix-command-with-java.html&title=Exec unix command with Java&summary=To develop Unix connector of ConnId framework, I needed a good java library to execute unix command on remote server.%0A            After several tests, I choose vngx-jsch, a library that, according to its developers, improves jsch library."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/exec-unix-command-with-java.html&text=Exec unix command with Java"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/exec-unix-command-with-java.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://plus.google.com/share?url=http://blog.tirasa.net/exec-unix-command-with-java.html"><img alt="" src="images/google_square-24.png"></a>&nbsp;
+          <ul class="list tagcloud rnd8">
+<li>
+<a href="/tags/java/index.html">java</a>
+</li>
+<li>
+<a href="/tags/linux/index.html">linux</a>
+</li>
+</ul>
+<p class="more">
+<a href="/index.html">&laquo; Return</a>
+</p>
+</section>
+</div>
+</div>
   
 <div id="sidebar_1" class="sidebar one_quarter">
 <aside>
@@ -428,7 +265,7 @@
 <nav>
 <ul>
 <li>
-<a target="_blank" href="http://syncope.tirasa.net/index.php">Apache Syncope</a>
+<a target="_blank" href="http://syncope.tirasa.net/index.html">Apache Syncope</a>
 </li>
 <li>
 <a target="_blank" href="http://connid.tirasa.net/">Connid</a>
