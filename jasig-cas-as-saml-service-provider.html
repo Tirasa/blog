@@ -2,8 +2,8 @@
 <html xmlns:str="http://xsltsl.org/string" xmlns:g="http://base.google.com/ns/1.0" xmlns:i18n="http://apache.org/cocoon/i18n/3.0">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Tirasa Blog - Syncope Push and Matching Rules</title>
-<meta content="Tirasa Blog - Syncope Push and Matching Rules" property="og:title">
+<title>Tirasa Blog - Jasig CAS as SAML Service Provider</title>
+<meta content="Tirasa Blog - Jasig CAS as SAML Service Provider" property="og:title">
 <meta charset="UTF-8">
 <meta content="Think Open Source, create Open Source - Identity and Access management specialists - Apache Syncope main sponsor" name="description">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -145,63 +145,103 @@
     
 <div style="margin-bottom: 50px;" class="three_quarter first contentbackground">
 <div id="missionvision">
-<section class="clear">04 Jul 2014<div style="border-top: 1px dotted #9293c8">&nbsp;</div>
-<h3 style="margin:0px; color: #9293c8;">Syncope Push and Matching Rules</h3>
-<p>Written by<a href="/author/fabio/index.html"><i> fabio</i></a>
+<section class="clear">07 Aug 2015<div style="border-top: 1px dotted #9293c8">&nbsp;</div>
+<h3 style="margin:0px; color: #9293c8;">Jasig CAS as SAML Service Provider</h3>
+<p>Written by<a href="/author/massi/index.html"><i> massi</i></a>
 </p>
-<p>Apache Syncope 1.2.0 (upcoming release) introduces two important concepts:
-the <a target="_blank" href="http://cwiki.apache.org/confluence/display/SYNCOPE/Push">push</a>
-and the
-<a target="_blank" href="http://cwiki.apache.org/confluence/display/SYNCOPE/Push#Push-MatchingandUnmatchingrules">matching
-rule</a>.</p>
-<p>The push is a synchronization mechanism used by Apache Syncope to propagate a
-filtered set of user/role/membership data towards external resources.</p>
-<p>All the entity (user/group) data involved by a push are retrieved locally and
-compared with remote ones before sending out.</p>
-<p>An entity to be sent out can be:</p>
-<ol>
+<p>As most of you already know
+<a target="_blank" href="https://www.apereo.org/projects/cas">Jasig CAS</a> is one of the most
+famous and used access manager open source software. This means that it doesn't
+need a presentation. But those who know it well also knows that Jasig CAS
+doesn't provide any SAML features. This means that if you want to have a SAML
+Identity Provider or a SAML Service Provider with CAS it is always a complicated
+job.</p>
+<p>Few months ago, however, our customer needs to migrate its IAM solution from
+a commercial one to a new one completely open source. Of course we choose Apache
+Syncope to manage the identity profiles and Jasig CAS to manage the SSO and the
+accesses but, for the latter, we had the problem of how migrate the SAML parts:
+the customer had both Service Provider requirements is Identity Provider
+requirements. After some days of analysis we decided to use CAS + Shibbolet to
+have an Identity Provider and a custom solution to get the Service Provider
+services. In this post I would like to explain how we get the latter.</p>
+<h2>SAMLServiceProvider and the idea </h2>
+<p>To achieve our requirements we started from a
+<a target="_blank" href="https://github.com/Tirasa/SAML2ServiceProvider/">SAMLServiceProvider</a>
+module making it an authentication module served by CAS. The idea was to start
+the SAML protocol from a new CAS servlet and, at the end of the SAML protocol if
+the SAML session was successfully initialized, creating a CAS session to use the
+CAS protected services as a local user and get the Single Sign On on the other
+Intranet services.</p>
+<h2>Development </h2>
+<p>As you can see in the following image</p>
+<p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml_tree.png"></p>
+<p>we added the SAML classes in the CAS project. After this step we configured
+the web.xml adding the necessary servlets</p>
+<pre class="prettyprint">
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;Authentication&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;net.tirasa.saml.Authentication&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;Metadata&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;net.tirasa.saml.Metadata&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;Authentication&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/SPInitiator&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;Metadata&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/metadata&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+</pre>
+<p>The only two necessary servlets are:</p>
+<ul>
 
-<li>a <em>matching</em> entity, if a corresponding remote entity has been found;
-</li>
+<li>Metadata: to exchange the metadata;</li>
 
-<li>or an <em>unmatching</em> entity, otherwise.</li>
+<li>Authentication: to start the SAML protocol.</li>
 
-</ol>
-<p>By default, Syncope will propagate all the unmatching entities for
-provisioning (without any linking operation) and will update all the matching
-ones.</p>
-<p>By the way, a different behaviour can be configured working with
-<a target="_blank" href="http://cwiki.apache.org/confluence/display/SYNCOPE/Push#Push-MatchingandUnmatchingrules">matching
-rules</a>.</p>
-<p>The same rules can be configured to customize the behaviour of a
-<a target="_blank" href="https://cwiki.apache.org/confluence/display/SYNCOPE/Synchronization">synchronization</a>
-from external resource to Apache Syncope.</p>
-<p>Take a look at
-<a target="_blank" href="http://cwiki.apache.org/confluence/display/SYNCOPE/Tasks#Tasks-PushTask">push
-task</a> and enjoy these new cool features.</p>
-<p>&nbsp;</p>
-<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/apache-syncope-push-and-matching-rules.html&title=Syncope Push and Matching Rules&summary=At last the possibility to synchronize data from Syncope towards external resources."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
-          <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/apache-syncope-push-and-matching-rules.html&text=Syncope Push and Matching Rules"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
-          <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/apache-syncope-push-and-matching-rules.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
-          <a target="_blank" href="https://plus.google.com/share?url=http://blog.tirasa.net/apache-syncope-push-and-matching-rules.html"><img alt="" src="images/google_square-24.png"></a>&nbsp;
+</ul>
+<p>The most important difference between the original Service Provider module
+and the new one developed like an authentication module is that the consumer is
+located on the login servlet of the CAS server:</p>
+<pre class="prettyprint">&lt;md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://www.host.it/cas/login" index="0"/&gt;</pre>
+<p>What does it mean?</p>
+<p>It means that, after authentication process concludes on the IdP,
+<strong>the SAML flow ends where the CAS flow starts</strong>. Is it brilliant,
+isn't it?</p>
+<p>To get this behavior we have an action state with a custom action called
+SwitchAction able to figure out if someone is calling the SAML protocol to call
+the right class, in this case the Consumer class.</p>
+<p>Another step to underline is that the Consumer.java class (as you see on the
+github project) was divided in different parts to get a CAS authentication
+module like the SPNEGO one (the latter doesn't ask the password as our SAML
+module).</p>
+<p>I stop here this post because how build a CAS authentication module (or the
+specific SAML module) could be an argument for a new post, but, if you are
+interested to know more details about this Jasig CAS as SAML Service Provider
+don't esistate to call or sent us an e-mail.</p>
+<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/jasig-cas-as-saml-service-provider.html&title=Jasig CAS as SAML Service Provider&summary=As most of you already know JasigCAS is one of the most famous and used access manager open source software. This means that it doesn't need a presentation. But those who know it well also knows that Jasig CAS doesn't provide any SAML features. This means that if you want to have a SAML Identity Provider or a SAML Service Provider with CAS it is always complicated."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/jasig-cas-as-saml-service-provider.html&text=Jasig CAS as SAML Service Provider"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/jasig-cas-as-saml-service-provider.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://plus.google.com/share?url=http://blog.tirasa.net/jasig-cas-as-saml-service-provider.html"><img alt="" src="images/google_square-24.png"></a>&nbsp;
           <ul class="list tagcloud rnd8">
 <li>
-<a href="/tags/push/index.html">push</a>
+<a href="/tags/SAML/index.html">SAML</a>
 </li>
 <li>
-<a href="/tags/matching+unmatching+rules/index.html">matching unmatching rules</a>
+<a href="/tags/Jasig+CAS/index.html">Jasig CAS</a>
 </li>
 <li>
-<a href="/tags/synchronization/index.html">synchronization</a>
+<a href="/tags/federation/index.html">federation</a>
 </li>
 <li>
-<a href="/tags/sync+task/index.html">sync task</a>
+<a href="/tags/java/index.html">java</a>
 </li>
 <li>
-<a href="/tags/resources/index.html">resources</a>
-</li>
-<li>
-<a href="/tags/activedirectory/index.html">activedirectory</a>
+<a href="/tags/opensource/index.html">opensource</a>
 </li>
 </ul>
 <p class="more">
