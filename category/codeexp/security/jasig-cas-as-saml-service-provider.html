@@ -149,37 +149,35 @@
 <h3 style="margin:0px; color: #9293c8;">Jasig CAS as SAML Service Provider</h3>
 <p>Written by<a href="/author/massi/index.html"><i> massi</i></a>
 </p>
-<p>As most of you already know
+<p>As you probably already know
 <a target="_blank" href="https://www.apereo.org/projects/cas">Jasig CAS</a> is one of the most
 famous and used access manager open source software. This means that it doesn't
-need a presentation. But those who know it well also knows that Jasig CAS
-doesn't provide any SAML features. This means that if you want to have a SAML
-Identity Provider or a SAML Service Provider with CAS it is always a complicated
+need a presentation, but those who know it well also knows that Jasig CAS
+doesn't provide any SAML 2.0 feature out-of-the-box. This means that having CAS
+acting as SAML Identity Provider or Service Provider is always a complicated
 job.</p>
-<p>Few months ago, however, our customer needs to migrate its IAM solution from
-a commercial one to a new one completely open source. Of course we choose Apache
-Syncope to manage the identity profiles and Jasig CAS to manage the SSO and the
-accesses but, for the latter, we had the problem of how migrate the SAML parts:
-the customer had both Service Provider requirements is Identity Provider
-requirements. After some days of analysis we decided to use CAS + Shibbolet to
-have an Identity Provider and a custom solution to get the Service Provider
-services. In this post I would like to explain how we get the latter.</p>
+<p>Few months ago, however, one of our customers needed to migrate its IAM
+solution from proprietary to a brand new open source based solution. We
+naturally chose <a target="_blank" href="http://syncope.apache.org">Apache
+Syncope</a> to manage identity profiles and Jasig CAS to manage SSO and
+authorization. Such customer had stronger SAML requirements, either as Service
+Provider and Identity Provider. After some days of analysis we decided to extend
+CAS with <a target="_blank" href="https://shibboleth.net/">Shibbolet</a>; in the
+following I am going to explain how we did.</p>
 <h2>SAMLServiceProvider and the idea </h2>
 <p>To achieve our requirements we started from a
 <a target="_blank" href="https://github.com/Tirasa/SAML2ServiceProvider/">SAMLServiceProvider</a>
-module making it an authentication module served by CAS. The idea was to start
-the SAML protocol from a new CAS servlet and, at the end of the SAML protocol if
-the SAML session was successfully initialized, creating a CAS session to use the
-CAS protected services as a local user and get the Single Sign On on the other
-Intranet services.</p>
+module as an authentication module served by CAS. The idea was to start the SAML
+protocol from a new CAS servlet and, at the end of the SAML exchange, if the
+SAML session was successfully initialized, to create a CAS session so that CAS
+could be empowered to protect services and achieve SSO.</p>
 <h2>Development </h2>
 <p>As you can see in the following image</p>
 <p>
 <img style="margin: 10px;" src="/gallery/tirasa/blog/saml_tree.png"></p>
 <p>we added the SAML classes in the CAS project. After this step we configured
 the web.xml adding the necessary servlets</p>
-<pre class="prettyprint">
-  &lt;servlet&gt;
+<pre class="prettyprint">  &lt;servlet&gt;
     &lt;servlet-name&gt;Authentication&lt;/servlet-name&gt;
     &lt;servlet-class&gt;net.tirasa.saml.Authentication&lt;/servlet-class&gt;
   &lt;/servlet&gt;
@@ -205,8 +203,8 @@ the web.xml adding the necessary servlets</p>
 
 </ul>
 <p>The most important difference between the original Service Provider module
-and the new one developed like an authentication module is that the consumer is
-located on the login servlet of the CAS server:</p>
+and the new one is that the consumer is located on the login servlet of the CAS
+server:</p>
 <pre class="prettyprint">&lt;md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://www.host.it/cas/login" index="0"/&gt;</pre>
 <p>What does it mean?</p>
 <p>It means that, after authentication process concludes on the IdP,
@@ -215,15 +213,15 @@ isn't it?</p>
 <p>To get this behavior we have an action state with a custom action called
 SwitchAction able to figure out if someone is calling the SAML protocol to call
 the right class, in this case the Consumer class.</p>
-<p>Another step to underline is that the Consumer.java class (as you see on the
-github project) was divided in different parts to get a CAS authentication
-module like the SPNEGO one (the latter doesn't ask the password as our SAML
-module).</p>
-<p>I stop here this post because how build a CAS authentication module (or the
+<p>Another step to underline is that the Consumer class (as you see from the
+github project) was split in different parts in order to get a CAS
+authentication module like the SPNEGO one (the latter doesn't ask for password,
+similarly to our SAML module).</p>
+<p>I am stopping here because how to build a CAS authentication module (or the
 specific SAML module) could be an argument for a new post, but, if you are
 interested to know more details about this Jasig CAS as SAML Service Provider
-don't esistate to call or sent us an e-mail.</p>
-<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/jasig-cas-as-saml-service-provider.html&title=Jasig CAS as SAML Service Provider&summary=As most of you already know JasigCAS is one of the most famous and used access manager open source software. This means that it doesn't need a presentation. But those who know it well also knows that Jasig CAS doesn't provide any SAML features. This means that if you want to have a SAML Identity Provider or a SAML Service Provider with CAS it is always complicated."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
+don't hesitate to call or e-mail.</p>
+<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/jasig-cas-as-saml-service-provider.html&title=Jasig CAS as SAML Service Provider&summary=CAS is probably the most used open access manager, let's spice it with SAML 2.0."><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/jasig-cas-as-saml-service-provider.html&text=Jasig CAS as SAML Service Provider"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/jasig-cas-as-saml-service-provider.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://plus.google.com/share?url=http://blog.tirasa.net/jasig-cas-as-saml-service-provider.html"><img alt="" src="images/google_square-24.png"></a>&nbsp;
@@ -483,7 +481,7 @@ don't esistate to call or sent us an e-mail.</p>
 <li class="tag2">
 <a class="nuv" href="/tags/openjpa/index.html">openjpa</a>
 </li>
-<li class="tag7">
+<li class="tag6">
 <a class="nuv" href="/tags/opensource/index.html">opensource</a>
 </li>
 <li class="tag1">
@@ -592,6 +590,14 @@ don't esistate to call or sent us an e-mail.</p>
 <div class="tweet-container">
 <ul class="list none">
 <li>
+<strong><a href="/apache-syncope-with-docker.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Run Apache Syncope and Docker</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
 <strong><a href="/dynamic-springs--at-transactional.html" style="text-decoration: none;">
 <hct:field name="tirasa:title">
 <hct:value>Dynamic Spring's @Transactional</hct:value>
@@ -627,14 +633,6 @@ don't esistate to call or sent us an e-mail.</p>
 <strong><a href="/maven-notifications-under-kde.html" style="text-decoration: none;">
 <hct:field name="tirasa:title">
 <hct:value>Maven notifications under KDE</hct:value>
-</hct:field></a>
-<br>
-</strong>
-</li>
-<li>
-<strong><a href="/ntsecuritydescripto-management.html" style="text-decoration: none;">
-<hct:field name="tirasa:title">
-<hct:value>Java library for Windows NT security descriptor management</hct:value>
 </hct:field></a>
 <br>
 </strong>
