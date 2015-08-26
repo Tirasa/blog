@@ -1,0 +1,747 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:str="http://xsltsl.org/string" xmlns:g="http://base.google.com/ns/1.0" xmlns:i18n="http://apache.org/cocoon/i18n/3.0">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Tirasa Blog - Migrating configuration chunks between Apache Syncope deployments</title>
+<meta content="Tirasa Blog - Migrating configuration chunks between Apache Syncope deployments" property="og:title">
+<meta charset="UTF-8">
+<meta content="Think Open Source, create Open Source - Identity and Access management specialists - Apache Syncope main sponsor" name="description">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="off" http-equiv="x-dns-prefetch-control">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<meta content="302007795" property="twitter:account_id">
+<meta content="summary" name="twitter:card">
+<meta content="@syncopeidm" name="twitter:site">
+<meta content="@syncopeidm" name="twitter:site:id">
+<meta content="Tirasa" name="twitter:domain">
+<meta content="@syncopeidm" name="twitter:creator">
+<meta content="iam // identity management // access management // open source // apache syncope" name="twitter:description">
+<meta content="Tirasa" name="twitter:title">
+<meta content="http://www.tirasa.net/site/images/logo.png" name="twitter:image:src">
+<meta content="iam,identity management, access management, open source, apache syncope" name="keywords">
+<meta content="en_US, it_IT" property="og:locale">
+<meta content="iam // identity management // access management // open source // apache syncope" property="og:description">
+<meta content="http://www.tirasa.net/" property="og:url">
+<meta content="Tirasa" property="og:site_name">
+<meta content="article" property="og:type">
+<meta content="http://www.tirasa.net/images/logo.png" property="og:image">
+<meta content="https://www.facebook.com/tirasasrl" property="article:publisher">
+<meta content="https://www.facebook.com/tirasasrl" property="article:author">
+<meta content="2014-01-17T17:05:46+00:00" property="article:published_time">
+<meta content="2014-01-17T00:19:19+00:00" property="article:modified_time">
+<link href="http://www.tirasa.net/" rel="canonical">
+<link href="http://blog.tirasa.net/rss.xml" title="Tirasa Blog Feed" type="application/rss+xml" rel="alternate">
+<link type="image/vnd.microsoft.icon" href="images/favicon.png" rel="shortcut icon">
+<link href="https://plus.google.com/+TirasaNet/" rel="author">
+<link media="all" type="text/css" rel="stylesheet" href="css/main.css">
+<link media="all" type="text/css" rel="stylesheet" href="css/mediaqueries.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700">
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Loved+by+the+King">
+<script src="js/run_prettify.js"></script><script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&language=it"></script><script>
+      function initialize() {
+      var mapOptions = {
+      zoom: 16,
+      maxZoom: 16,
+      minZoom: 16,
+      center: new google.maps.LatLng(42.453845, 14.219460),
+      scaleControl: false,
+      
+      panControl: false,
+      zoomControl: false,
+      mapTypeControl: false,
+      scrollwheel: false,
+      streetViewControl: false,
+      overviewMapControl: false,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+      
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"),
+      mapOptions);
+      
+      
+      var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(42.453845, 14.219460),
+      map: map
+      
+      });
+      
+      }
+
+      google.maps.event.addDomListener(window, "load", initialize);
+
+    </script><script src="js/jquery-latest.min.js"></script><script src="js/jquery-ui.min.js"></script><script src="js/jquery-mobilemenu.min.js"></script><script src="js/custom.js"></script><script src="js/highslide.js" type="text/javascript"></script><script type="text/javascript">
+      hs.graphicsDir = 'css/graphics/';
+    </script><script type="text/javascript">
+      jQuery.noConflict()(function ($) {
+      $( "#accordion" ).accordion();
+      });
+    </script>
+<link media="all" href="css/highslide.css" type="text/css" rel="stylesheet">
+<link media="all" href="css/accordion.css" type="text/css" rel="stylesheet">
+<link href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+</head>
+<body>
+<div xmlns:hct="http://www.tirasa.net/hct/1.0" class="wrapper row0">
+<div id="header" class="full_width clear">
+<ul class="list none" style="margin: 0px;text-align: right;color: white;font-family: 'Montserrat';font-size: 12px;padding-top: 0.25%;;width: 100%;min-height: 17px;"></ul>
+</div>
+</div>
+<div style="padding-bottom: 15px;padding-top: 15px;" class="wrapper row1">
+<header class="full_width clear" id="header">
+<div style="position: relative;float: left;">
+<h1 style="margin-bottom: 0;">
+<a href="http://www.tirasa.net"><img style="width: 200px; margin-top: 1.5%; margin-right: 10px;" src="images/logo.png"></a>
+</h1>
+</div>
+<div style="position: relative;display: inline-flex;" id="topnav">
+<ul class="clear">
+<li>
+<a class="drop" style="width: 120%;" href="http://www.tirasa.net/businessproposition/index.html">Business Proposition</a>
+<ul>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/apache-syncope.html">Apache Syncope</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/identity-access-management.html">Identity &amp; Access Management</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/content-management-system.html">Enterprise Content Management</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/open-source.html">Open Source</a>
+</li>
+</ul>
+</li>
+<li>
+<a title="customers" href="#" class="drop disable_link">Who we are</a>
+<ul>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/mission-vision.html">Mission &amp; Vision</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/aboutus.html">Team</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/contacts.html">Contact</a>
+</li>
+</ul>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/customers.html">Customers</a>
+</li>
+<li>
+<a style="width: 120%;color: #9293c8;" href="http://blog.tirasa.net/index.html">Blog</a>
+</li>
+</ul>
+</div>
+<div class="social_header">
+<a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="https://github.com/Tirasa"><img alt="github" src="images/github_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.linkedin.com/company/2164993"><img alt="linkedin" src="images/linkedin_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.facebook.com/tirasasrl"><img alt="facebook" src="images/facebook_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px" href="http://www.google.com/+TirasaNet"><img alt="g+" src="images/google_plus.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="mailto:info@tirasa.net"><img alt="send an email" src="images/email.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.tirasa.net/rss.xml"><img alt="Blog Post" src="images/feed.png"></a>
+</div>
+</header>
+</div>
+<div class="wrapper row3">
+<div id="container">
+    
+<div style="margin-bottom: 50px;" class="three_quarter first contentbackground">
+<div id="missionvision">
+<section class="clear">26 Aug 2015<div style="border-top: 1px dotted #9293c8">&nbsp;</div>
+<h3 style="margin:0px; color: #9293c8;">Migrating configuration chunks between Apache Syncope deployments</h3>
+<p>Written by<a href="/author/giacomolm/index.html"><i> giacomolm</i></a>
+</p>
+<p>Apache Syncope allows to manage a wide range of IdM concepts like attribute
+schemas, connectors, resources, mapping, roles, synchronization tasks. Moreover
+another bunch of new concepts will be supported with 2.0.0 release, like realms.
+</p>
+<p>As reported by
+<a target="_blank" href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=31819687">project
+wiki</a>, there is option from exporting the whole configuration from an
+existing deployment, with purpose of building from scratch another depoyment's
+configuration. As you can see, Syncope uses a file called content.xml,
+containing all the initial object configuration: the first time that Syncope
+initializes with an empty database, all such properties are imported. Unless
+using an in-memory storage (as H2), such properties are then stored permanently
+and available for further execution and processing. Subsequent initializations
+(e.g. container restart) will ignore content.xml.</p>
+<p>When you're handling different deployments of Syncope in different
+environments, like pre-prod and prod, it might be useful to be able to move such
+configuration back and forth without dropping the internal storage: usage of
+content.xml is not applicable then. How to migrate configuration items in this
+case?</p>
+<p>In the following we will discuss how to perform this operation.</p>
+<h3>First approach: Apache Syncope client library </h3>
+<p>There are different approaches to deal with this problem: in our experience
+we have at least two solutions. The former is using the Apache Syncope client
+library: for example suppose you want to move a resource settings from one
+instance to another. In this case you can write a simple Maven application
+having the following dependency (where version needs to match your deployment):
+</p>
+<pre class="prettyprint">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.syncope&lt;/groupId&gt;
+  &lt;artifactId&gt;syncope-client&lt;/artifactId&gt;
+  &lt;version&gt;1.2.5&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+<p>with the following Java code:</p>
+<pre class="prettyprint">SyncopeClient origClient =
+  new SyncopeClientFactoryBean().setAddress(ORIG_ADDRESS).create(ADMIN_ID, ADMIN_PWD);
+ResourceTO resource =
+  origClient.getService(ResourceService.class).read(RESOURCE_NAME);
+</pre>
+<pre class="prettyprint">SyncopeClient destClient =
+  new SyncopeClientFactoryBean().setAddress(DEST_ADDRESS).create(ADMIN_ID, ADMIN_PWD);
+destClient.getService(ResourceService.class).update(RESOURCE_NAME, resource)
+</pre>
+<p>This assumes that the resource name between the two instances is exactly the
+same, and also that the underlying connector instance has the same id; if this
+is not the case, we only need to tweak the ResourceTO object before sending it
+to the destination system.</p>
+<p>If you are pushing resource settings for the first time in the other Syncope
+installation - instead of update it - you'll have to replace the last line above
+with:</p>
+<pre class="prettyprint">destClient.getService(ResourceService.class).create(resource);
+</pre>
+<h3>Second approach: CXF Web Client </h3>
+<p>The second option is to use the CXF web client to access the underlying
+transport layer in order to manipulate the raw JSON data; the flow is identical
+to the one above: to GET an item via REST from the origin system and to POST /
+PUT it again via REST in the destination system.</p>
+<pre class="prettyprint">SyncopeClient origClient =// see above
+WebClient sourceWebClient = WebClient.fromClient(WebClient.client(origClient));
+sourceWebClient.
+  accept(MediaType.APPLICATION_JSON_VALUE).
+  to(ORIG_ADDRESS+&rdquo;&rdquo;+RESOURCE_NAME, false);
+
+String jsonResource = sourceWebClient.get(String.class);
+</pre>
+<p>It is worth to note that getting the resource as JSON string allows to
+manipulate it in a simpler way: we can save its representation in particular
+file, change some parameter and re-use this file during import.</p>
+<p>Once processing is complete, we can push this resource to the other instance.
+In case of a new resource, we can proceed with a POST:</p>
+<pre class="prettyprint">String newJsonResource = // e.g. jsonResource obtained above and manipulated
+
+SyncopeClient destClient = // see above
+WebClient destWebClient = WebClient.fromClient(WebClient.client(destClient));
+destWebClient.
+  type(MediaType.APPLICATION_JSON_VALUE).
+  to(DEST_ADDRESS, true).
+  post(newJsonResource);
+</pre>
+<p>In case you want to update an existing resource, you need to perform a PUT
+operation:</p>
+<pre class="prettyprint">destWebClient.
+  type(MediaType.APPLICATION_JSON_VALUE).
+  to(DEST_ADDRESS+&rdquo;&rdquo;+DEST_RESOURCE_NAME, true).
+  put(newJsonResource);
+</pre>
+<p>Once more, this assumes that resource name is exactly the same, and also that
+the underlying connector instance has the same id. Otherwise you have to modify
+during resource processing.</p>
+<h3>Conclusion </h3>
+<p>Configuration migration can be done in several ways. In this case we have
+seen two options: the first one using the Syncope client library only, the
+second one with CXF Web Client support. The former is useful when you want to
+process received objects at runtime, while the latter is more general and it's
+useful when you want to read the entire resource configuration: you can store
+objects in text files or sent to further processing.</p>
+<p>Please also consider that, providing Apache Syncope a full fledged and
+standard-compliant
+<a target="_blank" href="http://syncope.apache.org/rest/1.2/index.html">REST
+interface</a>, there is no strict need to use any Java library to perform what
+described above.</p>
+<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/migrating-configuration-pieces-between-apache-syncope-deployments.html&title=Migrating configuration chunks between Apache Syncope deployments&summary=Moving Apache Syncope connectors and resources from one deployment to another"><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/migrating-configuration-pieces-between-apache-syncope-deployments.html&text=Migrating configuration chunks between Apache Syncope deployments"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/migrating-configuration-pieces-between-apache-syncope-deployments.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://plus.google.com/share?url=http://blog.tirasa.net/migrating-configuration-pieces-between-apache-syncope-deployments.html"><img alt="" src="images/google_square-24.png"></a>&nbsp;
+          <ul class="list tagcloud rnd8">
+<li>
+<a href="/tags/apache+syncope/index.html">apache syncope</a>
+</li>
+<li>
+<a href="/tags/rest/index.html">rest</a>
+</li>
+<li>
+<a href="/tags/client/index.html">client</a>
+</li>
+<li>
+<a href="/tags/cxf/index.html">cxf</a>
+</li>
+</ul>
+<p class="more">
+<a href="/index.html">&laquo; Return</a>
+</p>
+</section>
+</div>
+</div>
+  
+<div id="sidebar_1" class="sidebar one_quarter">
+<aside>
+<h2>Menu</h2>
+<nav>
+<ul>
+<li>
+<a href="http://www.tirasa.net">Home</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/index.html">Business Proposition</a>
+<ul>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/apache-syncope.html">Apache Syncope</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/identity-access-management.html">Identity &amp; Access Management</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/content-management-system.html">Enterprise Content Management</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/open-source.html">Open Source</a>
+</li>
+</ul>
+</li>
+<li>
+<a title="customers" href="#" class="drop disable_link">Who we are</a>
+<ul>
+<li>
+<a style="" href="http://www.tirasa.net/mission-vision.html">Mission &amp; Vision</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/aboutus.html">Team</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/contacts.html">Contact</a>
+</li>
+</ul>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/customers.html">Customers</a>
+</li>
+<li>
+<a style="width: 120%;color: #9293c8;" href="http://blog.tirasa.net/index.html">Blog</a>
+</li>
+</ul>
+</nav>
+</aside>
+<aside>
+<h2>Link</h2>
+<nav>
+<ul>
+<li>
+<a target="_blank" href="http://syncope.tirasa.net/index.html">Apache Syncope</a>
+</li>
+<li>
+<a target="_blank" href="http://connid.tirasa.net/">Connid</a>
+</li>
+<li>
+<a target="_blank" href="https://github.com/Tirasa/">Tirasa on GitHub</a>
+</li>
+<li>
+<a target="_blank" href="http://hct.tirasa.net/">Hippo Cocoon Toolkit</a>
+</li>
+</ul>
+</nav>
+</aside>
+    
+<aside>
+<h2>Categories</h2>
+<nav>
+<ul>
+<li>
+<a href="/category/apache-syncope/index.html">Apache Syncope</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/connid/index.html">ConnId</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/identity-management/index.html">Identity Management</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/access-management/index.html">Access Management</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/open-source/index.html">Open Source</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/open-source/apache/index.html">Apache</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/open-source/linux/index.html">Linux</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/open-source/linux/bash-scripting/index.html">Bash Scripting</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/category/codeexp/index.html">DevOps</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/codeexp/maven/index.html">Maven</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/java/index.html">Java</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/jexl/index.html">Jexl</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/technology/index.html">Technology</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/openjpa/index.html">OpenJPA</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/ldap/index.html">ldap</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/active-directory/index.html">Active Directory</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/security/index.html">security</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/category/uncategorized/index.html">Uncategorized</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/uncategorized/estemporanea/index.html">Estemporanea</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/uncategorized/idee/index.html">Idee</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+    
+<aside xmlns:math="http://exslt.org/math">
+<h2>Tag Cloud</h2>
+<div class="tags">
+<li class="tag3">
+<a class="nuv" href="/tags/active+directory/index.html">active directory</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/activiti/index.html">activiti</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/apache+cocoon/index.html">apache cocoon</a>
+</li>
+<li class="tag9">
+<a class="nuv" href="/tags/apache+syncope/index.html">apache syncope</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/apache+wicket/index.html">apache wicket</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/asf/index.html">asf</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/assign/index.html">assign</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/certificate/index.html">certificate</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/client/index.html">client</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/connector/index.html">connector</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/connid/index.html">connid</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/cxf/index.html">cxf</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/exchange/index.html">exchange</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/federation/index.html">federation</a>
+</li>
+<li class="tag4">
+<a class="nuv" href="/tags/identity+management/index.html">identity management</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/interface/index.html">interface</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/java/index.html">java</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/ldap/index.html">ldap</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/ldapsearch/index.html">ldapsearch</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/ldif/index.html">ldif</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/linux/index.html">linux</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/maven/index.html">maven</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/microsoft/index.html">microsoft</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/notification/index.html">notification</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/openjpa/index.html">openjpa</a>
+</li>
+<li class="tag6">
+<a class="nuv" href="/tags/opensource/index.html">opensource</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/openssl/index.html">openssl</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/powershell/index.html">powershell</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/propagation/index.html">propagation</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/quartz/index.html">quartz</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/release/index.html">release</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/resource/index.html">resource</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/rest/index.html">rest</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/roles/index.html">roles</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/spring/index.html">spring</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/ssl/index.html">ssl</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/synchronization/index.html">synchronization</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/tirasa/index.html">tirasa</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/tls/index.html">tls</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/users/index.html">users</a>
+</li>
+</div>
+</aside>
+    
+<div>
+<div class="wrapper row3">
+<section class="last clear">
+<aside>
+<h2>
+              News
+              <a target="_blank" style="color:#d6d5d5;padding-left:5px;" href="http://blog.tirasa.net/rss.xml"><img style="width:20px;padding-bottom:5px" alt="Tirasa News RSS" src="images/feed.png"></a>
+</h2>
+<ul class="nospace clear">
+<li>
+<article>
+<h1 style="font-size:16px; color: #9293c8">
+<a href="http://www.tirasa.net/news/the-identity-ecosystem.html">Introducing the Open Source Identity Ec...
+                            </a>
+</h1>
+<p style="font-size:12px">Neither cathedral nor bazaar, the third way to Enterprise IAM is revealed</p>
+</article>
+</li>
+<li>
+<article>
+<h1 style="font-size:16px; color: #9293c8">
+<a href="http://www.tirasa.net/news/how-will-you-replace-waveset.html">How will you replace Oracle Waveset?</a>
+</h1>
+<p style="font-size:12px">Oracle Waveset (former Sun IdM) is end-of-line on Dec 31st: are you ready for this?</p>
+</article>
+</li>
+<li>
+<article>
+<h1 style="font-size:16px; color: #9293c8">
+<a href="http://www.tirasa.net/news/connid-1.4.0.0-released.html">ConnId 1.4.0.0 release available</a>
+</h1>
+<p style="font-size:12px">This new release comes after months of joint effort among different IdM players</p>
+</article>
+</li>
+<li>
+<article>
+<h1 style="font-size:16px; color: #9293c8">
+<a href="http://www.tirasa.net/news/syncope-compliance-dashboard.html">Syncope Compliance Dashboard</a>
+</h1>
+<p style="font-size:12px">Tirasa launches Syncope Compliance Dashboard (SCD), the analysis and compliance tool for Apache Syncope</p>
+</article>
+</li>
+</ul>
+</aside>
+</section>
+</div>
+</div>
+  
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<div style="margin-top: 25px; margin-bottom: 25px;" class="wrapper row4">
+<div class="clear" id="footer">
+    
+<div xmlns:datetime="http://exslt.org/dates-and-times" xmlns:dfutils="xalan://net.tirasa.utils.DateFormatUtils" xmlns:java="http://xml.apache.org/xslt/java" class="one_quarter">
+<h2 class="footer_title">
+<a style="text-transform: uppercase;color: #d6d5d5" href="/index.html">Latest posts</a>&nbsp;&nbsp;</h2>
+<div class="tweet-container">
+<ul class="list none">
+<li>
+<strong><a href="/migrating-configuration-pieces-between-apache-syncope-deployments.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Migrating configuration chunks between Apache Syncope deployments</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
+<strong><a href="/apache-syncope-with-docker.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Run Apache Syncope and Docker</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
+<strong><a href="/dynamic-springs--at-transactional.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Dynamic Spring's @Transactional</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
+<strong><a href="/syncope-2.0-resource-management.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>New Apache Syncope 2.0 Administration Console</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
+<strong><a href="/jasig-cas-as-saml-service-provider.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Jasig CAS as SAML Service Provider</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+<li>
+<strong><a href="/syncope-1.2.4-on-centos-6.6-via-installer.html" style="text-decoration: none;">
+<hct:field name="tirasa:title">
+<hct:value>Syncope on Centos via installer</hct:value>
+</hct:field></a>
+<br>
+</strong>
+</li>
+</ul>
+</div>
+</div>
+    
+<div class="one_quarter">
+<h2 class="footer_title">Apache Syncope</h2>
+<p>We designed Syncope because we are IdM experts and Open Source enthusiasts.
+The idea was to create an agile Open Source Identity Manager, lightweight and
+incisive, able to meet the requirements of enterprise environments.</p>
+<p>We started Tirasa with the goal of accelerating the development and diffusion
+of Syncope IdM.</p>
+<p>In February 2012 we donated Syncope IdM to
+<a target="_blank" href="http://www.apache.org/">The Apache Software
+Foundation</a>.</p>
+</div>
+    
+<div class="two_quarter">
+  
+<h2 class="footer_title">Tweets</h2>
+  
+<a class="twitter-timeline" width="625" height="320" data-chrome="noheader nofooter noscrollbar transparent" data-theme="dark" data-related="syncopeidm" href="https://twitter.com/search?q=%23Tirasa+OR+%23HippoCocoonToolkit+OR+%23ConnId+OR+from%3Asyncopeidm+OR+to%3Asyncopeidm+OR+%40syncopeidm+include%3Aretweets" data-widget-id="344714180324118528">Tweet su "#Tirasa OR #HippoCocoonToolkit OR #ConnId OR from:syncopeidm OR to:syncopeidm OR @syncopeidm include:retweets"</a>
+  <script>!function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+      if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = p + "://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }
+    }(document, "script", "twitter-wjs");</script>
+  
+
+</div>
+  
+</div>
+</div>
+<div style="background-color: #9293c8;" class="wrapper row2">
+<div id="footer" class="clear">
+<div class="one_third">
+<p class="fl_left" style="font-size: 0.7em;">Tirasa S.r.l. - P.I. 01974100685<br>Powered by <a style="color: whitesmoke" href="http://hct.tirasa.net/" target="_blank">Hippo Cocoon Toolkit</a>
+</p>
+</div>
+<div class="one_third">
+<p style="font-size: 0.7em;">Apache, Syncope, Apache Syncope and the Apache Syncope logo are trademarks of The Apache Software Foundation.</p>
+</div>
+<script type="text/javascript">
+          function year() {
+          var theDate=new Date()
+          document.write(theDate.getFullYear())}
+        </script>
+<div class="one_third">
+<p class="fl_right" style="font-size: 0.7em;">Copyright &copy; 2011-
+            <script type="text/javascript">
+              var theDate=new Date();    
+              document.write(theDate.getFullYear());
+            </script>
+            Tirasa S.r.l.<br>All rights reserved<br>Template based on<a style="color: whitesmoke" title="Free Website Templates" href="http://www.os-templates.com/" target="_blank"> Os Template</a>
+</p>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.tirasa.net/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", "6"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+</body>
+</html>
