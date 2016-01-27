@@ -164,14 +164,11 @@ memberships</strong>
 </p>
 <p>Memberships won't be synchronized without adding an ad-hoc synchronization
 action.</p>
-<p>&nbsp;</p>
 <p>The simplest way to implement your sync action is to extend
 org.apache.syncope.core.sync.impl.LDAPMembershipSyncActions by overriding
 getGroupMembershipAttrName() method.</p>
-<p>&nbsp;</p>
 <p>This method have to be returned the value of the connector configuration
 property <em>groupMemberReferenceAttribute</em>.</p>
-<p>&nbsp;</p>
 <p>See the sample below.</p>
 <pre class="prettyprint">              protected String getGroupMembershipAttrName(
               final Connector connector) {
@@ -213,7 +210,7 @@ where your Active Directory (JNDI) connector bundle is.</p>
 <p>Then move to the <em>Configuration</em> tab and
 <a target="_blank" href="https://connid.atlassian.net/wiki/pages/viewpage.action?pageId=360482">configure</a>
 your connector instance (see below a complete example).</p>
-<table style="width: 399px; height: 521px;" border="1">
+<table border="1" style="width: 399px; height: 521px;">
 
 <tbody>
 
@@ -364,10 +361,12 @@ attributes and Active Directory group profile attributes.</p>
 </p>
 <p>You may need to define some attribute schema on Apache Syncope before being
 able to complete the configuration below.</p>
-<img style="margin: 10px;" src="/"><p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/usermapping.png"><br>
+<p>
 <strong>Role mapping sample</strong>
 </p>
-<img style="margin: 10px;" src="/"><p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/rolemapping.png"><br>
+<p>
 <strong>Step 4: Propagation testing</strong>
 </p>
 <p>With configuration above Apache Syncope is fully enabled to manage users and
