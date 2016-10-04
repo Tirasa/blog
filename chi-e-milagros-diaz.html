@@ -51,10 +51,12 @@
 
         $(document).ready(function() {
           $.cookiesDirective({
-            privacyPolicyUri: 'http://www.tirasa.net/privacy-policy.html',
             position: 'bottom',
-            duration: 20,
+            duration: 10,
+	    linkColor: '#9293c8',
+            backgroundOpacity: '90',
       
+            privacyPolicyUri: 'http://www.tirasa.net/privacy-policy.html',
 	    message: 'This site uses cookies. Some of the cookies we use are essential for parts of the site to operate and have already been set. ',
 	    multipleCookieScriptBeginningLabel: ' We use ',
 	    and: ' and ',
@@ -624,6 +626,8 @@ Foundation</a>.</p>
 <div id="footer" class="clear">
 <div class="one_third">
 <p class="fl_left" style="font-size: 0.7em;">Tirasa S.r.l. - P.I. 01974100685<br>Powered by <a style="color: whitesmoke" href="http://hct.tirasa.net/" target="_blank">Hippo Cocoon Toolkit</a>
+<br>
+<a style="color: whitesmoke" href="/site/privacy-policy.html">Privacy Policy</a>
 </p>
 </div>
 <div class="one_third">
