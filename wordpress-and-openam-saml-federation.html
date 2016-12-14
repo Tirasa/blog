@@ -23,12 +23,12 @@
 <meta content="Tirasa Blog - Wordpress and OpenAM SAML Federation" name="twitter:title">
 <meta content="Small example on how to federate OpenAM with Wordpress via SAML 2.0." name="twitter:description">
 <meta content="@TirasaNet" name="twitter:creator">
-<meta content="http://blog.tirasa.net//gallery/tirasa/blog/saml0.png" name="twitter:image">
+<meta content="http://blog.tirasa.net/gallery/tirasa/blog/saml0.png" name="twitter:image">
 <meta content="Tirasa Blog - Wordpress and OpenAM SAML Federation" property="og:title">
 <meta content="en_US" property="og:locale">
 <meta content="article" property="og:type">
 <meta content="http://blog.tirasa.net/wordpress-and-openam-saml-federation.html" property="og:url">
-<meta content="http://blog.tirasa.net//gallery/tirasa/blog/saml0.png" property="og:image">
+<meta content="http://blog.tirasa.net/gallery/tirasa/blog/saml0.png" property="og:image">
 <meta content="Small example on how to federate OpenAM with Wordpress via SAML 2.0." property="og:description">
 <meta content="Tirasa" property="og:site_name">
 <meta content="2014-11-06 00:00:00" property="article:published_time">
@@ -206,7 +206,7 @@ the identity provider redirects a SAML response to the services provider. In our
 case the Wordpress plugin elaborates the request: if the user doesn't exist, it
 will be internally created. At the end of this phase, user is logged in.</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml0.png">&nbsp;</p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml0.png">&nbsp;</p>
 <p>In order to proceed with this example, we will use an interesting plugin
 called SAML 2.0 Single Sign-On. You can download it from Wordpress website, or
 directly from the plugin page of Wordpress admin console. We will explore it
@@ -224,26 +224,26 @@ Wordpress roles.</p>
 <p>After installation, in the plugins page, install SAML 2.0 Single Sign-On (you
 can search SAML string): we will configure it after.</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml1.png"></p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml1.png"></p>
 <p>3) Now we have to configure OpenAM. First of all, we have to create a Circle
 Of Trust (COT). In order to do this, in the OpenAM home page click on Federation
 and after click new in the COT table.</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml2.png"></p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml2.png"></p>
 <p>In this example we are referring to top realm (/), but you can refer to
 another one.</p>
 <p>4) Now go back to OpenAM home page. Click on &ldquo;Create hosted identity
 provider&rdquo; on the common tasks tab. Also in this case choose your realm (in our
 case \ ) Use the &ldquo;Test&rdquo; signing key.</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml3.png"></p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml3.png"></p>
 <p>At the end click on Configure button. In this way we have created the hosted
 identity provider.</p>
 <p>5) Before creating the service provider, go back to Wordpress. Go under
 Settings and click on Single SignOn. In this page you will find your SP SAML
 information. For the moment copy the highlighted link</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml4.png"></p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml4.png"></p>
 <p>The linked page contains the Service Provider metadata, that will be used by
 the IDP during authentication.</p>
 <p>6) Now, go back in OpenAM and click on the Common Tasks Tab. Then, click on
@@ -252,7 +252,7 @@ Choose URL radio. Add the URL that was copied from the Wordpress plugin. The
 circle of trust must be the same as the one that was created in the previous
 steps.</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml5.png"></p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml5.png"></p>
 <p>If the meta-data URL is correct, OpenAM will show a popup windows confirming
 your configuration.</p>
 <p>7) Before configuring the remote service provider, we have to add an existing
@@ -263,43 +263,43 @@ authentication. In order to do include this attribute, go under Access Control &
 &lt;<em>your realm</em>&gt; &rarr; Datastore &rarr; Embedded . Find the LDAP user
 attributes and add the '<em>isMemberOf</em>' Attribute</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml6.png"></p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml6.png"></p>
 <p>8) Now we can proceed with remote service provider configuration. This steps
 consists of specification of attribute mapping. The listed attribute will be
 included in the SAML response and will be used by the Service Provider.</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml7.png"></p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml7.png"></p>
 <p>9) Now we are able to set the Wordpress plugin, In order to do this, we need
 some extra information that we can check by visiting our IdP configuration. In
 my case this is the link:</p>
 <p>http://www.example.com:8080/OpenAM-11.0.0/saml2/jsp/exportmetadata.jsp</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml8.png"></p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml8.png"></p>
 <p>This page contains all the meta-data related to Identity Provider. Keep only
 the link in your clipboard.</p>
 <p>10) Open Wordpress plugin configuration Page. Go under Identity provider and
 paste the link in the Url Metadata textfield. Now click on fetch meta-data</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml9.png"></p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml9.png"></p>
 <p>In this way we filled automatically the service provider info.</p>
 <p>11) Now we can fill Service Provider information. Don't forget to generate
 the key</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml10.png">&nbsp;</p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml10.png">&nbsp;</p>
 <p>Now fill service provider information depending on your IdP attribute mapper
 (see step 8). In my case I have this configuration.</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml11.png"></p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml11.png"></p>
 <p>In my OpenAM installation I have only the administrator group, that I mapped
 with the Administrator group name.</p>
 <p>12) Now open your favorite browser (better in a private session) and visit
 wordpress login: http://www.example.com/wordpress/wp-login.php. You will be
 redirected to OpenAM login page</p>
 <p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml12.png">&nbsp;</p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml12.png">&nbsp;</p>
 <p>I used demo/changeit, an user belonging to administrator group. After click
 on login, you will have:</p>
-<img style="margin: 10px;" src="//gallery/tirasa/blog/saml13.png"><p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/saml13.png"><p>
 <em><strong>T</strong></em><em><strong>roubleshooting</strong></em><em>:</em>
 
 </p>
