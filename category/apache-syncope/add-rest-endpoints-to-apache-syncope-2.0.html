@@ -1,0 +1,827 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:dfutils="xalan://net.tirasa.utils.DateFormatUtils" xmlns:java="http://xml.apache.org/xslt/java" xmlns:str="http://xsltsl.org/string" xmlns:g="http://base.google.com/ns/1.0" xmlns:i18n="http://apache.org/cocoon/i18n/3.0" itemtype="http://schema.org/Article" itemscope="" prefix="og: http://ogp.me/ns#" lang="en_US">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Tirasa Blog - Add REST endpoints to Apache Syncope 2.0</title>
+<meta content="The REST interface of Apache Syncope 2.0 offers full access to IdM features, but what if you need to extend?" name="description">
+<meta content="noodp" name="robots">
+<link href="http://blog.tirasa.net/add-rest-endpoints-to-apache-syncope-2.0.html" rel="canonical">
+<link href="http://www.google.com/+TirasaNet/about" rel="publisher">
+<meta content="Tirasa Blog - Add REST endpoints to Apache Syncope 2.0" itemprop="name">
+<meta content="The REST interface of Apache Syncope 2.0 offers full access to IdM features, but what if you need to extend?" itemprop="description">
+<meta content="The REST interface of Apache Syncope 2.0 offers full access to IdM features, but what if you need to extend?" itemprop="headline">
+<meta content="http://blog.tirasa.net/add-rest-endpoints-to-apache-syncope-2.0.html" itemprop="url">
+<meta content="2016-12-22 00:00:00" itemprop="dateModified">
+<meta content="2016-12-22 00:00:00" itemprop="datePublished">
+<span itemtype="https://schema.org/Corporation" itemscope="" itemprop="publisher"><span itemtype="https://schema.org/ImageObject" itemscope="" itemprop="logo">
+<meta content="http://www.tirasa.net/images/logo.png" itemprop="url">
+</span>
+<meta content="Tirasa" itemprop="name">
+</span>
+<meta content="summary" name="twitter:card">
+<meta content="@TirasaNet" name="twitter:site">
+<meta content="Tirasa Blog - Add REST endpoints to Apache Syncope 2.0" name="twitter:title">
+<meta content="The REST interface of Apache Syncope 2.0 offers full access to IdM features, but what if you need to extend?" name="twitter:description">
+<meta content="@TirasaNet" name="twitter:creator">
+<meta content="http://blog.tirasa.net/gallery/tirasa/blog/restful-area.png" name="twitter:image">
+<meta content="Tirasa Blog - Add REST endpoints to Apache Syncope 2.0" property="og:title">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="http://blog.tirasa.net/add-rest-endpoints-to-apache-syncope-2.0.html" property="og:url">
+<meta content="http://blog.tirasa.net/gallery/tirasa/blog/restful-area.png" property="og:image">
+<meta content="The REST interface of Apache Syncope 2.0 offers full access to IdM features, but what if you need to extend?" property="og:description">
+<meta content="Tirasa" property="og:site_name">
+<meta content="2016-12-22 00:00:00" property="article:published_time">
+<meta content="2016-12-22 00:00:00" property="article:modified_time">
+<meta content="252836668438434" property="fb:app_id">
+<meta charset="UTF-8">
+<link type="image/vnd.microsoft.icon" href="images/favicon.png" rel="shortcut icon">
+<meta content="off" http-equiv="x-dns-prefetch-control">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link media="all" type="text/css" rel="stylesheet" href="css/main.css">
+<link media="all" type="text/css" rel="stylesheet" href="css/custom.css">
+<link media="all" type="text/css" rel="stylesheet" href="css/mediaqueries.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700">
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Loved+by+the+King">
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script><script src="js/jquery-latest.min.js"></script><script src="js/jquery-ui.min.js"></script><script src="js/jquery-mobilemenu.min.js"></script><script src="js/jquery.cookiesdirective.js"></script><script src="js/js.cookie.js"></script><script src="js/custom.js"></script><script src="js/highslide.js"></script><script type="text/javascript">
+      hs.graphicsDir = 'css/graphics/';
+
+      jQuery.noConflict()(function ($) {
+        $("#accordion").accordion({
+          active: false,
+          collapsible: true,
+          heightStyle: "content"
+        });
+        if (location.hash) {
+          var tabIndex = parseInt(window.location.hash.substring(1));
+          $("#accordion").accordion('option', 'active', tabIndex);
+        }
+
+        $(document).ready(function() {
+          $.cookiesDirective({
+            position: 'bottom',
+            duration: 10,
+	    linkColor: '#9293c8',
+            backgroundOpacity: '90',
+      
+            privacyPolicyUri: 'http://www.tirasa.net/privacy-policy.html',
+	    message: 'This site uses cookies. Some of the cookies we use are essential for parts of the site to operate and have already been set. ',
+	    multipleCookieScriptBeginningLabel: ' We use ',
+	    and: ' and ',
+	    multipleCookieScriptEndLabel: ' scripts, which all set cookies. ',			
+	    singleCookieScriptBeginningLabel: ' We use a ',
+	    singleCookieScriptEndLabel: ' script which sets cookies.',			
+	    explicitCookieDeletionWarning: 'You may delete and block all cookies from this site, but parts of the site will not work. ',
+  	    explicitFindOutMore: 'To find out more about cookies on this website, see our',
+	    privacyPolicyLinkText: ' privacy policy',
+	    explicitCheckboxLabel: 'You must tick the "I accept cookies from this site" box to accept',
+	    explicitCookieAcceptanceLabel: 'I accept cookies from this site',
+	    explicitCookieAcceptButtonText: 'Continue',
+	    impliedDisclosureText: ' More details can be found in our',
+	    impliedSubmitText: 'Do not show this message again'
+        
+          });
+        });
+      });
+    </script>
+<link media="all" href="css/highslide.css" type="text/css" rel="stylesheet">
+<link media="all" href="css/accordion.css" type="text/css" rel="stylesheet">
+<link href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript">
+          var disqus_config = function () {
+            this.page.url = 'http://blog.tirasa.net/add-rest-endpoints-to-apache-syncope-2.0.html';
+            this.page.identifier = 'http://blog.tirasa.net/add-rest-endpoints-to-apache-syncope-2.0.html';
+          };
+          (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//tirasa.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+</head>
+<body>
+<div xmlns:hct="http://www.tirasa.net/hct/1.0" class="wrapper row0">
+<div id="header" class="full_width clear">
+<ul class="list none" style="margin: 0px;text-align: right;color: white;font-family: 'Montserrat';font-size: 12px;padding-top: 0.25%;;width: 100%;min-height: 17px;"></ul>
+</div>
+</div>
+<script xmlns:gcse="uri:google-did-not-provide-a-real-ns">
+      (function() {
+      var cx = '007564373758891836797:-tjr10bo51c';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+<div style="padding-bottom: 15px;padding-top: 15px;" class="wrapper row1">
+<header class="full_width clear" id="header">
+<div style="position: relative;float: left;">
+<h1 style="margin-bottom: 0;">
+<a href="http://www.tirasa.net"><img style="width: 200px; margin-top: 1.5%; margin-right: 10px;" src="images/logo.png"></a>
+</h1>
+</div>
+<div id="topnav">
+<ul class="clear">
+<li>
+<a class="drop" style="width: 120%;" href="http://www.tirasa.net/businessproposition/index.html">Products &amp; Solutions</a>
+<ul>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/apache-syncope.html">Apache Syncope</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/identity-access-management.html">Identity &amp; Access Management</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/content-management-system.html">Enterprise Content Management</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/open-source.html">Open Source</a>
+</li>
+</ul>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/support.html"></a>
+</li>
+<li>
+<a style="width: 120%;color: #9293c8;" href="http://blog.tirasa.net/index.html">Blog</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/customers.html">Customers</a>
+</li>
+<li>
+<a title="customers" href="#" class="drop disable_link">Who we are</a>
+<ul>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/mission-vision.html">Mission &amp; Vision</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/aboutus.html">Team</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/contacts.html">Contact</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="social_header">
+<div id="social">
+<a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="https://github.com/Tirasa"><img alt="github" src="images/github_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="https://twitter.com/TirasaNet"><img alt="twitter" src="images/twitter.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.linkedin.com/company/2164993"><img alt="linkedin" src="images/linkedin_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.facebook.com/tirasasrl"><img alt="facebook" src="images/facebook_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px" href="http://www.google.com/+TirasaNet"><img alt="g+" src="images/google_plus.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="mailto:info@tirasa.net"><img alt="send an email" src="images/email.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.tirasa.net/rss.xml"><img alt="Blog Post" src="images/feed.png"></a>
+</div>
+<div id="search">
+<div resultsUrl="http://jsfiddle.net/devnook/2PC2f/6/show_html/" class="gcse-search"></div>
+</div>
+</div>
+</header>
+</div>
+<div class="wrapper row3">
+<div id="container">
+    
+<div style="margin-bottom: 50px;" class="three_quarter first contentbackground">
+<div id="missionvision">
+<section class="clear">22 Dec 2016<div style="border-top: 1px dotted #9293c8">&nbsp;</div>
+<h3 style="margin:0px; color: #9293c8;">Add REST endpoints to Apache Syncope 2.0</h3>
+<p>Written by<a href="/author/ilgrosso/index.html"><i> ilgrosso</i></a>
+</p>
+<div style="display: none;" id="date">22 Dec 2016</div>
+<div style="display: none;" id="summary">The REST interface of Apache Syncope 2.0 offers full access to IdM features, but what if you need to extend?</div>
+<img style="margin: 10px;" align="right" src="/gallery/tirasa/blog/restful-area.png"><p>The <a target="_blank" href="http://syncope.apache.org/docs/reference-guide.html#rest">REST
+layer</a> in the <em>Core</em>&nbsp;module of Apache Syncope 2.0 is the result of an
+intense, finishing and evolving work around the strong, Apache CXF-based
+foundations provided by earlier versions. What is now available is a
+fully-compliant
+<a target="_blank" href="https://en.wikipedia.org/wiki/Java_API_for_RESTful_Web_Services">JAX-RS
+2.0</a> implementation, natively dealing both with JSON and XML payloads.
+Moreover, an
+<a target="_blank" href="http://syncope.apache.org/docs/reference-guide.html#swagger">extension</a>
+can be enabled to instantly benefit from
+<a target="_blank" href="http://swagger.io/">Swagger</a> integration.</p>
+<p>Identity Management, however, is a process claiming the maximum flexibility
+from its tools: for this reason I am going to show in the following how the
+<a target="_blank" href="http://syncope.apache.org/rest/2.0/index.html">standard set of REST
+services</a> can be simply extended with custom operations. This as practical
+application of the
+<a target="_blank" href="http://syncope.apache.org/docs/reference-guide.html#new-rest-endpoints">advices</a>
+provided by the official reference guide.</p>
+<h3>The use case </h3>
+<p>This comes from a
+<a target="_blank" href="https://lists.apache.org/thread.html/a00ad66a1f6803fccba702b507e83f3d2425c9838e23c2e8926dc6d4@%3Cuser.syncope.apache.org%3E">recent
+discussion</a> in the public user mailing list of the Apache Syncope project: a
+reminder which, upon providing a registered e-mail address, sends out a message
+to such address, containing the matching username.</p>
+<h3>The project </h3>
+<p>The Maven project from this post, with the full source code, is
+<a target="_blank" href="https://github.com/ilgrosso/syncopeNewRESTEndpoint">hosted at
+Github</a> for convenience.</p>
+<p>After generating a
+<a target="_blank" href="https://syncope.apache.org/docs/getting-started.html#maven-project">new
+Maven project</a>, in order to create a Syncope
+<a target="_blank" href="https://syncope.apache.org/docs/reference-guide.html#extensions">extension</a>,
+I have prepared the following module structure:</p>
+<pre class="prettyprint">ext
+└── reminder
+    ├── rest-api
+    ├── rest-cxf
+    └── logic
+</pre>
+<p>In order to define a new REST endpoint, three components are essentially
+needed (please note how this follows the Syncope's
+<a target="_blank" href="http://syncope.apache.org/docs/reference-guide.html#architecture">architectural
+pattern</a>):</p>
+<ol>
+
+<li>a JAX-RS annotated interface</li>
+
+<li>a CXF-enabled implementation of such interface</li>
+
+<li>a <em>Logic</em> class featuring the actual implementation logic</li>
+
+</ol>
+<p>In the sample project, the JAX-RS annotated interface is
+<a target="_blank" href="https://github.com/ilgrosso/syncopeNewRESTEndpoint/blob/master/ext/reminder/rest-api/src/main/java/org/apache/syncope/common/rest/api/service/ReminderService.java">ReminderService</a>:
+</p>
+<pre class="prettyprint">@Path("users/reminder")
+public interface ReminderService extends JAXRSService {
+
+    /**
+     * Sends an e-mail with his / her username to the user identified by the provided e-mail address.
+     *
+     * @param email e-mal address identifying a given user
+     */
+    @GET
+    void remindUsername(@NotNull @QueryParam("email") String email);
+}
+</pre>
+<p>A single endpoint is defined here, but more can be added.</p>
+<p>The CXF-enabled implementation is
+<a target="_blank" href="https://github.com/ilgrosso/syncopeNewRESTEndpoint/blob/master/ext/reminder/rest-cxf/src/main/java/org/apache/syncope/core/rest/cxf/service/ReminderServiceImpl.java">ReminderServiceImpl</a>:
+</p>
+<pre class="prettyprint">@Service
+public class ReminderServiceImpl extends AbstractServiceImpl implements ReminderService {
+
+    @Autowired
+    private ReminderLogic logic;
+
+    @Override
+    public void remindUsername(final String email) {
+        logic.remindUsername(email);
+    }
+
+}
+</pre>
+<p>Here the code just passes the invocation down the line to the <em>Logic</em>
+class; more checks and modifications, specific to the REST / HTTP domain, can be
+performed as parsing / returning header values, for example.</p>
+<p>Finally the actual logic is implemented by
+<a target="_blank" href="https://github.com/ilgrosso/syncopeNewRESTEndpoint/blob/master/ext/reminder/logic/src/main/java/org/apache/syncope/core/logic/ReminderLogic.java">ReminderLogic</a>:
+</p>
+<pre class="prettyprint">    @PreAuthorize("isAnonymous() or hasRole('" + StandardEntitlement.ANONYMOUS + "')")
+    public void remindUsername(final String email) {
+        AttributeCond emailCond = new AttributeCond(AttributeCond.Type.EQ);
+        emailCond.setSchema("email");
+        emailCond.setExpression(email);
+
+        List matching = searchDAO.search(SearchCond.getLeafCond(emailCond), AnyTypeKind.USER);
+        if (matching.isEmpty()) {
+            throw new NotFoundException("User with e-mail address " + email);
+        }
+        if (matching.size() &gt; 1) {
+            LOG.error("Multiple users with e-mail address {}: {}", email, matching);
+            throw new IllegalArgumentException("Multiple users with e-mail address " + email);
+        }
+
+        User user = matching.get(0);
+
+        notificationManager.createTasks(
+                AuditElements.EventCategoryType.CUSTOM,
+                null,
+                null,
+                "remindUsername",
+                AuditElements.Result.SUCCESS,
+                binder.getUserTO(user, false),
+                null);
+    }
+</pre>
+<p>This code essentially:</p>
+<ol>
+
+<li>restricts the invokers to anonymous users by mean of Spring Security
+annotations and Syncope entitlements</li>
+
+<li>finds the internal user marching the provided e-mail address (and throws
+exceptions for anything unexpected)</li>
+
+<li>triggers a specific
+<a target="_blank" href="https://syncope.apache.org/docs/reference-guide.html#notification-events">notification
+event</a>
+</li>
+
+</ol>
+<p>The last item requires a
+<a target="_blank" href="https://syncope.apache.org/docs/reference-guide.html#notifications">notification</a>
+matching that event and a specific
+<a target="_blank" href="https://syncope.apache.org/docs/reference-guide.html#notification-templates">mail
+template</a> to be configured in the system: these things were added to the
+<a target="_blank" href="https://github.com/ilgrosso/syncopeNewRESTEndpoint/blob/master/core/src/test/resources/domains/MasterContent.xml">default
+content</a>&nbsp;so that they are bootstrapped with
+<a target="_blank" href="http://syncope.apache.org/docs/getting-started.html#embedded-mode">embedded
+mode</a>.</p>
+<h3>How to test </h3>
+<p>Assuming to have GIT and Maven properly configured:</p>
+<pre class="prettyprint">$ git clone https://github.com/ilgrosso/syncopeNewRESTEndpoint.git
+$ mvn clean install
+$ cd enduser
+$ mvn -Pembedded
+</pre>
+<p>At this point the new REST endpoint is visible both from the REST reference
+(point your favorite browser to
+<a target="_blank" href="http://#">http://localhost:9080/syncope/</a>):</p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/newrestendpointreference.png"><p>and Swagger UI (point to
+<a target="_blank" href="http://#">http://localhost:9080/syncope/swagger/</a>):</p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/newrestendpointswagger.png"><h3>Want
+to do more? </h3>
+<p>REST endpoints can do much more in Syncope:</p>
+<ul>
+
+<li>accept / return transfer objects, which will be transparently handled as
+JSON or XML;</li>
+
+<li>persist new entities into the
+<a target="_blank" href="https://syncope.apache.org/docs/reference-guide.html#persistence">internal
+storage</a>;</li>
+
+<li>enrich the
+<a target="_blank" href="https://syncope.apache.org/docs/reference-guide.html#admin-console-component">Admin
+Console</a> with new features.</li>
+
+</ul>
+<p>The
+<a target="_blank" href="https://syncope.apache.org/docs/reference-guide.html#apache-camel-provisioning-manager">Apache
+Camel Provisioning Manager</a>&nbsp;can be taken as reference as it implements
+everything an extension is meant for.</p>
+<hr>
+<p>Don't struggle any more with rigid, unmodifiable Identity Managers
+(proprietary or Open Source): take your REST with Apache Syncope!</p>
+<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/add-rest-endpoints-to-apache-syncope-2.0.html&title=Add REST endpoints to Apache Syncope 2.0&summary=The REST interface of Apache Syncope 2.0 offers full access to IdM features, but what if you need to extend?"><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/add-rest-endpoints-to-apache-syncope-2.0.html&text=Add REST endpoints to Apache Syncope 2.0"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/add-rest-endpoints-to-apache-syncope-2.0.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://plus.google.com/share?url=http://blog.tirasa.net/add-rest-endpoints-to-apache-syncope-2.0.html"><img alt="" src="images/google_square-24.png"></a>&nbsp;
+          <ul class="list tagcloud rnd8">
+<li>
+<a href="/tags/rest/index.html">rest</a>
+</li>
+<li>
+<a href="/tags/apache+syncope/index.html">apache syncope</a>
+</li>
+<li>
+<a href="/tags/notification/index.html">notification</a>
+</li>
+</ul>
+<div id="disqus_thread"></div>
+<p class="more">
+<a href="/index.html">&laquo; Return</a>
+</p>
+</section>
+</div>
+</div>
+  
+<div id="sidebar_1" class="sidebar one_quarter">
+<aside>
+<h2>Menu</h2>
+<nav>
+<ul>
+<li>
+<a href="http://www.tirasa.net">Home</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/index.html">Business Proposition</a>
+<ul>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/apache-syncope.html">Apache Syncope</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/identity-access-management.html">Identity &amp; Access Management</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/content-management-system.html">Enterprise Content Management</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/open-source.html">Open Source</a>
+</li>
+</ul>
+</li>
+<li>
+<a title="customers" href="#" class="drop disable_link">Who we are</a>
+<ul>
+<li>
+<a style="" href="http://www.tirasa.net/mission-vision.html">Mission &amp; Vision</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/aboutus.html">Team</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/contacts.html">Contact</a>
+</li>
+</ul>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/customers.html">Customers</a>
+</li>
+<li>
+<a style="width: 120%;color: #9293c8;" href="http://blog.tirasa.net/index.html">Blog</a>
+</li>
+</ul>
+</nav>
+</aside>
+<aside>
+<h2>Link</h2>
+<nav>
+<ul>
+<li>
+<a target="_blank" href="http://connid.tirasa.net/">ConnId</a>
+</li>
+<li>
+<a target="_blank" href="http://hct.tirasa.net/">Hippo Cocoon Toolkit</a>
+</li>
+<li>
+<a target="_blank" href="https://github.com/Tirasa/">Tirasa on GitHub</a>
+</li>
+</ul>
+</nav>
+</aside>
+    
+<aside>
+<h2>Categories</h2>
+<nav>
+<ul>
+<li>
+<a href="/category/apache-syncope/index.html">Apache Syncope</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/connid/index.html">ConnId</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/identity-management/index.html">Identity Management</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/access-management/index.html">Access Management</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/open-source/index.html">Open Source</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/open-source/apache/index.html">Apache</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/open-source/linux/index.html">Linux</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/open-source/linux/bash-scripting/index.html">Bash Scripting</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/category/codeexp/index.html">DevOps</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/codeexp/maven/index.html">Maven</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/java/index.html">Java</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/jexl/index.html">Jexl</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/technology/index.html">Technology</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/openjpa/index.html">OpenJPA</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/ldap/index.html">ldap</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/active-directory/index.html">Active Directory</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/security/index.html">security</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/category/uncategorized/index.html">Uncategorized</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/uncategorized/estemporanea/index.html">Estemporanea</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/uncategorized/idee/index.html">Idee</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+    
+<aside xmlns:math="http://exslt.org/math">
+<h2>Tag Cloud</h2>
+<div class="tags">
+<li class="tag1">
+<a class="nuv" href="/tags/SAML/index.html">SAML</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/active+directory/index.html">active directory</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/activiti/index.html">activiti</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/apache+cocoon/index.html">apache cocoon</a>
+</li>
+<li class="tag9">
+<a class="nuv" href="/tags/apache+syncope/index.html">apache syncope</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/apache+wicket/index.html">apache wicket</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/asf/index.html">asf</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/assign/index.html">assign</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/certificate/index.html">certificate</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/client/index.html">client</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/connector/index.html">connector</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/connid/index.html">connid</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/cxf/index.html">cxf</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/exchange/index.html">exchange</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/federation/index.html">federation</a>
+</li>
+<li class="tag4">
+<a class="nuv" href="/tags/identity+management/index.html">identity management</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/interface/index.html">interface</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/java/index.html">java</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/javascript/index.html">javascript</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/ldap/index.html">ldap</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/linux/index.html">linux</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/maven/index.html">maven</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/microsoft/index.html">microsoft</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/notification/index.html">notification</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/openjpa/index.html">openjpa</a>
+</li>
+<li class="tag6">
+<a class="nuv" href="/tags/opensource/index.html">opensource</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/openssl/index.html">openssl</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/password/index.html">password</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/password+reset/index.html">password reset</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/powershell/index.html">powershell</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/propagation/index.html">propagation</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/quartz/index.html">quartz</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/release/index.html">release</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/resource/index.html">resource</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/rest/index.html">rest</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/roles/index.html">roles</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/security/index.html">security</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/self-registration/index.html">self-registration</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/self-service/index.html">self-service</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/spring/index.html">spring</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/ssl/index.html">ssl</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/synchronization/index.html">synchronization</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/tirasa/index.html">tirasa</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/tls/index.html">tls</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/users/index.html">users</a>
+</li>
+</div>
+</aside>
+  
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<div style="margin-top: 25px; margin-bottom: 25px;" class="wrapper row4">
+<div class="clear" id="footer">
+    
+<div style="margin-bottom: 20px;" class="three_quarter">
+<div style="padding-top: 10px;">
+<h3>
+<a href="http://www.tirasa.net/news/index.html">Latest Updates</a><a target="_blank" style="color:#d6d5d5;padding-left:5px;" href="http://www.tirasa.net/rss.xml"><img style="width:20px;padding-bottom:5px" alt="Tirasa RSS" src="images/feed.png"></a>
+</h3>
+<div class="owl-carousel" id="hshop-slider" style="border-bottom: 1px solid rgba(145,165,180,.6)">
+<div class="item">
+<div class="left-item">
+<img src="/gallery/tirasa/blog/restful-area.png"></div>
+<div class="right-item">
+<a href="/add-rest-endpoints-to-apache-syncope-2.0.html" class="purple">
+<h5 class="item-title">Add REST endpoints to Apache Syncope 2.0</h5>
+</a>
+<p style="color: white;">The REST interface of Apache Syncope 2.0 offers full access to IdM features, but what if you need to extend?</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="/gallery/tirasa/blog/img_20161117_121625.jpg"></div>
+<div class="right-item">
+<a href="/back-from-apachecon-sevilla-2016.html" class="purple">
+<h5 class="item-title">Back from ApacheCon Sevilla 2016</h5>
+</a>
+<p style="color: white;">A little excerpt of my amazing experience at ApacheCon 2016 Seville</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="http://www.tirasa.net/gallery/tirasa/site/businessproposition/syncopecasdemo.png"></div>
+<div class="right-item">
+<a href="http://www.tirasa.net/news/new-integrated-iam-demo-image.html" class="purple">
+<h5 class="item-title">New Integrated IAM Demo Image</h5>
+</a>
+<p style="color: white;">Docker image with Syncope and other IAM components in a fully integrated environment</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="/gallery/tirasa/blog/angular-protractor.png"></div>
+<div class="right-item">
+<a href="/syncope-enduser-testing-part-1.html" class="purple">
+<h5 class="item-title">Apache Syncope Enduser: Testing (part 1)</h5>
+</a>
+<p style="color: white;">Wrapping up Maven &amp; JS best practices to achieve smooth Enduser testing</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="http://www.tirasa.net/gallery/tirasa/site/news/thenewstack.png"></div>
+<div class="right-item">
+<a href="http://www.tirasa.net/news/our-ceo-interviewed-by-the-new-stack.html" class="purple">
+<h5 class="item-title">Our CEO interviewed by The New Stack</h5>
+</a>
+<p style="color: white;">Online IT magazine reports about Tirasa and Apache Syncope 2.0</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="http://www.tirasa.net/gallery/tirasa/site/news/dashboard.png"></div>
+<div class="right-item">
+<a href="http://www.tirasa.net/news/apache-syncope-2.0.0-is-now-available.html" class="purple">
+<h5 class="item-title">Apache Syncope 2.0.0 is now available</h5>
+</a>
+<p style="color: white;">The final act of almost two years of intense development, re-factoring, cleaning up and enhancements</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    
+<div class="one_quarter">
+  
+<div style="padding-top: 10px;">
+    
+<h3>
+<a href="#">Tweets</a>
+</h3>
+
+    
+<a class="twitter-timeline" width="625" height="320" data-chrome="noheader nofooter noscrollbar transparent" data-theme="dark" data-dnt="true" data-widget-id="806128727264526337" href="https://twitter.com/search?q=%23HippoCocoonToolkit%20OR%20%23ConnId%20OR%20from%3ATirasaNet%20OR%20to%3ATirasaNet%20OR%20%40TirasaNet%20OR%20from%3Asyncopeidm%20OR%20to%3Asyncopeidm%20OR%20%40syncopeidm">Tweet riguardo #HippoCocoonToolkit OR #ConnId OR from:TirasaNet OR to:TirasaNet OR @TirasaNet OR from:syncopeidm OR to:syncopeidm OR @syncopeidm</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+</div>
+
+</div>
+  
+</div>
+</div>
+<div style="background-color: #9293c8;" class="wrapper row2">
+<div id="footer" class="clear">
+<div class="one_third">
+<p class="fl_left" style="font-size: 0.7em;">Tirasa S.r.l. - P.I. 01974100685<br>Powered by <a style="color: whitesmoke" href="http://hct.tirasa.net/" target="_blank">Hippo Cocoon Toolkit</a>
+<br>
+<a style="color: whitesmoke" href="http://www.tirasa.net/privacy-policy.html">Privacy Policy</a>
+</p>
+</div>
+<div class="one_third">
+<p style="font-size: 0.7em;">Apache, Syncope, Apache Syncope and the Apache Syncope logo are trademarks of The Apache Software Foundation.</p>
+</div>
+<script type="text/javascript">
+          function year() {
+          var theDate=new Date()
+          document.write(theDate.getFullYear())}
+        </script>
+<div class="one_third">
+<p class="fl_right" style="font-size: 0.7em;text-align:right;">Copyright &copy; 2011-
+            <script type="text/javascript">
+              var theDate=new Date();    
+              document.write(theDate.getFullYear());
+            </script>
+            Tirasa S.r.l.<br>All rights reserved<br>Follow our <a style="color: whitesmoke" href="http://www.tirasa.net/tirasagram.html">Bot</a> on <a style="color: whitesmoke" href="https://twitter.com/TirasaGram">Twitter</a>
+</p>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.tirasa.net/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", "6"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+</body>
+</html>
