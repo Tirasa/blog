@@ -286,7 +286,7 @@ performed as parsing / returning header values, for example.</p>
         emailCond.setSchema("email");
         emailCond.setExpression(email);
 
-        List matching = searchDAO.search(SearchCond.getLeafCond(emailCond), AnyTypeKind.USER);
+        List<User> matching = searchDAO.search(SearchCond.getLeafCond(emailCond), AnyTypeKind.USER);
         if (matching.isEmpty()) {
             throw new NotFoundException("User with e-mail address " + email);
         }
