@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+sitemap: http://blog.tirasa.net/sitemap.xml
