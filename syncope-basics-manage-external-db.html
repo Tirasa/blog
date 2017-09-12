@@ -236,11 +236,11 @@ CREATE TABLE users (email VARCHAR(100), username VARCHAR(150) NOT NULL, password
 the&nbsp;<a target="_blank" href="http://syncope.apache.org/docs/reference-guide.html#customization">instructions
 from the official Reference Guide</a> in order to configure the bundles
 directory to have all necessary connector JAR files.</p>
-<p>Then you just need to add the MySQL connector dependency to the core/pom.xml
-project file:</p>
+<p>Then you just need to add the MySQL connector dependency to the
+"core/pom.xml" project file:</p>
 <pre class="prettyprint">&lt;dependency&gt;
- &lt;groupid&gt;mysql&lt;/groupid&gt;
- &lt;artifactid&gt;mysql-connector-java&lt;/artifactid&gt;
+ &lt;groupId&gt;mysql&lt;/groupId&gt;
+ &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
  &lt;version&gt;5.1.42&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
@@ -335,13 +335,16 @@ automatically propagate users from MySQL1 to MySQL2: </h3>
 <p>
 <img style="margin: 10px;" src="/gallery/tirasa/blog/advancedpulltask1.png"></p>
 <p>Now, if you have already executed the previous push task for MySQL2, access
-the external resource and remove the rows from it, then run the "ImportUsers"
-pull task from MySQL1 resource. The result should be something like this:</p>
+the external resource and remove the rows from it. <br>
+Also it could be necessary to remove all previously synchronized users from
+Syncope too, then run the "ImportUsers" pull task from MySQL1 resource.</p>
+<p>All users will be pulled to Syncope again and propagated to MySQL2 resource.
+The result should be something like this:</p>
 <p>
 <img style="margin: 10px;" src="/gallery/tirasa/blog/advancedpulltaskresult.png">
 </p>
 <p>
-<strong>Notice</strong>: this way the fullname attribute will be correctly
+<strong>Notice</strong>: this way the "fullname" attribute will be correctly
 populated.</p>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/syncope-basics-manage-external-db.html&title=Syncope Basics: Manage external DB&summary=First post of a new series where simple boilerplate-like examples are shown, with Apache Syncope set up for provisioning to external resources"><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/syncope-basics-manage-external-db.html&text=Syncope Basics: Manage external DB"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
@@ -559,7 +562,7 @@ populated.</p>
 <li class="tag2">
 <a class="nuv" href="/tags/connector/index.html">connector</a>
 </li>
-<li class="tag3">
+<li class="tag2">
 <a class="nuv" href="/tags/connid/index.html">connid</a>
 </li>
 <li class="tag1">
@@ -658,6 +661,9 @@ populated.</p>
 <li class="tag1">
 <a class="nuv" href="/tags/tls/index.html">tls</a>
 </li>
+<li class="tag1">
+<a class="nuv" href="/tags/tutorial/index.html">tutorial</a>
+</li>
 <li class="tag2">
 <a class="nuv" href="/tags/users/index.html">users</a>
 </li>
@@ -684,6 +690,16 @@ populated.</p>
 <div class="left-item">
 <img src="/gallery/tirasa/blog/abc.png"></div>
 <div class="right-item">
+<a href="/syncope-basics-manage-active-directory.html" class="purple">
+<h5 class="item-title">Syncope Basics: Manage Active Directory</h5>
+</a>
+<p style="color: white;">Apache Syncope and Active Directory, an enduring relationship born years ago</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="/gallery/tirasa/blog/abc.png"></div>
+<div class="right-item">
 <a href="/syncope-basics-manage-external-db.html" class="purple">
 <h5 class="item-title">Syncope Basics: Manage external DB</h5>
 </a>
@@ -698,16 +714,6 @@ populated.</p>
 <h5 class="item-title">Managing Zimbra Accounts with Apache Syncope</h5>
 </a>
 <p style="color: white;">Have you ever thought about centralizing control with Apache Syncope of your Zimbra accounts?</p>
-</div>
-</div>
-<div class="item">
-<div class="left-item">
-<img src="/gallery/tirasa/blog/springboot.png"></div>
-<div class="right-item">
-<a href="/syncope-via-spring-boot.html" class="purple">
-<h5 class="item-title">Syncope via Spring Boot</h5>
-</a>
-<p style="color: white;">Need to integrate Apache Syncope in your microservice architecture? Spring Boot comes to the rescue!</p>
 </div>
 </div>
 <div class="item">
