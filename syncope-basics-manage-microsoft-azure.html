@@ -221,8 +221,7 @@ to do the same, you can remove example data by running the following commands:
 <pre class="prettyprint">$ cd [CREATED_PROJECT_FOLDER]
 $ cp core/src/main/resources/domains/MasterContent.xml core/src/test/resources/domains/MasterContent.xml
 </pre>
-<h2> Add Azure connector dependency to Syncope bundles list (step not required
-in Syncope &gt;= <strong>2.0.9-SNAPSHOT</strong>) </h2>
+<h2> Add Azure connector dependency to Syncope bundles list </h2>
 <p>To add the Azure bundle dependency to <em>2.0.8</em> project you'll need to
 edit root "pom.xml" file and add the
 "<strong>net.tirasa.connid.bundles.azure</strong>" dependency. <br>
@@ -283,7 +282,7 @@ menu:</p>
 <a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/addazureres.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addazureres.png:thumbnail"></a>
 </p>
 <h3> Deal with "objectId" attribute, returned by Azure service after User /
-Group creations (step not required in Syncope &gt;= 2.0.9-SNAPSHOT) </h3>
+Group creations </h3>
 <p>At this point, since we are using Syncope <em>2.0.8</em>, we need to manually
 add the Azure PropagationActions to Syncope project (the related file already
 exists in Syncope project from version <em>2.0.9-SNAPSHOT</em> by default) in
@@ -740,6 +739,16 @@ and start you tests.</p>
 <div class="owl-carousel" id="hshop-slider" style="border-bottom: 1px solid rgba(145,165,180,.6)">
 <div class="item">
 <div class="left-item">
+<img src="/gallery/tirasa/blog/abc.png"></div>
+<div class="right-item">
+<a href="/syncope-basics-manage-microsoft-azure-part-ii.html" class="purple">
+<h5 class="item-title">Syncope Basics: Manage Microsoft Azure part II</h5>
+</a>
+<p style="color: white;">How to configure Apache Syncope to support Licenses assignment / removal on Microsoft Azure AD.</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
 <img src="http://www.tirasa.net/gallery/tirasa/site/customers/izs.jpg"></div>
 <div class="right-item">
 <a href="http://www.tirasa.net/news/identity-and-access-management-izs.html" class="purple">
@@ -786,16 +795,6 @@ and start you tests.</p>
 <h5 class="item-title">SPID, the Open Source way</h5>
 </a>
 <p style="color: white;">Italy's Public System for Digital Identity with Tirasa's Open Source Identity Stack</p>
-</div>
-</div>
-<div class="item">
-<div class="left-item">
-<img src="/gallery/tirasa/blog/saml2.jpg"></div>
-<div class="right-item">
-<a href="/saml-single-signon-to-apache-syncope.html" class="purple">
-<h5 class="item-title">SAML Single SignOn to Apache Syncope</h5>
-</a>
-<p style="color: white;">How to configure Apache Syncope to log in via SAML 2.0</p>
 </div>
 </div>
 </div>
