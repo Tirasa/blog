@@ -192,14 +192,17 @@
 <div style="display: none;" id="summary">How to configure Apache Syncope to support Licenses assignment / removal on Microsoft Azure AD.</div>
 <p>
 <img style="margin: 10px;" align="right" src="/gallery/tirasa/blog/abc.png"> This
-guide is a sequel of <a href="/syncope-basics-manage-microsoft-azure.html">Syncope
+guide is a sequel of
+<a target="_blank" href="http://blog.tirasa.net/syncope-basics-manage-microsoft-azure.html">Syncope
 Basics: Manage Microsoft Azure</a> and explains how to configure Apache Syncope
 in order to allow the assignment / removal of Azure Licenses to / from Azure AD
 Users.</p>
-<p>Since some new features were introduced in Syncope since 2.0.8, and fixes
-made to the ConnId Azure connector since 1.0.0, we are going to generate a new
-project rather than upgrading the one from the previous post, for the sake of
-simplicity.</p>
+<p>As you should have seen from previous guide, <strong>it is required to have
+some of the new Syncope <em>2.0.9-SNAPSHOT</em> features to be able to make
+provisioning on Azure AD</strong>.</p>
+<p>For this tutorial, I've decided to use the <em>2.0.9-SNAPSHOT</em> version,
+instead of manually edit <em>2.0.8</em>. <br>
+I will show how to use a <em>SNAPSHOT</em> version from archetype.</p>
 <h2> Create project from maven archetype </h2>
 <pre class="prettyprint">$ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate \
  -DarchetypeGroupId=org.apache.syncope \
@@ -229,8 +232,8 @@ repository.</p>
 <em>1.0.0</em>, but here we need to use latest version <em>1.0.1-SNAPSHOT</em>,
 so we need to edit "pom.xml" file to override it. <br>
 This step won't be necessary when Syncope <em>2.0.9</em> will be released and
-will include ConnId Azure Bundle version <em>1.0.1</em> as default. <br>
-Add the following property inside the "&lt;properties&gt;&lt;/properties&gt;"
+will include ConnId Azure Bundle version <em>1.0.1</em> as default.</p>
+<p>Add the following property inside the "&lt;properties&gt;&lt;/properties&gt;"
 tag:</p>
 <pre class="prettyprint">&lt;connid.azure.version&gt;1.0.1-SNAPSHOT&lt;/connid.azure.version&gt;
 </pre>
@@ -239,15 +242,15 @@ tag:</p>
 Azure connector and external resource. <br>
 Then, continue on this one.</p>
 <h2> Set up Syncope to handle License assignment and removal </h2>
-<h3> Add a new
-"AnyType" </h3>
+<h4> Add a new
+"AnyType" </h4>
 <p>We need to create a new "AnyType" that represents a License. Go to
 "Configuration" (left panel) -&gt; "Types" -&gt; "AnyType" (tab), click the "+"
 button and add a new one:</p>
 <p>
 <a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/azurelicenseanytype.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/azurelicenseanytype.png:thumbnail"></a>
 </p>
-<h3> Define provision rules for LICENSE AnyType </h3>
+<h5> Define provision rules for LICENSE AnyType </h5>
 <p>First, it is important to know that Azure requires the "usageLocation"
 attribute to be populated before assigning / removing a license (see
 <a target="_blank" href="http://mstechtalk.com/mystery-of-office-365-usagelocation/">here</a>
@@ -260,17 +263,19 @@ mapping to refer to related external attribute ("usageLocation"):</p>
 
 </p>
 <p>Then, we need to add it to existing Azure resource provision rules. It will
-be something like: <br>
-"AzureUsageLocation" -&gt; "usageLocation".</p>
+be something like:</p>
+<p>"<strong>AzureUsageLocation</strong>" -&gt;
+"<strong>usageLocation</strong>".</p>
 <p>Now, we need to add a new mapping rule for relationships between USER and
 LICENSE objects. <br>
-The correct rule will be: <br>
-"relationships[USER_LICENSE][LICENSE].name" -&gt; "azureLicense". <br>
-See the
+The correct rule will be:</p>
+<p>"<strong>relationships[USER_LICENSE][LICENSE].name</strong>" -&gt;
+"<strong>azureLicense</strong>".</p>
+<p>See the
 <a target="_blank" href="https://ci.apache.org/projects/syncope/2_0_X/reference-guide.html#mapping">
 Syncope reference guide related section </a> about internal attribute mapping
 expression models.</p>
-<h3> Configure an Azure external resource to pull licenses from Azure </h3>
+<h4> Configure an Azure external resource to pull licenses from Azure </h4>
 <p>I prefer to add a new resource that will be used to pull licenses only. So
 let's add a new resource from "Topology" section in Admin Console:</p>
 <p>
@@ -280,10 +285,10 @@ let's add a new resource from "Topology" section in Admin Console:</p>
 LICENSE AnyType. <br>
 So click on the new resource node and choose "Edit provision rules" from right
 menu. <br>
-For our example it is enough to use: <br>
-"name" -&gt; "skuId" <br>
-but you could also add other rules. Here is a list of other external attributes
-you can map:</p>
+For our example it is enough to use:</p>
+<p>"<strong>name</strong>" -&gt; "<strong>skuId</strong>"</p>
+<p>but you could also add other rules. Here is a list of other external
+attributes you can map:</p>
 <ul>
 
 <li>objectId (String)</li>
@@ -299,13 +304,14 @@ you can map:</p>
 <li>appliesTo (String)</li>
 
 </ul>
-<p>Please, note that the only required attribute to map relationships between
-USER and LICENSE is "skuId". <br>
-It will be used to assign or remove licenses, as explained in
+<p>
+<strong>Important</strong>: the only required attribute to map relationships
+between USER and LICENSE is "skuId". <br>
+It will be used to assign or remove licenses, as explained in the
 <a target="_blank" href="https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/functions-and-actions#assignLicense">
-the official Microsoft Azure API reference </a> . So you will specify a "skuId",
-related to a SKU, in order to assign / remove one or more licenses that may
-contains one or more service plans.</p>
+official Microsoft Azure API reference </a>. <br>
+So you will specify a "skuId", related to a SKU, in order to assign / remove one
+or more licenses that may contains one or more service plans.</p>
 <p>Now, we should add a Pull task in order to pull all licenses from Azure.
 <br>
 Click on the "AzureLicenses" resource node in "Topology" and choose "Pull
@@ -324,7 +330,7 @@ licenses list (if there were any on you Azure account). <br>
 Otherwise, go back to Pull tasks view, select "ImportLicenses" Pull task and
 click on "view" to see the list of task executions and check the details of the
 operation.</p>
-<h3> Configuration test </h3>
+<h4> Configuration test </h4>
 <p>If you want to test the configuration of the "AzureLicenses" resource you can
 just try exploring it and Syncope will show all Subscriptions you have in Azure
 AD. <br>
@@ -752,6 +758,16 @@ and start you tests.</p>
 <div class="owl-carousel" id="hshop-slider" style="border-bottom: 1px solid rgba(145,165,180,.6)">
 <div class="item">
 <div class="left-item">
+<img src="http://www.tirasa.net/gallery/tirasa/site/news/ulss6.jpg"></div>
+<div class="right-item">
+<a href="http://www.tirasa.net/news/yet-another-helthcare-organization-relies-on-tirasa.html" class="purple">
+<h5 class="item-title">Yet another healthcare organization relies on Tirasa for IAM</h5>
+</a>
+<p style="color: white;">AULSS 6 Euganea of Padua makes standard-based Open Source user management and IT authorization</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
 <img src="/gallery/tirasa/blog/abc.png"></div>
 <div class="right-item">
 <a href="/syncope-basics-manage-microsoft-azure-part-ii.html" class="purple">
@@ -798,16 +814,6 @@ and start you tests.</p>
 <h5 class="item-title">Tirasa at Red Hat Open Source Day Italia 2017</h5>
 </a>
 <p style="color: white;">This Thursday we will join the presentation by the Italian Army for their IAM case study</p>
-</div>
-</div>
-<div class="item">
-<div class="left-item">
-<img src="http://www.tirasa.net/gallery/tirasa/site/news/spid.jpg"></div>
-<div class="right-item">
-<a href="http://www.tirasa.net/news/spid-the-open-source-way.html" class="purple">
-<h5 class="item-title">SPID, the Open Source way</h5>
-</a>
-<p style="color: white;">Italy's Public System for Digital Identity with Tirasa's Open Source Identity Stack</p>
 </div>
 </div>
 </div>
