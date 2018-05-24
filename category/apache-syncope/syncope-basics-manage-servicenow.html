@@ -1,0 +1,863 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:dfutils="xalan://net.tirasa.utils.DateFormatUtils" xmlns:java="http://xml.apache.org/xslt/java" xmlns:str="http://xsltsl.org/string" xmlns:g="http://base.google.com/ns/1.0" xmlns:i18n="http://apache.org/cocoon/i18n/3.0" itemtype="http://schema.org/Article" itemscope="" prefix="og: http://ogp.me/ns#" lang="en_US">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Tirasa Blog - Syncope Basics: Manage ServiceNow</title>
+<meta content="How to configure Apache Syncope to provision Users to a ServiceNow Cloud Service instance" name="description">
+<meta content="noodp" name="robots">
+<link href="http://blog.tirasa.net/syncope-basics-manage-servicenow.html" rel="canonical">
+<link href="http://www.google.com/+TirasaNet/about" rel="publisher">
+<meta content="Tirasa Blog - Syncope Basics: Manage ServiceNow" itemprop="name">
+<meta content="How to configure Apache Syncope to provision Users to a ServiceNow Cloud Service instance" itemprop="description">
+<meta content="How to configure Apache Syncope to provision Users to a ServiceNow Cloud Service instance" itemprop="headline">
+<meta content="http://blog.tirasa.net/syncope-basics-manage-servicenow.html" itemprop="url">
+<meta content="2018-05-24 00:00:00" itemprop="dateModified">
+<meta content="2018-05-24 00:00:00" itemprop="datePublished">
+<span itemtype="https://schema.org/Corporation" itemscope="" itemprop="publisher"><span itemtype="https://schema.org/ImageObject" itemscope="" itemprop="logo">
+<meta content="http://www.tirasa.net/images/logo.png" itemprop="url">
+</span>
+<meta content="Tirasa" itemprop="name">
+</span>
+<meta content="summary" name="twitter:card">
+<meta content="@TirasaNet" name="twitter:site">
+<meta content="Tirasa Blog - Syncope Basics: Manage ServiceNow" name="twitter:title">
+<meta content="How to configure Apache Syncope to provision Users to a ServiceNow Cloud Service instance" name="twitter:description">
+<meta content="@TirasaNet" name="twitter:creator">
+<meta content="http://blog.tirasa.net/gallery/tirasa/blog/abc.png" name="twitter:image">
+<meta content="Tirasa Blog - Syncope Basics: Manage ServiceNow" property="og:title">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="http://blog.tirasa.net/syncope-basics-manage-servicenow.html" property="og:url">
+<meta content="http://blog.tirasa.net/gallery/tirasa/blog/abc.png" property="og:image">
+<meta content="How to configure Apache Syncope to provision Users to a ServiceNow Cloud Service instance" property="og:description">
+<meta content="Tirasa" property="og:site_name">
+<meta content="2018-05-24 00:00:00" property="article:published_time">
+<meta content="2018-05-24 00:00:00" property="article:modified_time">
+<meta content="252836668438434" property="fb:app_id">
+<meta charset="UTF-8">
+<link type="image/vnd.microsoft.icon" href="images/favicon.png" rel="shortcut icon">
+<meta content="off" http-equiv="x-dns-prefetch-control">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link media="all" type="text/css" rel="stylesheet" href="css/main.css">
+<link media="all" type="text/css" rel="stylesheet" href="css/custom.css">
+<link media="all" type="text/css" rel="stylesheet" href="css/mediaqueries.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700">
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Loved+by+the+King">
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script><script src="js/jquery-latest.min.js"></script><script src="js/jquery-ui.min.js"></script><script src="js/jquery-mobilemenu.min.js"></script><script src="js/jquery.cookiesdirective.js"></script><script src="js/js.cookie.js"></script><script src="js/custom.js"></script><script src="js/highslide.js"></script><script type="text/javascript">
+      hs.graphicsDir = 'css/graphics/';
+
+      jQuery.noConflict()(function ($) {
+        $("#accordion").accordion({
+          active: false,
+          collapsible: true,
+          heightStyle: "content"
+        });
+        if (location.hash) {
+          var tabIndex = parseInt(window.location.hash.substring(1));
+          $("#accordion").accordion('option', 'active', tabIndex);
+        }
+
+        $(document).ready(function() {
+          $.cookiesDirective({
+            position: 'bottom',
+            duration: 10,
+	    linkColor: '#9293c8',
+            backgroundOpacity: '90',
+      
+            privacyPolicyUri: 'http://www.tirasa.net/privacy-policy.html',
+	    message: 'This site uses cookies. Some of the cookies we use are essential for parts of the site to operate and have already been set. ',
+	    multipleCookieScriptBeginningLabel: ' We use ',
+	    and: ' and ',
+	    multipleCookieScriptEndLabel: ' scripts, which all set cookies. ',			
+	    singleCookieScriptBeginningLabel: ' We use a ',
+	    singleCookieScriptEndLabel: ' script which sets cookies.',			
+	    explicitCookieDeletionWarning: 'You may delete and block all cookies from this site, but parts of the site will not work. ',
+  	    explicitFindOutMore: 'To find out more about cookies on this website, see our',
+	    privacyPolicyLinkText: ' privacy policy',
+	    explicitCheckboxLabel: 'You must tick the "I accept cookies from this site" box to accept',
+	    explicitCookieAcceptanceLabel: 'I accept cookies from this site',
+	    explicitCookieAcceptButtonText: 'Continue',
+	    impliedDisclosureText: ' More details can be found in our',
+	    impliedSubmitText: 'Do not show this message again'
+        
+          });
+        });
+      });
+    </script>
+<link media="all" href="css/highslide.css" type="text/css" rel="stylesheet">
+<link media="all" href="css/accordion.css" type="text/css" rel="stylesheet">
+<link href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript">
+          var disqus_config = function () {
+            this.page.url = 'http://blog.tirasa.net/syncope-basics-manage-servicenow.html';
+            this.page.identifier = 'http://blog.tirasa.net/syncope-basics-manage-servicenow.html';
+          };
+          (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//tirasa.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+</head>
+<body>
+<div xmlns:hct="http://www.tirasa.net/hct/1.0" class="wrapper row0">
+<div id="header" class="full_width clear">
+<ul class="list none" style="margin: 0px;text-align: right;color: white;font-family: 'Montserrat';font-size: 12px;padding-top: 0.25%;;width: 100%;min-height: 17px;"></ul>
+</div>
+</div>
+<script xmlns:gcse="uri:google-did-not-provide-a-real-ns">
+      (function() {
+      var cx = '007564373758891836797:-tjr10bo51c';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+<div style="padding-bottom: 15px;padding-top: 15px;" class="wrapper row1">
+<header class="full_width clear" id="header">
+<div style="position: relative;float: left;">
+<h1 style="margin-bottom: 0;">
+<a href="http://www.tirasa.net"><img style="width: 200px; margin-top: 1.5%; margin-right: 10px;" src="images/logo.png"></a>
+</h1>
+</div>
+<div id="topnav">
+<ul class="clear">
+<li>
+<a class="drop" style="width: 120%;" href="http://www.tirasa.net/businessproposition/index.html">Products &amp; Solutions</a>
+<ul>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/apache-syncope.html">Apache Syncope</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/identity-access-management.html">Identity &amp; Access Management</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/content-management-system.html">Enterprise Content Management</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/open-source.html">Open Source</a>
+</li>
+</ul>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/support.html"></a>
+</li>
+<li>
+<a style="width: 120%;color: #9293c8;" href="http://blog.tirasa.net/index.html">Blog</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/customers.html">Customers</a>
+</li>
+<li>
+<a class="drop" style="width: 120%;" href="http://www.tirasa.net/mission-vision.html">Who we are</a>
+<ul>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/mission-vision.html">Mission &amp; Vision</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/aboutus.html">Team</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/contacts.html">Contact</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="social_header">
+<div id="social">
+<a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="https://github.com/Tirasa"><img alt="github" src="images/github_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="https://twitter.com/TirasaNet"><img alt="twitter" src="images/twitter.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.linkedin.com/company/2164993"><img alt="linkedin" src="images/linkedin_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.facebook.com/tirasasrl"><img alt="facebook" src="images/facebook_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px" href="http://www.google.com/+TirasaNet"><img alt="g+" src="images/google_plus.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="mailto:info@tirasa.net"><img alt="send an email" src="images/email.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.tirasa.net/rss.xml"><img alt="Blog Post" src="images/feed.png"></a>
+</div>
+<div id="search">
+<div resultsUrl="http://jsfiddle.net/devnook/2PC2f/6/show_html/" class="gcse-search"></div>
+</div>
+</div>
+</header>
+</div>
+<div class="wrapper row3">
+<div id="container">
+    
+<div style="margin-bottom: 50px;" class="three_quarter first contentbackground">
+<div id="missionvision">
+<section class="clear">24 May 2018<div style="border-top: 1px dotted #9293c8">&nbsp;</div>
+<h3 style="margin:0px; color: #9293c8;">Syncope Basics: Manage ServiceNow</h3>
+<p>Written by<a href="/author/malessandroni/index.html"><i> malessandroni</i></a>
+</p>
+<div style="display: none;" id="date">24 May 2018</div>
+<div style="display: none;" id="summary">How to configure Apache Syncope to provision Users to a ServiceNow Cloud Service instance</div>
+<p>
+<img style="margin: 10px;" align="right" src="/gallery/tirasa/blog/abc.png"> We
+recently developed and released the
+<a title="ServiceNow connector" target="_blank" href="https://connid.atlassian.net/wiki/display/BASE/ServiceNow">
+ServiceNow connector</a> as part of the
+<a title="ConnId project" target="_blank" href="http://connid.tirasa.net/">ConnId
+project</a>. This bundle is used to connect Apache Syncope to a ServiceNow Cloud
+Service instance.</p>
+<hr>
+<p>
+<img style="margin: 10px;" src="/gallery/tirasa/blog/sponsor.png">The development of
+this connector's first stable version has been sponsored by
+<a target="_blank" href="https://www.iwelcome.com/">iWelcome</a>, the leading European IDaaS
+provider.</p>
+<hr>
+<p>Here I'm going to show how to use it on Syncope <em>2.0.8</em>.</p>
+<h2> Create project from maven archetype </h2>
+<p>The new connector is available by default from Syncope
+<em>2.0.9-SNAPSHOT</em>, but in this guide I'll show you how to use it in our
+Syncope latest stable release (<em>2.0.8</em>); so let's start creating a simple
+Apache Syncope <em>2.0.8</em> project from archetype:</p>
+<pre class="prettyprint">$ mvn archetype:generate \
+-DarchetypeGroupId=org.apache.syncope \
+-DarchetypeArtifactId=syncope-archetype \
+-DarchetypeRepository=http://repo1.maven.org/maven2 \
+-DarchetypeVersion=2.0.8
+</pre>
+<p>By default, the embedded mode is populated with example data. <br>
+In order to be more clear, I'll work on a fresh Syncope instance; so if you want
+to do the same, you can remove example data by running the following commands:
+</p>
+<pre class="prettyprint">$ cd [CREATED_PROJECT_FOLDER]
+$ cp core/src/main/resources/domains/MasterContent.xml core/src/test/resources/domains/MasterContent.xml
+</pre>
+<h2> Add ServiceNow connector dependency to Syncope bundles list (step not
+required in Syncope &gt;= <strong>2.0.9-SNAPSHOT</strong>) </h2>
+<p>To add the ServiceNow bundle dependency to <em>2.0.8</em> project you'll need
+to edit root "pom.xml" file and add the
+"<strong>net.tirasa.connid.bundles.servicenow</strong>" dependency. <br>
+So from project main folder, run:</p>
+<pre class="prettyprint">$ vi pom.xml
+</pre>
+<p>add:</p>
+<pre class="prettyprint">&lt;properties&gt;
+  ...
+  &lt;connid.servicenow.version&gt;1.0.0&lt;/connid.servicenow.version&gt;
+  ...
+&lt;/properties&gt;
+</pre>
+<p>then add the "maven-dependency-plugin" as you can see
+<a target="_blank" href="https://github.com/apache/syncope/blob/2_0_X/pom.xml#L1803-L1869">here</a>
+and remember to insert that content under:</p>
+<pre class="prettyprint">&lt;pluginManagement&gt;
+  &lt;plugins&gt;
+	...
+  &lt;/plugins&gt;
+&lt;/pluginManagement&gt;
+</pre>
+<h2> Run Syncope in embedded mode </h2>
+<p>From the project root dir, run:</p>
+<pre class="prettyprint">$ mvn -P all clean install &amp;&amp; cd enduser &amp;&amp; mvn -P embedded,all
+</pre>
+<p>Open
+<a target="_blank" href="http://localhost:9080/syncope-console">http://localhost:9080/syncope-console
+</a> and you'll access the <strong>Syncope Admin Console</strong>.</p>
+<p>Login to Admin Console using the default "admin" / "password" credentials.
+</p>
+<h2> Set up an ServiceNow external resource </h2>
+<p>Go to "Topology" and add a new connector (see image below):</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/addservicenowconnector1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addservicenowconnector1.png:thumbnail"></a>
+
+</p>
+<p>You'll be able to see the new ServiceNow bundle, so choose
+"net.tirasa.connid.bundles.servicenow" from "Bundle" list and fill the other
+required fields:</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/servicenowbundle.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/servicenowbundle.png:thumbnail"></a>
+</p>
+<p>Click on "Next" button and enter the ServiceNow service configuration by
+filling the required parameters (you can find more info about it on related
+<a target="_blank" href="https://connid.atlassian.net/wiki/spaces/BASE/pages/429490177/ServiceNow#ServiceNow-ConfigurationProperties">ConnId
+ServiceNow connector wiki page</a>):</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/addservicenowconnector2.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addservicenowconnector2.png:thumbnail"></a>
+
+</p>
+<p>Click on "Next" button again, select connector Capabilities (AUTHENTICATE and
+SYNC are not supported as you can see
+<a target="_blank" href="https://connid.atlassian.net/wiki/spaces/BASE/pages/429490177/ServiceNow#ServiceNow-Supportedoperations">here</a>)
+and click on "Finish":</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/addservicenowconnector3.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addservicenowconnector3.png:thumbnail"></a>
+
+</p>
+<p>Now you are ready to create the ServiceNow external resource. <br>
+Click on the just created connector and choose "Add new resource" from right
+menu:</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/addservicenowres.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addservicenowres.png:thumbnail"></a>
+</p>
+<h4> Deal with the "id" attribute, returned by ServiceNow service after User
+creations (step not required in Syncope &gt;= 2.0.9-SNAPSHOT) </h4>
+<p>At this point, since we are using Syncope <em>2.0.8</em>, we need to manually
+add the ServiceNow PropagationActions to Syncope project (the related file
+already exists in Syncope project from version <em>2.0.9-SNAPSHOT</em> by
+default) in order to let Syncope save the Users ID returned by ServiceNow
+Service after creations.</p>
+<p>You need to create the "
+<a target="_blank" href="https://github.com/apache/syncope/blob/2_0_X/core/provisioning-java/src/main/java/org/apache/syncope/core/provisioning/java/propagation/ServiceNowPropagationActions.java">org.apache.syncope.core.provisioning.java.propagation.ServiceNowPropagationActions</a>"
+file and link it to the "ServiceNowRes" resource.</p>
+<p>So, just run the following commands to create and edit a new file with that
+name:</p>
+<pre class="prettyprint">$ mkdir -p ./core/src/main/java/org/apache/syncope/core/provisioning/java/propagation/ &amp;&amp; vim ./core/src/main/java/org/apache/syncope/core/provisioning/java/propagation/ServiceNowPropagationActions.java
+</pre>
+<p>copy &amp; paste the content of the file above (
+<a target="_blank" href="https://raw.githubusercontent.com/apache/syncope/2_0_X/core/provisioning-java/src/main/java/org/apache/syncope/core/provisioning/java/propagation/ServiceNowPropagationActions.java">ServiceNowPropagationActions.java</a>).
+</p>
+<p>Then stop Syncope, re-build and re-start it. <br>
+When it'll be ready, you'll be able to add the "ServiceNowPropagationActions" to
+ServiceNow resource. <br>
+So just click on resource node and select "Edit resource" from menu:</p>
+<p>
+
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/addservicenowrespropagationactions.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addservicenowrespropagationactions.png:thumbnail"></a>
+
+</p>
+<h2> Add some required Plain Schemas </h2>
+<p>From the Admin Console, go to "Configuration" (left panel) -&gt; "Types"
+-&gt; "Schemas"; in the "PLAIN" accordion panel click on the "+" icon. <br>
+Create the "ServiceNowUserId" schema:</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/servicenowschemauser.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/servicenowschemauser.png:thumbnail"></a>
+</p>
+<p>We must add it to "BaseUser" AnyTypeClass in order to have it available for
+"USER" AnyType.</p>
+<p>To do that, select the "AnyTypeClasses" tab, click on "BaseUser" row and
+choose "edit" from right menu. <br>
+Add "ServiceNowUserId" to "Selected" sub-panel, in "Plain Schemas" section:</p>
+<p>
+
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/servicenowschemauseranytypeclass.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/servicenowschemauseranytypeclass.png:thumbnail"></a>
+
+</p>
+<h2> Add provision rules for "USER" and "GROUP" </h2>
+<p>Now we need to set some provision rules to map ServiceNow attributes to
+Syncope attributes.</p>
+<p>Click on the "ServiceNowRes" node in "Topology" and choose "Edit provision
+rules" from right menu.</p>
+<p>From the just opened modal window, click on "+" icon and select "USER", then
+click "Next" in the wizard until you'll get to "Mapping" step. <br>
+Now, you can choose a mapping configuration, e.g.</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/servicenowusermapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/servicenowusermapping.png:thumbnail"></a>
+
+</p>
+<p>You can also add provision rules for "GROUP", same way. <br>
+E.g.</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/servicenowgroupmapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/servicenowgroupmapping.png:thumbnail"></a>
+
+</p>
+<h4> Configuration test </h4>
+<p>You can run a simple basic test by exploring the resource and make Syncope
+retrieve all Users you have in your ServiceNow service.</p>
+<p>Click on the "ServiceNowRes" node from "Topology" and choose "Explore
+resource" from menu.</p>
+<p>Select "USER" from the dropdown on top of the modal window and you'll see
+some users, in case you have any on your ServiceNow service. <br>
+Here you can see an example:</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/servicenowuserexplore.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/servicenowuserexplore.png:thumbnail"></a>
+
+</p>
+<p>You can do the same for "GROUP". <br>
+Here you can see an example:</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/servicenowgroupexplore.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/servicenowgroupexplore.png:thumbnail"></a>
+
+</p>
+<h2> Sample project </h2>
+<p>I have created a
+<a target="_blank" href="https://github.com/Tirasa/syncopeWithServiceNow">sample
+project</a> according to this guide. <br>
+Assuming you have Git and Maven properly configured, run:</p>
+<pre class="prettyprint">$ git clone https://github.com/Tirasa/syncopeWithServiceNow.git
+$ cd syncopeWithServiceNow/
+$ mvn -P all clean install &amp;&amp; cd enduser &amp;&amp; mvn -P embedded,all
+</pre>
+<p>Now you can point your browser to
+<a target="_blank" href="http://localhost:9080/syncope-console">http://localhost:9080/syncope-console</a>
+and start you tests.</p>
+<span id="XinhaEditingPostion"> </span><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/syncope-basics-manage-servicenow.html&title=Syncope Basics: Manage ServiceNow&summary=How to configure Apache Syncope to provision Users to a ServiceNow Cloud Service instance"><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/syncope-basics-manage-servicenow.html&text=Syncope Basics: Manage ServiceNow"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/syncope-basics-manage-servicenow.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://plus.google.com/share?url=http://blog.tirasa.net/syncope-basics-manage-servicenow.html"><img alt="" src="images/google_square-24.png"></a>&nbsp;
+          <ul class="list tagcloud rnd8">
+<li>
+<a href="/tags/apache+syncope/index.html">apache syncope</a>
+</li>
+<li>
+<a href="/tags/servicenow/index.html">servicenow</a>
+</li>
+<li>
+<a href="/tags/identity+management/index.html">identity management</a>
+</li>
+<li>
+<a href="/tags/tutorial/index.html">tutorial</a>
+</li>
+</ul>
+<div id="disqus_thread"></div>
+<p class="more">
+<a href="/index.html">&laquo; Return</a>
+</p>
+</section>
+</div>
+</div>
+  
+<div id="sidebar_1" class="sidebar one_quarter">
+<aside>
+<h2>Menu</h2>
+<nav>
+<ul>
+<li>
+<a href="http://www.tirasa.net">Home</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/index.html">Business Proposition</a>
+<ul>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/apache-syncope.html">Apache Syncope</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/identity-access-management.html">Identity &amp; Access Management</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/content-management-system.html">Enterprise Content Management</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/open-source.html">Open Source</a>
+</li>
+</ul>
+</li>
+<li>
+<a title="customers" href="#" class="drop disable_link">Who we are</a>
+<ul>
+<li>
+<a style="" href="http://www.tirasa.net/mission-vision.html">Mission &amp; Vision</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/aboutus.html">Team</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/contacts.html">Contact</a>
+</li>
+</ul>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/customers.html">Customers</a>
+</li>
+<li>
+<a style="width: 120%;color: #9293c8;" href="http://blog.tirasa.net/index.html">Blog</a>
+</li>
+</ul>
+</nav>
+</aside>
+<aside>
+<h2>Link</h2>
+<nav>
+<ul>
+<li>
+<a target="_blank" href="http://connid.tirasa.net/">ConnId</a>
+</li>
+<li>
+<a target="_blank" href="http://hct.tirasa.net/">Hippo Cocoon Toolkit</a>
+</li>
+<li>
+<a target="_blank" href="https://github.com/Tirasa/">Tirasa on GitHub</a>
+</li>
+</ul>
+</nav>
+</aside>
+    
+<aside>
+<h2>Categories</h2>
+<nav>
+<ul>
+<li>
+<a href="/category/apache-syncope/index.html">Apache Syncope</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/connid/index.html">ConnId</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/identity-management/index.html">Identity Management</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/access-management/index.html">Access Management</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/open-source/index.html">Open Source</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/open-source/apache/index.html">Apache</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/open-source/linux/index.html">Linux</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/open-source/linux/bash-scripting/index.html">Bash Scripting</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/category/codeexp/index.html">DevOps</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/codeexp/maven/index.html">Maven</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/java/index.html">Java</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/jexl/index.html">Jexl</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/technology/index.html">Technology</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/openjpa/index.html">OpenJPA</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/ldap/index.html">ldap</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/active-directory/index.html">Active Directory</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/security/index.html">security</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/category/uncategorized/index.html">Uncategorized</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/uncategorized/estemporanea/index.html">Estemporanea</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/uncategorized/idee/index.html">Idee</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+    
+<aside xmlns:math="http://exslt.org/math">
+<h2>Tag Cloud</h2>
+<div class="tags">
+<li class="tag1">
+<a class="nuv" href="/tags/SAML/index.html">SAML</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/active+directory/index.html">active directory</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/activiti/index.html">activiti</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/apache+cocoon/index.html">apache cocoon</a>
+</li>
+<li class="tag9">
+<a class="nuv" href="/tags/apache+syncope/index.html">apache syncope</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/apache+wicket/index.html">apache wicket</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/asf/index.html">asf</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/assign/index.html">assign</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/azure/index.html">azure</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/certificate/index.html">certificate</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/client/index.html">client</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/connector/index.html">connector</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/connid/index.html">connid</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/cxf/index.html">cxf</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/exchange/index.html">exchange</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/federation/index.html">federation</a>
+</li>
+<li class="tag5">
+<a class="nuv" href="/tags/identity+management/index.html">identity management</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/interface/index.html">interface</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/java/index.html">java</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/javascript/index.html">javascript</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/ldap/index.html">ldap</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/linux/index.html">linux</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/maven/index.html">maven</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/microsoft/index.html">microsoft</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/notification/index.html">notification</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/openjpa/index.html">openjpa</a>
+</li>
+<li class="tag6">
+<a class="nuv" href="/tags/opensource/index.html">opensource</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/openssl/index.html">openssl</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/password/index.html">password</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/password+reset/index.html">password reset</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/powershell/index.html">powershell</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/propagation/index.html">propagation</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/quartz/index.html">quartz</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/release/index.html">release</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/resource/index.html">resource</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/rest/index.html">rest</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/roles/index.html">roles</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/salesforce/index.html">salesforce</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/scim/index.html">scim</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/security/index.html">security</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/self-registration/index.html">self-registration</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/self-service/index.html">self-service</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/spring/index.html">spring</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/ssl/index.html">ssl</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/sso/index.html">sso</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/synchronization/index.html">synchronization</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/tirasa/index.html">tirasa</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/tls/index.html">tls</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/tutorial/index.html">tutorial</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/users/index.html">users</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/workflow/index.html">workflow</a>
+</li>
+</div>
+</aside>
+  
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<div style="margin-top: 25px; margin-bottom: 25px;" class="wrapper row4">
+<div class="clear" id="footer">
+    
+<div style="margin-bottom: 20px;" class="three_quarter">
+<div style="padding-top: 10px;">
+<h3>
+<a href="http://www.tirasa.net/news/index.html">Latest Updates</a><a target="_blank" style="color:#d6d5d5;padding-left:5px;" href="http://www.tirasa.net/rss.xml"><img style="width:20px;padding-bottom:5px" alt="Tirasa RSS" src="images/feed.png"></a>
+</h3>
+<div class="owl-carousel" id="hshop-slider" style="border-bottom: 1px solid rgba(145,165,180,.6)">
+<div class="item">
+<div class="left-item">
+<img src="/gallery/tirasa/blog/abc.png"></div>
+<div class="right-item">
+<a href="/syncope-basics-manage-servicenow.html" class="purple">
+<h5 class="item-title">Syncope Basics: Manage ServiceNow</h5>
+</a>
+<p style="color: white;">How to configure Apache Syncope to provision Users to a ServiceNow Cloud Service instance</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="/gallery/tirasa/blog/abc.png"></div>
+<div class="right-item">
+<a href="/syncope-basics-manage-scim-v1.1.html" class="purple">
+<h5 class="item-title">Syncope Basics: Manage SCIM v1.1</h5>
+</a>
+<p style="color: white;">How to configure Apache Syncope to provision Users to a SCIM v1.1 RESTful service</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="/gallery/tirasa/blog/oidc.png"></div>
+<div class="right-item">
+<a href="/openid-connectt-single-signon-to-apache-syncope.html" class="purple">
+<h5 class="item-title">OpenID Connect Single SignOn to Apache Syncope</h5>
+</a>
+<p style="color: white;">How to configure Apache Syncope to login via OpenID Connect</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="http://www.tirasa.net/gallery/tirasa/site/news/plainid.png"></div>
+<div class="right-item">
+<a href="http://www.tirasa.net/news/tirasa-supports-plainid-in-its-dynamic-authorization-integrate-solution.html" class="purple">
+<h5 class="item-title">Tirasa supports PlainID in its dynamic authorization integrate solution</h5>
+</a>
+<p style="color: white;">PlainID and Tirasa announced the release of a PlainID Dynamic Authorization integrate solution, to enhance its Authorization management capabilities</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="http://www.tirasa.net/gallery/tirasa/site/news/ulss6.jpg"></div>
+<div class="right-item">
+<a href="http://www.tirasa.net/news/yet-another-helthcare-organization-relies-on-tirasa.html" class="purple">
+<h5 class="item-title">Yet another healthcare organization relies on Tirasa for IAM</h5>
+</a>
+<p style="color: white;">AULSS 6 Euganea of Padua makes standard-based Open Source user management and IT authorization</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="http://www.tirasa.net/gallery/tirasa/site/customers/izs.jpg"></div>
+<div class="right-item">
+<a href="http://www.tirasa.net/news/identity-and-access-management-izs.html" class="purple">
+<h5 class="item-title">IZSAM realizes its own IAM solution</h5>
+</a>
+<p style="color: white;">The Istituto Zooprofilattico Sperimentale dell'Abruzzo e del Molise engages Tirasa for its own IAM infrastructure.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    
+<div class="one_quarter">
+  
+<div style="padding-top: 10px;">
+    
+<h3>
+<a href="#">Tweets</a>
+</h3>
+
+    
+<a class="twitter-timeline" width="625" height="320" data-chrome="noheader nofooter noscrollbar transparent" data-theme="dark" data-dnt="true" data-widget-id="806128727264526337" href="https://twitter.com/search?q=%23HippoCocoonToolkit%20OR%20%23ConnId%20OR%20from%3ATirasaNet%20OR%20to%3ATirasaNet%20OR%20%40TirasaNet%20OR%20from%3Asyncopeidm%20OR%20to%3Asyncopeidm%20OR%20%40syncopeidm">Tweet riguardo #HippoCocoonToolkit OR #ConnId OR from:TirasaNet OR to:TirasaNet OR @TirasaNet OR from:syncopeidm OR to:syncopeidm OR @syncopeidm</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+</div>
+
+</div>
+  
+</div>
+</div>
+<div style="background-color: #9293c8;" class="wrapper row2">
+<div id="footer" class="clear">
+<div class="one_third">
+<p class="fl_left" style="font-size: 0.7em;">Tirasa S.r.l. - P.I. 01974100685<br>Powered by <a style="color: whitesmoke" href="http://hct.tirasa.net/" target="_blank">Hippo Cocoon Toolkit</a>
+<br>
+<a style="color: whitesmoke" href="http://www.tirasa.net/privacy-policy.html">Privacy Policy</a>
+</p>
+</div>
+<div class="one_third">
+<p style="font-size: 0.7em;">Apache, Syncope, Apache Syncope and the Apache Syncope logo are trademarks of The Apache Software Foundation.</p>
+</div>
+<script type="text/javascript">
+          function year() {
+          var theDate=new Date()
+          document.write(theDate.getFullYear())}
+        </script>
+<div class="one_third">
+<p class="fl_right" style="font-size: 0.7em;text-align:right;">Copyright &copy; 2011-
+            <script type="text/javascript">
+              var theDate=new Date();    
+              document.write(theDate.getFullYear());
+            </script>
+            Tirasa S.r.l.<br>All rights reserved<br>Follow our <a style="color: whitesmoke" href="http://www.tirasa.net/tirasagram.html">Bot</a> on <a style="color: whitesmoke" href="https://twitter.com/TirasaGram">Twitter</a>
+</p>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.tirasa.net/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", "6"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+</body>
+</html>
