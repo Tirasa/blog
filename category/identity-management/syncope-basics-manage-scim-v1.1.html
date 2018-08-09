@@ -288,12 +288,12 @@ menu:</p>
 <p>
 <a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/addscimv11res.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11res.png:thumbnail"></a>
 </p>
-<h4> Deal with the "id" attribute, returned by SCIM service after User creations
-(step not required in Syncope &gt;= 2.0.9-SNAPSHOT) </h4>
+<h4> Dealing with the "id" attribute, returned by SCIM service upon User
+creations (step not required in Syncope &gt;= 2.0.9-SNAPSHOT) </h4>
 <p>At this point, since we are using Syncope <em>2.0.8</em>, we need to manually
 add the SCIM PropagationActions to Syncope project (the related file already
 exists in Syncope project from version <em>2.0.9-SNAPSHOT</em> by default) in
-order to let Syncope save the Users ID returned by SCIM Service after creations.
+order to let Syncope save the Users ID returned by SCIM Service upon creations.
 </p>
 <p>You need to create the "
 <a target="_blank" href="https://github.com/apache/syncope/blob/2_0_X/core/provisioning-java/src/main/java/org/apache/syncope/core/provisioning/java/propagation/SCIMv11PropagationActions.java">org.apache.syncope.core.provisioning.java.propagation.SCIMv11PropagationActions</a>"
@@ -393,6 +393,40 @@ $ mvn -P all clean install &amp;&amp; cd enduser &amp;&amp; mvn -P embedded,all
 <p>Now you can point your browser to
 <a target="_blank" href="http://localhost:9080/syncope-console">http://localhost:9080/syncope-console</a>
 and start you tests.</p>
+<h2>Update Syncope 2.1 - Dealing with the "id" attribute, returned by SCIM
+service upon User creations </h2>
+<p>After the release of Syncope 2.1 an improvement was made to the logic for all
+those connectors that need to save the value of some attribute coming from the
+specific resource service after creating an entity on it. <br>
+All that logic from the PropagationActions classes
+("<a target="_blank" href="https://github.com/apache/syncope/blob/2_0_X/core/provisioning-java/src/main/java/org/apache/syncope/core/provisioning/java/propagation/SCIMv11PropagationActions.java">org.apache.syncope.core.provisioning.java.propagation.SCIMv11PropagationActions</a>"
+for SCIM bundle) was removed. <br>
+And, since all the logic in the "SCIMv11PropagationActions" is about that, we
+removed class from the Syncope 2.1 and <strong>you don't need to create or link
+any PropagationActions for SCIM connector</strong>.</p>
+<p>So, since the "PropagationActions" files were minimized, what else do I need
+to do for Syncope 2.1? <br>
+Well, it is pretty simple! <br>
+You just need to open the resource mapping and you'll see a new field: <br>
+
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/2_1_xusermapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/2_1_xusermapping.png:thumbnail"></a> 
+<br>
+Enter the previously created required schema ("SCIMUserId" for "USER" AnyType)
+in that field, to handle the returned value from the SCIM service.</p>
+<p>Done, that's all! <br>
+So, to summarize the all process:</p>
+<ul>
+
+<li>create schemas to handle the attribute values returned by the service;</li>
+
+<li>add those schemas to the new field in resource mapping (<em>Schema to hold
+values for identifiers generated upon Create by the external Identity
+Store</em>);</li>
+
+<li>add the "[SCHEMA_NAME]" -&gt; "__UID__" mapping item with "Remote Key" flag.
+</li>
+
+</ul>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/syncope-basics-manage-scim-v1.1.html&title=Syncope Basics: Manage SCIM v1.1&summary=How to configure Apache Syncope to provision Users to a SCIM v1.1 RESTful service"><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/syncope-basics-manage-scim-v1.1.html&text=Syncope Basics: Manage SCIM v1.1"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/syncope-basics-manage-scim-v1.1.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
@@ -580,6 +614,9 @@ and start you tests.</p>
 <h2>Tag Cloud</h2>
 <div class="tags">
 <li class="tag1">
+<a class="nuv" href="/tags/OpenID+Connect/index.html">OpenID Connect</a>
+</li>
+<li class="tag1">
 <a class="nuv" href="/tags/SAML/index.html">SAML</a>
 </li>
 <li class="tag3">
@@ -750,6 +787,16 @@ and start you tests.</p>
 <div class="owl-carousel" id="hshop-slider" style="border-bottom: 1px solid rgba(145,165,180,.6)">
 <div class="item">
 <div class="left-item">
+<img src="/gallery/tirasa/blog/keycloack.png"></div>
+<div class="right-item">
+<a href="/apache-syncope-sso-with-keycloack.html" class="purple">
+<h5 class="item-title">Apache Syncope SSO with Keycloack</h5>
+</a>
+<p style="color: white;">How to configure Apache Syncope and Keycloak to allow Single SignOn via OpenID Connect</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
 <img src="/gallery/tirasa/blog/haveibeenpwned.png"></div>
 <div class="right-item">
 <a href="/configure-syncope-to-check-for-pwned-passwords.html" class="purple">
@@ -766,16 +813,6 @@ and start you tests.</p>
 <h5 class="item-title">Apache Syncope &amp; Salesforce</h5>
 </a>
 <p style="color: white;">How to configure Apache Syncope to provision Users to Salesforce using the SCIM v1.1 ConnId Bundle</p>
-</div>
-</div>
-<div class="item">
-<div class="left-item">
-<img src="/gallery/tirasa/blog/abc.png"></div>
-<div class="right-item">
-<a href="/syncope-basics-manage-servicenow.html" class="purple">
-<h5 class="item-title">Syncope Basics: Manage ServiceNow</h5>
-</a>
-<p style="color: white;">How to configure Apache Syncope to provision Users to a ServiceNow Cloud Service instance</p>
 </div>
 </div>
 <div class="item">

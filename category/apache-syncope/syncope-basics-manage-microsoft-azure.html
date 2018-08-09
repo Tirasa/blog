@@ -193,15 +193,15 @@
 <p>
 <img style="margin: 10px;" align="right" src="/gallery/tirasa/blog/abc.png"> We
 recently developed and released the
-<a title="Azure connector" target="_blank" href="https://connid.atlassian.net/wiki/spaces/BASE/pages/308674561/Azure">Azure
-connector</a> as part of the
+<a title="Azure connector" target="_blank" href="https://connid.atlassian.net/wiki/spaces/BASE/pages/308674561/Azure">
+Azure connector </a> as part of the
 <a title="ConnId project" target="_blank" href="http://connid.tirasa.net/">ConnId
 project</a>. This bundle is used to connect the
 <a title="Microsoft Azure AD" target="_blank" href="https://azure.microsoft.com/en-us/services/active-directory/">Microsoft
 Azure AD</a> to Apache Syncope.</p>
 <hr>
 <p>
-<img style="margin: 10px;" src="/gallery/tirasa/blog/sponsor.png">The development of
+<img style="margin: 10px;" src="/gallery/tirasa/blog/sponsor.png"> The development of
 this connector's first stable version has been sponsored by
 <a target="_blank" href="https://www.iwelcome.com/">iWelcome</a>, the leading European IDaaS
 provider.</p>
@@ -288,12 +288,12 @@ menu:</p>
 <p>
 <a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/addazureres.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addazureres.png:thumbnail"></a>
 </p>
-<h3> Deal with "objectId" attribute, returned by Azure service after User /
-Group creations </h3>
+<h3> Dealing with the "objectId" attribute, returned by Azure service upon User
+/ Group creations </h3>
 <p>At this point, since we are using Syncope <em>2.0.8</em>, we need to manually
 add the Azure PropagationActions to Syncope project (the related file already
 exists in Syncope project from version <em>2.0.9-SNAPSHOT</em> by default) in
-order to let Syncope save the Users / Groups ID returned by Azure Service after
+order to let Syncope save the Users / Groups ID returned by Azure Service upon
 creations.</p>
 <p>You need to create the
 "<a target="_blank" href="https://github.com/apache/syncope/blob/2_0_X/core/provisioning-java/src/main/java/org/apache/syncope/core/provisioning/java/propagation/AzurePropagationActions.java">org.apache.syncope.core.provisioning.java.propagation.AzurePropagationActions</a>"
@@ -302,8 +302,8 @@ file and link it to "AzureRes" resource.</p>
 name:</p>
 <pre class="prettyprint">$ mkdir -p ./core/src/main/java/org/apache/syncope/core/provisioning/java/propagation/ &amp;&amp; vim ./core/src/main/java/org/apache/syncope/core/provisioning/java/propagation/AzurePropagationActions.java
 </pre>
-<p>copy &amp; paste the content of the file above
-(<a target="_blank" href="https://raw.githubusercontent.com/apache/syncope/2_0_X/core/provisioning-java/src/main/java/org/apache/syncope/core/provisioning/java/propagation/AzurePropagationActions.java">AzurePropagationActions.java</a>).
+<p>copy &amp; paste the content of the file above (
+<a target="_blank" href="https://raw.githubusercontent.com/apache/syncope/2_0_X/core/provisioning-java/src/main/java/org/apache/syncope/core/provisioning/java/propagation/AzurePropagationActions.java">AzurePropagationActions.java</a>).
 </p>
 <p>Then stop Syncope, re-build and re-start it. <br>
 When it'll be ready, you'll be able to add the "AzurePropagationActions" to
@@ -395,6 +395,64 @@ $ mvn -P all clean install &amp;&amp; cd enduser &amp;&amp; mvn -P embedded,all
 <p>Now you can point your browser to
 <a target="_blank" href="http://localhost:9080/syncope-console">http://localhost:9080/syncope-console</a>
 and start you tests.</p>
+<h2>Update Syncope 2.1 - Dealing with the "objectId" attribute, returned by
+Azure service upon User / Group creations </h2>
+<p>After the release of Syncope 2.1 an improvement was made to the logic for all
+those connectors that need to save the value of some attribute coming from the
+specific resource service upon creating an entity to provision on it. <br>
+All that logic from the PropagationActions classes
+("<a target="_blank" href="https://github.com/apache/syncope/blob/2_0_X/core/provisioning-java/src/main/java/org/apache/syncope/core/provisioning/java/propagation/AzurePropagationActions.java">org.apache.syncope.core.provisioning.java.propagation.AzurePropagationActions</a>"
+for Azure bundle) was removed.</p>
+<p>Check the difference between
+<a target="_blank" href="https://github.com/apache/syncope/blob/2_0_X/core/provisioning-java/src/main/java/org/apache/syncope/core/provisioning/java/propagation/AzurePropagationActions.java">AzurePropagationActions
+Syncope 2.0.x</a> and
+<a target="_blank" href="https://github.com/apache/syncope/blob/2_1_X/core/provisioning-java/src/main/java/org/apache/syncope/core/provisioning/java/propagation/AzurePropagationActions.java">AzurePropagationActions
+Syncope 2.1.x</a>
+</p>
+<p>Now, since the "PropagationActions" files were minimized, what else do I need
+to do for Syncope 2.1? <br>
+Well, it is pretty simple! <br>
+You just need to open the resource mapping and you'll see a new field: <br>
+
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/2_1_xusermapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/2_1_xusermapping.png:thumbnail"></a> 
+<br>
+Enter the previously created required schemas ("AzureUserId" for "USER" AnyType
+and "AzureGroupId" for "GROUP" AnyType) in that field, to handle the returned
+value from the Azure service.</p>
+<p>Most of the connectors were used to have a PropagationActions class only to
+handle the returned attribute value from service. <br>
+For those ones, as said before, the PropagationActions class was removed in
+Syncope 2.1. <br>
+About the Azure bundle, instead, the "AzurePropagationActions" is still required
+to manage other stuff. According to new way Syncope 2.1 manage
+PropagationActions and other java implementations, to be able to link a
+PropagationActions class to a resource you first need to use the new
+"Implementations" section. <br>
+Go to Admin Console, on the left panel click "Configuration" -&gt;
+"Implementations" -&gt; "PROPAGATION_ACTIONS" tab and add the
+"org.apache.syncope.core.provisioning.java.propagation.AzurePropagationActions"
+JAVA class: <br>
+
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/2_1_ximplementationpropagationactions.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/2_1_ximplementationpropagationactions.png:thumbnail"></a>
+
+</p>
+<p>Done, that's all! <br>
+To summarize the all process:</p>
+<ul>
+
+<li>create schemas to handle the attribute values returned by the service;</li>
+
+<li>add those schemas to the new field in resource mapping (<em>Schema to hold
+values for identifiers generated upon Create by the external Identity
+Store</em>);</li>
+
+<li>add the "[SCHEMA_NAME]" -&gt; "__UID__" mapping item with "Remote Key" flag;
+</li>
+
+<li>add the "AzurePropagationActions" JAVA implementation and add link it to
+resource.</li>
+
+</ul>
 <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/syncope-basics-manage-microsoft-azure.html&title=Syncope Basics: Manage Microsoft Azure&summary=How to configure Apache Syncope to provision Users and Groups to Microsoft Azure AD"><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
           <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/syncope-basics-manage-microsoft-azure.html&text=Syncope Basics: Manage Microsoft Azure"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
           <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/syncope-basics-manage-microsoft-azure.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
@@ -582,6 +640,9 @@ and start you tests.</p>
 <h2>Tag Cloud</h2>
 <div class="tags">
 <li class="tag1">
+<a class="nuv" href="/tags/OpenID+Connect/index.html">OpenID Connect</a>
+</li>
+<li class="tag1">
 <a class="nuv" href="/tags/SAML/index.html">SAML</a>
 </li>
 <li class="tag3">
@@ -752,6 +813,16 @@ and start you tests.</p>
 <div class="owl-carousel" id="hshop-slider" style="border-bottom: 1px solid rgba(145,165,180,.6)">
 <div class="item">
 <div class="left-item">
+<img src="/gallery/tirasa/blog/keycloack.png"></div>
+<div class="right-item">
+<a href="/apache-syncope-sso-with-keycloack.html" class="purple">
+<h5 class="item-title">Apache Syncope SSO with Keycloack</h5>
+</a>
+<p style="color: white;">How to configure Apache Syncope and Keycloak to allow Single SignOn via OpenID Connect</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
 <img src="/gallery/tirasa/blog/haveibeenpwned.png"></div>
 <div class="right-item">
 <a href="/configure-syncope-to-check-for-pwned-passwords.html" class="purple">
@@ -768,16 +839,6 @@ and start you tests.</p>
 <h5 class="item-title">Apache Syncope &amp; Salesforce</h5>
 </a>
 <p style="color: white;">How to configure Apache Syncope to provision Users to Salesforce using the SCIM v1.1 ConnId Bundle</p>
-</div>
-</div>
-<div class="item">
-<div class="left-item">
-<img src="/gallery/tirasa/blog/abc.png"></div>
-<div class="right-item">
-<a href="/syncope-basics-manage-servicenow.html" class="purple">
-<h5 class="item-title">Syncope Basics: Manage ServiceNow</h5>
-</a>
-<p style="color: white;">How to configure Apache Syncope to provision Users to a ServiceNow Cloud Service instance</p>
 </div>
 </div>
 <div class="item">
