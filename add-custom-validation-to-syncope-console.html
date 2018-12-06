@@ -1,0 +1,839 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:dfutils="xalan://net.tirasa.utils.DateFormatUtils" xmlns:java="http://xml.apache.org/xslt/java" xmlns:str="http://xsltsl.org/string" xmlns:g="http://base.google.com/ns/1.0" xmlns:i18n="http://apache.org/cocoon/i18n/3.0" itemtype="http://schema.org/Article" itemscope="" prefix="og: http://ogp.me/ns#" lang="en_US">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Tirasa Blog - Add custom validation to Apache Syncope Admin Console</title>
+<meta content="Apache Syncope already provides powerful, tunable attribute validators, enforced by the Core back-end: what about customizing front-end validation?" name="description">
+<meta content="noodp" name="robots">
+<link href="http://blog.tirasa.net/add-custom-validation-to-syncope-console.html" rel="canonical">
+<link href="http://www.google.com/+TirasaNet/about" rel="publisher">
+<meta content="Tirasa Blog - Add custom validation to Apache Syncope Admin Console" itemprop="name">
+<meta content="Apache Syncope already provides powerful, tunable attribute validators, enforced by the Core back-end: what about customizing front-end validation?" itemprop="description">
+<meta content="Apache Syncope already provides powerful, tunable attribute validators, enforced by the Core back-end: what about customizing front-end validation?" itemprop="headline">
+<meta content="http://blog.tirasa.net/add-custom-validation-to-syncope-console.html" itemprop="url">
+<meta content="2018-12-06 00:00:00" itemprop="dateModified">
+<meta content="2018-12-06 00:00:00" itemprop="datePublished">
+<span itemtype="https://schema.org/Corporation" itemscope="" itemprop="publisher"><span itemtype="https://schema.org/ImageObject" itemscope="" itemprop="logo">
+<meta content="http://www.tirasa.net/images/logo.png" itemprop="url">
+</span>
+<meta content="Tirasa" itemprop="name">
+</span>
+<meta content="summary" name="twitter:card">
+<meta content="@TirasaNet" name="twitter:site">
+<meta content="Tirasa Blog - Add custom validation to Apache Syncope Admin Console" name="twitter:title">
+<meta content="Apache Syncope already provides powerful, tunable attribute validators, enforced by the Core back-end: what about customizing front-end validation?" name="twitter:description">
+<meta content="@TirasaNet" name="twitter:creator">
+<meta content="http://blog.tirasa.net/gallery/tirasa/blog/validation-icon.png" name="twitter:image">
+<meta content="Tirasa Blog - Add custom validation to Apache Syncope Admin Console" property="og:title">
+<meta content="en_US" property="og:locale">
+<meta content="article" property="og:type">
+<meta content="http://blog.tirasa.net/add-custom-validation-to-syncope-console.html" property="og:url">
+<meta content="http://blog.tirasa.net/gallery/tirasa/blog/validation-icon.png" property="og:image">
+<meta content="Apache Syncope already provides powerful, tunable attribute validators, enforced by the Core back-end: what about customizing front-end validation?" property="og:description">
+<meta content="Tirasa" property="og:site_name">
+<meta content="2018-12-06 00:00:00" property="article:published_time">
+<meta content="2018-12-06 00:00:00" property="article:modified_time">
+<meta content="252836668438434" property="fb:app_id">
+<meta charset="UTF-8">
+<link type="image/vnd.microsoft.icon" href="images/favicon.png" rel="shortcut icon">
+<meta content="off" http-equiv="x-dns-prefetch-control">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link media="all" type="text/css" rel="stylesheet" href="css/main.css">
+<link media="all" type="text/css" rel="stylesheet" href="css/custom.css">
+<link media="all" type="text/css" rel="stylesheet" href="css/mediaqueries.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700">
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Loved+by+the+King">
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script><script src="js/jquery-latest.min.js"></script><script src="js/jquery-ui.min.js"></script><script src="js/jquery-mobilemenu.min.js"></script><script src="js/jquery.cookiesdirective.js"></script><script src="js/js.cookie.js"></script><script src="js/custom.js"></script><script src="js/highslide.js"></script><script type="text/javascript">
+      hs.graphicsDir = 'css/graphics/';
+
+      jQuery.noConflict()(function ($) {
+        $("#accordion").accordion({
+          active: false,
+          collapsible: true,
+          heightStyle: "content"
+        });
+        if (location.hash) {
+          var tabIndex = parseInt(window.location.hash.substring(1));
+          $("#accordion").accordion('option', 'active', tabIndex);
+        }
+
+        $(document).ready(function() {
+          $.cookiesDirective({
+            position: 'bottom',
+            duration: 10,
+	    linkColor: '#9293c8',
+            backgroundOpacity: '90',
+      
+            privacyPolicyUri: 'http://www.tirasa.net/privacy-policy.html',
+	    message: 'This site uses cookies. Some of the cookies we use are essential for parts of the site to operate and have already been set. ',
+	    multipleCookieScriptBeginningLabel: ' We use ',
+	    and: ' and ',
+	    multipleCookieScriptEndLabel: ' scripts, which all set cookies. ',			
+	    singleCookieScriptBeginningLabel: ' We use a ',
+	    singleCookieScriptEndLabel: ' script which sets cookies.',			
+	    explicitCookieDeletionWarning: 'You may delete and block all cookies from this site, but parts of the site will not work. ',
+  	    explicitFindOutMore: 'To find out more about cookies on this website, see our',
+	    privacyPolicyLinkText: ' privacy policy',
+	    explicitCheckboxLabel: 'You must tick the "I accept cookies from this site" box to accept',
+	    explicitCookieAcceptanceLabel: 'I accept cookies from this site',
+	    explicitCookieAcceptButtonText: 'Continue',
+	    impliedDisclosureText: ' More details can be found in our',
+	    impliedSubmitText: 'Do not show this message again'
+        
+          });
+        });
+      });
+    </script>
+<link media="all" href="css/highslide.css" type="text/css" rel="stylesheet">
+<link media="all" href="css/accordion.css" type="text/css" rel="stylesheet">
+<link href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript">
+          var disqus_config = function () {
+            this.page.url = 'http://blog.tirasa.net/add-custom-validation-to-syncope-console.html';
+            this.page.identifier = 'http://blog.tirasa.net/add-custom-validation-to-syncope-console.html';
+          };
+          (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//tirasa.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+</head>
+<body>
+<div xmlns:hct="http://www.tirasa.net/hct/1.0" class="wrapper row0">
+<div id="header" class="full_width clear">
+<ul class="list none" style="margin: 0px;text-align: right;color: white;font-family: 'Montserrat';font-size: 12px;padding-top: 0.25%;;width: 100%;min-height: 17px;"></ul>
+</div>
+</div>
+<script xmlns:gcse="uri:google-did-not-provide-a-real-ns">
+      (function() {
+      var cx = '007564373758891836797:-tjr10bo51c';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+<div style="padding-bottom: 15px;padding-top: 15px;" class="wrapper row1">
+<header class="full_width clear" id="header">
+<div style="position: relative;float: left;">
+<h1 style="margin-bottom: 0;">
+<a href="http://www.tirasa.net"><img style="width: 200px; margin-top: 1.5%; margin-right: 10px;" src="images/logo.png"></a>
+</h1>
+</div>
+<div id="topnav">
+<ul class="clear">
+<li>
+<a class="drop" style="width: 120%;" href="http://www.tirasa.net/businessproposition/index.html">Products &amp; Solutions</a>
+<ul>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/apache-syncope.html">Apache Syncope</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/identity-access-management.html">Identity &amp; Access Management</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/content-management-system.html">Enterprise Content Management</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/businessproposition/open-source.html">Open Source</a>
+</li>
+</ul>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/support.html"></a>
+</li>
+<li>
+<a style="width: 120%;color: #9293c8;" href="http://blog.tirasa.net/index.html">Blog</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/customers.html">Customers</a>
+</li>
+<li>
+<a class="drop" style="width: 120%;" href="http://www.tirasa.net/mission-vision.html">Who we are</a>
+<ul>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/mission-vision.html">Mission &amp; Vision</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/aboutus.html">Team</a>
+</li>
+<li>
+<a style="width: 120%;" href="http://www.tirasa.net/contacts.html">Contact</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="social_header">
+<div id="social">
+<a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="https://github.com/Tirasa"><img alt="github" src="images/github_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="https://twitter.com/TirasaNet"><img alt="twitter" src="images/twitter.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.linkedin.com/company/2164993"><img alt="linkedin" src="images/linkedin_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.facebook.com/tirasasrl"><img alt="facebook" src="images/facebook_alt.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px" href="http://www.google.com/+TirasaNet"><img alt="g+" src="images/google_plus.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="mailto:info@tirasa.net"><img alt="send an email" src="images/email.png"></a><a target="_blank" style="color:#d6d5d5;padding-right:3px;" href="http://www.tirasa.net/rss.xml"><img alt="Blog Post" src="images/feed.png"></a>
+</div>
+<div id="search">
+<div resultsUrl="http://jsfiddle.net/devnook/2PC2f/6/show_html/" class="gcse-search"></div>
+</div>
+</div>
+</header>
+</div>
+<div class="wrapper row3">
+<div id="container">
+    
+<div style="margin-bottom: 50px;" class="three_quarter first contentbackground">
+<div id="missionvision">
+<section class="clear">06 Dec 2018<div style="border-top: 1px dotted #9293c8">&nbsp;</div>
+<h3 style="margin:0px; color: #9293c8;">Add custom validation to Apache Syncope Admin Console</h3>
+<p>Written by<a href="/author/apatricelli/index.html"><i> apatricelli</i></a>
+</p>
+<div style="display: none;" id="date">06 Dec 2018</div>
+<div style="display: none;" id="summary">Apache Syncope already provides powerful, tunable attribute validators, enforced by the Core back-end: what about customizing front-end validation?</div>
+<p>
+
+<img style="margin: 10px;" align="right" src="/gallery/tirasa/blog/validation-icon.png">As
+most of you already know, if ever meet Syncope world, one of the main challenges
+that Syncope developers faced and often face is provide extreme customizability.
+Though the main customization features are provided and developed at the core
+level (to have an idea of what I'm talking about please visit
+<a title="Apache Syncope architecture" target="_blank" href="https://syncope.apache.org/docs/2.1/getting-started.html#a-birds-eye-view-on-the-architecture">this</a>&nbsp;)
+even console provides some customization features. We are going to introduce a
+way to customize frontend validation in the console module.</p>
+<p>First of all let's define our custom validator class</p>
+<pre class="prettyprint">public class DateConsistencyValidator extends AbstractFormValidator {
+
+    private static final long serialVersionUID = -4661147385331769440L;
+
+    private String dateComponent1;
+
+    private String dateComponent2;
+
+    private final FormComponent[] components;
+
+    public DateConsistencyValidator(final String dateComponent1, final String dateComponent2) {
+        this.dateComponent1 = dateComponent1;
+        this.dateComponent2 = dateComponent2;
+        components = new FormComponent[0];
+    }
+
+    @Override
+    public void validate(final Form form) {
+        AjaxDateFieldPanel component1 = getField(form, AjaxDateFieldPanel.class, dateComponent1);
+        AjaxDateFieldPanel component2 = getField(form, AjaxDateFieldPanel.class, dateComponent2);
+
+        if (component1.getField().getConvertedInput() != null
+                &amp;&amp; component2.getField().getConvertedInput() != null
+                &amp;&amp; component1.getField().getConvertedInput().after(component2.getField().getConvertedInput())) {
+
+            Map vars = new HashMap&lt;&gt;();
+            vars.put("field1Name", component1.getName());
+            vars.put("field2Name", component2.getName());
+            // use the following line if you do not want to take message from properties file
+            // form.error("Value of field ${field1Name} is not equal to ${field2Name}", vars);
+            form.error(component1.getString("date.consistency.validationError"), vars);
+        }
+    }
+
+    @Override
+    public FormComponent[] getDependentFormComponents() {
+        return components;
+    }
+
+    protected &gt; T getField(
+            final Form form,
+            final Class clazz,
+            final String name) {
+        T component = form.visitChildren(clazz,
+                new IVisitor() {
+
+            @Override
+            public void component(final T arg0, final IVisit arg1) {
+                if (name.equalsIgnoreCase(StringUtils.isBlank(arg0.getName())
+                        ? arg0.getField().getLabel().getObject()
+                        : arg0.getName())) {
+                    arg1.stop(arg0);
+                }
+            }
+        });
+
+        return component;
+    }
+
+}</pre>
+<p>Then let's define a custom wizard builder class that uses the custom
+validator and extends default
+<a title="UserWizardBuilder" target="_blank" href="https://github.com/apache/syncope/blob/2_1_X/client/console/src/main/java/org/apache/syncope/client/console/wizards/any/UserWizardBuilder.java">UserWizardBuilder</a>
+provided by Syncope</p>
+<pre class="prettyprint">public class UserWithValidationWizardBuilder extends UserWizardBuilder {
+
+    private static final long serialVersionUID = 1680007693565519842L;
+
+    public UserWithValidationWizardBuilder(
+            final List anyTypeClasses,
+            final UserFormLayoutInfo formLayoutInfo,
+            final PageReference pageRef) {
+
+        super(anyTypeClasses, formLayoutInfo, pageRef);
+    }
+
+    public UserWithValidationWizardBuilder(
+            final UserTO previousUserTO,
+            final UserTO userTO,
+            final List anyTypeClasses,
+            final UserFormLayoutInfo formLayoutInfo,
+            final PageReference pageRef) {
+
+        super(previousUserTO, userTO, anyTypeClasses, formLayoutInfo, pageRef);
+    }
+
+    @Override
+    protected WizardModel buildModelSteps(final AnyWrapper modelObject, final WizardModel wizardModel) {
+        super.buildModelSteps(modelObject, wizardModel);
+
+        if (formLayoutInfo.isPlainAttrs()) {
+            PlainAttrs plainAttrs = getWizardStep(PlainAttrs.class, wizardModel);
+            // add form validators
+            if (plainAttrs != null) {
+                plainAttrs.add(new DateConsistencyValidator("loginDate", "logoutDate"));
+            }
+        }
+
+        return wizardModel;
+    }
+
+    @SuppressWarnings("unchecked")
+    protected  T getWizardStep(final Class clazz, final WizardModel wizardModel) {
+        for (WizardModel.ICondition condition : wizardModel.getConditions()) {
+            if (clazz.isInstance(condition)) {
+                return clazz.cast(condition);
+            }
+        }
+        return null;
+    }
+
+}
+</pre>
+<p>Please notice the simplicity: in order to enable validation on two (or more,
+depends on validator implementation) you just need to add the following line:
+</p>
+<pre class="prettyprint">plainAttrs.add(new DateConsistencyValidator("mydate1", "mydate2"));</pre>
+<p>
+<strong>mydate1</strong> and <strong>mydate2</strong> are the names of
+existing Syncope schemas and reference user attributes. <br>
+Moreover, in order to get the message from properties file (like shown in the
+example) add a property to the file referenced by the attribute panel, for
+example AbstractFieldPanel.properties, located under</p>
+<pre class="prettyprint">console/src/main/resources/org/apache/syncope/client/console/wicket/markup/html/form/</pre>
+<p>The line should look like this:</p>
+<pre class="prettyprint">date.consistency.validationError=${field1Name} shall not be after ${field2Name}</pre>
+<p>
+<strong>Disclaimer</strong>: The provided implementation is only a sample to
+check dates consistency (fail if mydate1 is after mydate2), you can define
+whatever form validator by overriding
+<a title="AbstractFormValidator" target="_blank" href="https://github.com/apache/wicket/blob/wicket-7.x/wicket-core/src/main/java/org/apache/wicket/markup/html/form/validation/AbstractFormValidator.java">AbstractFormValidator</a>
+class provided by
+<a title="Apache Wicket home" target="_blank" href="https://wicket.apache.org/">Apache
+Wicket</a>.</p>
+<h3> Where to place such files? </h3>
+<p>If you are using a project generated from
+<a title="Create a project" target="_blank" href="https://syncope.apache.org/docs/2.1/getting-started.html#create-project">archetype</a>&nbsp;place
+the wizard builder class in</p>
+<pre class="prettyprint">console/src/main/java/org/apache/syncope/client/console/wizards/any/UserWithValidationWizardBuilder.jav</pre>
+<p>a and the custom validator(s) in</p>
+<pre class="prettyprint">console/src/main/java/org/apache/syncope/client/console/wizards/validators/DateConsistencyValidator.java</pre>
+<p>Finally build, deploy and restart you application server hosting Syncope.
+</p>
+<h3>How do I enable the custom wizard builder and validator?&nbsp; </h3>
+<p>Login as admin to console and setup a new role, say
+<strong>adminWithValidation</strong> (see following image) from Configuration
+-&gt; Administration -&gt; Roles&nbsp;</p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/role.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/role.png:thumbnail"></a>
+<p>Then edit layout of the role by clicking on the just created role and then on
+layout. Set formClass to</p>
+<pre class="prettyprint">org.apache.syncope.client.console.wizards.any.UserWithValidationWizardBuilder</pre>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/layout.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/layout.png:thumbnail"></a>
+<p>Assign this role to some existing user and then login with that user.</p>
+<p>In the following image you can see and example of frontend dates validation
+in action.</p>
+<p>
+<a onclick="return hs.expand(this)" class="highslide" href="/gallery/tirasa/blog/validation.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/validation.png:thumbnail"></a>
+</p>
+<p>
+<strong>N.B. </strong>The custom&nbsp;validator is invoked <strong>only if the
+editing user (logged one) has the role with custom layout</strong>, say role
+<strong>adminWithValidation</strong> for example.</p>
+<p>Enjoy :)</p>
+<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://blog.tirasa.net/add-custom-validation-to-syncope-console.html&title=Add custom validation to Apache Syncope Admin Console&summary=Apache Syncope already provides powerful, tunable attribute validators, enforced by the Core back-end: what about customizing front-end validation?"><img alt="" src="images/linkedin_square_color-24.png"></a>&nbsp;
+          <a target="_blank" href="https://twitter.com/intent/tweet?url=http://blog.tirasa.net/add-custom-validation-to-syncope-console.html&text=Add custom validation to Apache Syncope Admin Console"><img alt="" src="images/twitter_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://facebook.com/sharer.php?u=http://blog.tirasa.net/add-custom-validation-to-syncope-console.html"><img alt="" src="images/facebook_square-24.png"></a>&nbsp;
+          <a target="_blank" href="https://plus.google.com/share?url=http://blog.tirasa.net/add-custom-validation-to-syncope-console.html"><img alt="" src="images/google_square-24.png"></a>&nbsp;
+          <ul class="list tagcloud rnd8">
+<li>
+<a href="/tags/apache+syncope/index.html">apache syncope</a>
+</li>
+<li>
+<a href="/tags/console/index.html">console</a>
+</li>
+</ul>
+<div id="disqus_thread"></div>
+<p class="more">
+<a href="/index.html">&laquo; Return</a>
+</p>
+</section>
+</div>
+</div>
+  
+<div id="sidebar_1" class="sidebar one_quarter">
+<aside>
+<h2>Menu</h2>
+<nav>
+<ul>
+<li>
+<a href="http://www.tirasa.net">Home</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/index.html">Business Proposition</a>
+<ul>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/apache-syncope.html">Apache Syncope</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/identity-access-management.html">Identity &amp; Access Management</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/content-management-system.html">Enterprise Content Management</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/businessproposition/open-source.html">Open Source</a>
+</li>
+</ul>
+</li>
+<li>
+<a title="customers" href="#" class="drop disable_link">Who we are</a>
+<ul>
+<li>
+<a style="" href="http://www.tirasa.net/mission-vision.html">Mission &amp; Vision</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/aboutus.html">Team</a>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/contacts.html">Contact</a>
+</li>
+</ul>
+</li>
+<li>
+<a style="" href="http://www.tirasa.net/customers.html">Customers</a>
+</li>
+<li>
+<a style="width: 120%;color: #9293c8;" href="http://blog.tirasa.net/index.html">Blog</a>
+</li>
+</ul>
+</nav>
+</aside>
+<aside>
+<h2>Link</h2>
+<nav>
+<ul>
+<li>
+<a target="_blank" href="http://connid.tirasa.net/">ConnId</a>
+</li>
+<li>
+<a target="_blank" href="http://hct.tirasa.net/">Hippo Cocoon Toolkit</a>
+</li>
+<li>
+<a target="_blank" href="https://github.com/Tirasa/">Tirasa on GitHub</a>
+</li>
+</ul>
+</nav>
+</aside>
+    
+<aside>
+<h2>Categories</h2>
+<nav>
+<ul>
+<li>
+<a href="/category/apache-syncope/index.html">Apache Syncope</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/connid/index.html">ConnId</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/identity-management/index.html">Identity Management</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/access-management/index.html">Access Management</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/open-source/index.html">Open Source</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/open-source/apache/index.html">Apache</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/open-source/linux/index.html">Linux</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/open-source/linux/bash-scripting/index.html">Bash Scripting</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/category/codeexp/index.html">DevOps</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/codeexp/maven/index.html">Maven</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/java/index.html">Java</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/jexl/index.html">Jexl</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/technology/index.html">Technology</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/openjpa/index.html">OpenJPA</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/ldap/index.html">ldap</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/active-directory/index.html">Active Directory</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/codeexp/security/index.html">security</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/category/uncategorized/index.html">Uncategorized</a>
+<ul style="list-style-type: none;">
+<li>
+<a href="/category/uncategorized/estemporanea/index.html">Estemporanea</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+<li>
+<a href="/category/uncategorized/idee/index.html">Idee</a>
+<ul style="list-style-type: none;"></ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+    
+<aside xmlns:math="http://exslt.org/math">
+<h2>Tag Cloud</h2>
+<div class="tags">
+<li class="tag1">
+<a class="nuv" href="/tags/OpenID+Connect/index.html">OpenID Connect</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/SAML/index.html">SAML</a>
+</li>
+<li class="tag3">
+<a class="nuv" href="/tags/active+directory/index.html">active directory</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/activiti/index.html">activiti</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/apache+cocoon/index.html">apache cocoon</a>
+</li>
+<li class="tag9">
+<a class="nuv" href="/tags/apache+syncope/index.html">apache syncope</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/apache+wicket/index.html">apache wicket</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/asf/index.html">asf</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/assign/index.html">assign</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/azure/index.html">azure</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/certificate/index.html">certificate</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/client/index.html">client</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/connector/index.html">connector</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/connid/index.html">connid</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/console/index.html">console</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/cxf/index.html">cxf</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/exchange/index.html">exchange</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/federation/index.html">federation</a>
+</li>
+<li class="tag5">
+<a class="nuv" href="/tags/identity+management/index.html">identity management</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/interface/index.html">interface</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/java/index.html">java</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/javascript/index.html">javascript</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/ldap/index.html">ldap</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/linux/index.html">linux</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/maven/index.html">maven</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/microsoft/index.html">microsoft</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/notification/index.html">notification</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/openjpa/index.html">openjpa</a>
+</li>
+<li class="tag5">
+<a class="nuv" href="/tags/opensource/index.html">opensource</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/openssl/index.html">openssl</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/password/index.html">password</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/password+reset/index.html">password reset</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/policy/index.html">policy</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/powershell/index.html">powershell</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/propagation/index.html">propagation</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/quartz/index.html">quartz</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/release/index.html">release</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/resource/index.html">resource</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/rest/index.html">rest</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/roles/index.html">roles</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/scim/index.html">scim</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/security/index.html">security</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/self-registration/index.html">self-registration</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/self-service/index.html">self-service</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/spring/index.html">spring</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/ssl/index.html">ssl</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/sso/index.html">sso</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/synchronization/index.html">synchronization</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/tirasa/index.html">tirasa</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/tls/index.html">tls</a>
+</li>
+<li class="tag2">
+<a class="nuv" href="/tags/tutorial/index.html">tutorial</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/users/index.html">users</a>
+</li>
+<li class="tag1">
+<a class="nuv" href="/tags/workflow/index.html">workflow</a>
+</li>
+</div>
+</aside>
+  
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<div style="margin-top: 25px; margin-bottom: 25px;" class="wrapper row4">
+<div class="clear" id="footer">
+    
+<div style="margin-bottom: 20px;" class="three_quarter">
+<div style="padding-top: 10px;">
+<h3>
+<a href="http://www.tirasa.net/news/index.html">Latest Updates</a><a target="_blank" style="color:#d6d5d5;padding-left:5px;" href="http://www.tirasa.net/rss.xml"><img style="width:20px;padding-bottom:5px" alt="Tirasa RSS" src="images/feed.png"></a>
+</h3>
+<div class="owl-carousel" id="hshop-slider" style="border-bottom: 1px solid rgba(145,165,180,.6)">
+<div class="item">
+<div class="left-item">
+<img src="/gallery/tirasa/blog/validation-icon.png"></div>
+<div class="right-item">
+<a href="/add-custom-validation-to-syncope-console.html" class="purple">
+<h5 class="item-title">Add custom validation to Apache Syncope Admin Console</h5>
+</a>
+<p style="color: white;">Apache Syncope already provides powerful, tunable attribute validators, enforced by the Core back-end: what about customizing front-end validation?</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="/gallery/tirasa/blog/postgresql.png"></div>
+<div class="right-item">
+<a href="/benchmarking-apache-syncope-on-postgresql.html" class="purple">
+<h5 class="item-title">Benchmarking Apache Syncope on PostgreSQL</h5>
+</a>
+<p style="color: white;">We put the latest Apache Syncope and PostgreSQL on the bench to try and push to the limit: here are the results</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="/gallery/tirasa/blog/keycloack.png"></div>
+<div class="right-item">
+<a href="/apache-syncope-sso-with-keycloack.html" class="purple">
+<h5 class="item-title">Apache Syncope SSO with Keycloack</h5>
+</a>
+<p style="color: white;">How to configure Apache Syncope and Keycloak to allow Single SignOn via OpenID Connect</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="http://www.tirasa.net/gallery/tirasa/site/news/connectpa-logo.png"></div>
+<div class="right-item">
+<a href="http://www.tirasa.net/news/connectpa.html" class="purple">
+<h5 class="item-title">ConnectPA is starting</h5>
+</a>
+<p style="color: white;">Tirasa joins Maggioli, Metron and University of L'Aquila to shepherd the Italian Public Administration towards Cloud services</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="http://www.tirasa.net/gallery/tirasa/site/news/plainid.png"></div>
+<div class="right-item">
+<a href="http://www.tirasa.net/news/tirasa-supports-plainid-in-its-dynamic-authorization-integrate-solution.html" class="purple">
+<h5 class="item-title">Tirasa supports PlainID in its dynamic authorization integrate solution</h5>
+</a>
+<p style="color: white;">PlainID and Tirasa announced the release of a PlainID Dynamic Authorization integrate solution, to enhance its Authorization management capabilities</p>
+</div>
+</div>
+<div class="item">
+<div class="left-item">
+<img src="http://www.tirasa.net/gallery/tirasa/site/news/ulss6.jpg"></div>
+<div class="right-item">
+<a href="http://www.tirasa.net/news/yet-another-helthcare-organization-relies-on-tirasa.html" class="purple">
+<h5 class="item-title">Yet another healthcare organization relies on Tirasa for IAM</h5>
+</a>
+<p style="color: white;">AULSS 6 Euganea of Padua makes standard-based Open Source user management and IT authorization</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    
+<div class="one_quarter">
+  
+<div style="padding-top: 10px;">
+    
+<a class="twitter-timeline" data-height="400" data-theme="light" href="https://twitter.com/TirasaNet?ref_src=twsrc%5Etfw">Tweets by TirasaNet</a> <script async="async" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</div>
+
+</div>
+  
+</div>
+</div>
+<div style="background-color: #9293c8;" class="wrapper row2">
+<div id="footer" class="clear">
+<div class="one_third">
+<p class="fl_left" style="font-size: 0.7em;">Tirasa S.r.l. - P.I. 01974100685<br>Powered by <a style="color: whitesmoke" href="http://hct.tirasa.net/" target="_blank">Hippo Cocoon Toolkit</a>
+<br>
+<a style="color: whitesmoke" href="http://www.tirasa.net/privacy-policy.html">Privacy Policy</a>
+</p>
+</div>
+<div class="one_third">
+<p style="font-size: 0.7em;">Apache, Syncope, Apache Syncope and the Apache Syncope logo are trademarks of The Apache Software Foundation.</p>
+</div>
+<script type="text/javascript">
+          function year() {
+          var theDate=new Date()
+          document.write(theDate.getFullYear())}
+        </script>
+<div class="one_third">
+<p class="fl_right" style="font-size: 0.7em;text-align:right;">Copyright &copy; 2011-
+            <script type="text/javascript">
+              var theDate=new Date();    
+              document.write(theDate.getFullYear());
+            </script>
+            Tirasa S.r.l.<br>All rights reserved<br>Follow our <a style="color: whitesmoke" href="http://www.tirasa.net/tirasagram.html">Bot</a> on <a style="color: whitesmoke" href="https://twitter.com/TirasaGram">Twitter</a>
+</p>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.tirasa.net/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", "6"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+</body>
+</html>
