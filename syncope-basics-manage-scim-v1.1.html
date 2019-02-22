@@ -191,7 +191,7 @@
 <div style="display: none;" id="date">16 May 2018</div>
 <div style="display: none;" id="summary">How to configure Apache Syncope to provision Users to a SCIM v1.1 RESTful service</div>
 <p>
-<img style="margin: 10px;" align="right" src="/blog/www/gallery/tirasa/blog/abc.png"> We
+<img style="margin: 10px;" align="right" src="/www//gallery/tirasa/blog/abc.png"> We
 recently developed and released the
 <a title="SCIM v1.1 connector" target="_blank" href="https://connid.atlassian.net/wiki/spaces/BASE/pages/413433857/SCIM+1.1">
 SCIM v1.1 connector</a> as part of the
@@ -200,7 +200,7 @@ project</a>. This bundle is used to connect Apache Syncope to a SCIM v1.1
 RESTful service.</p>
 <hr>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/sponsor.png">The development of
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/sponsor.png">The development of
 this connector's first stable version has been sponsored by
 <a target="_blank" href="https://www.iwelcome.com/">iWelcome</a>, the leading European IDaaS
 provider.</p>
@@ -260,33 +260,33 @@ and remember to insert that content under:</p>
 <h2> Set up an SCIM external resource </h2>
 <p>Go to "Topology" and add a new connector (see image below):</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/addscimv11connector1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11connector1.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/addscimv11connector1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11connector1.png:thumbnail"></a>
 </p>
 <p>You'll be able to see the new SCIM v1.1 bundle, so choose
 "net.tirasa.connid.bundles.scimv11" from "Bundle" list and fill the other
 required fields:</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/scimv11bundle.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/scimv11bundle.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/scimv11bundle.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/scimv11bundle.png:thumbnail"></a>
 </p>
 <p>Click on "Next" button and enter the SCIM v1.1 service configuration by
 filling the required parameters (you can find more info about it on related
 <a target="_blank" href="https://connid.atlassian.net/wiki/spaces/BASE/pages/413433857/SCIM+1.1#SCIM1.1-ConfigurationProperties">ConnId
 SCIM v1.1 connector wiki page</a>):</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/addscimv11connector2.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11connector2.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/addscimv11connector2.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11connector2.png:thumbnail"></a>
 </p>
 <p>Click on "Next" button again, select connector Capabilities (AUTHENTICATE and
 SYNC are not supported as you can see
 <a target="_blank" href="https://connid.atlassian.net/wiki/spaces/BASE/pages/413433857/SCIM+1.1#SCIM1.1-Supportedoperations">here</a>)
 and click on "Finish":</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/addscimv11connector3.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11connector3.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/addscimv11connector3.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11connector3.png:thumbnail"></a>
 </p>
 <p>Now you are ready to create the SCIM external resource. <br>
 Click on the just created connector and choose "Add new resource" from right
 menu:</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/addscimv11res.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11res.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/addscimv11res.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11res.png:thumbnail"></a>
 </p>
 <h4> Dealing with the "id" attribute, returned by SCIM service upon User
 creations (step not required in Syncope &gt;= 2.0.9-SNAPSHOT) </h4>
@@ -311,7 +311,7 @@ SCIM resource. <br>
 So just click on resource node and select "Edit resource" from menu:</p>
 <p>
 
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/addscimv11respropagationactions.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11respropagationactions.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/addscimv11respropagationactions.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addscimv11respropagationactions.png:thumbnail"></a>
 
 </p>
 <h2> Add some required Plain Schemas </h2>
@@ -319,7 +319,7 @@ So just click on resource node and select "Edit resource" from menu:</p>
 -&gt; "Schemas"; in the "PLAIN" accordion panel click on the "+" icon. <br>
 Create the "SCIMUserId" schema:</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/scimv11schemauser.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/scimv11schemauser.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/scimv11schemauser.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/scimv11schemauser.png:thumbnail"></a>
 </p>
 <p>We must add it to "BaseUser" AnyTypeClass in order to have it available for
 "USER" AnyType.</p>
@@ -328,7 +328,7 @@ choose "edit" from right menu. <br>
 Add "SCIMUserId" to "Selected" sub-panel, in "Plain Schemas" section:</p>
 <p>
 
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/scimv11schemauseranytypeclass.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/scimv11schemauseranytypeclass.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/scimv11schemauseranytypeclass.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/scimv11schemauseranytypeclass.png:thumbnail"></a>
 
 </p>
 <h2> Add provision rules for "USER" </h2>
@@ -340,7 +340,7 @@ rules" from right menu.</p>
 click "Next" in the wizard until you'll get to "Mapping" step. <br>
 Now, you can choose a mapping configuration, e.g.</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/scimv11usermapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/scimv11usermapping.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/scimv11usermapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/scimv11usermapping.png:thumbnail"></a>
 </p>
 <h4> SCIM v1.1 attributes list </h4>
 <p>You can take a look at
@@ -379,7 +379,7 @@ from menu.</p>
 some users, in case you have any on your SCIM service. <br>
 Here you can see an example:</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/scimv11userexplore.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/scimv11userexplore.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/scimv11userexplore.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/scimv11userexplore.png:thumbnail"></a>
 </p>
 <h2> Sample project </h2>
 <p>I have created a
@@ -409,7 +409,7 @@ to do for Syncope 2.1? <br>
 Well, it is pretty simple! <br>
 You just need to open the resource mapping and you'll see a new field: <br>
 
-<a onclick="return hs.expand(this)" class="highslide" href="/blog/www/gallery/tirasa/blog/2_1_xusermapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/2_1_xusermapping.png:thumbnail"></a> 
+<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/2_1_xusermapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/2_1_xusermapping.png:thumbnail"></a> 
 <br>
 Enter the previously created required schema ("SCIMUserId" for "USER" AnyType)
 in that field, to handle the returned value from the SCIM service.</p>
@@ -790,7 +790,7 @@ Store</em>);</li>
 <div class="owl-carousel" id="hshop-slider" style="border-bottom: 1px solid rgba(145,165,180,.6)">
 <div class="item">
 <div class="left-item">
-<img src="/blog/www/gallery/tirasa/blog/notification.png"></div>
+<img src="/www//gallery/tirasa/blog/notification.png"></div>
 <div class="right-item">
 <a href="/blog/apache-syncope-notification-e-mails.html" class="purple">
 <h5 class="item-title">Apache Syncope Notification E-mails</h5>
@@ -800,7 +800,7 @@ Store</em>);</li>
 </div>
 <div class="item">
 <div class="left-item">
-<img src="/blog/www/gallery/tirasa/blog/validation-icon.png"></div>
+<img src="/www//gallery/tirasa/blog/validation-icon.png"></div>
 <div class="right-item">
 <a href="/blog/add-custom-validation-to-syncope-console.html" class="purple">
 <h5 class="item-title">Add custom validation to Apache Syncope Admin Console</h5>
@@ -810,7 +810,7 @@ Store</em>);</li>
 </div>
 <div class="item">
 <div class="left-item">
-<img src="/blog/www/gallery/tirasa/blog/postgresql.png"></div>
+<img src="/www//gallery/tirasa/blog/postgresql.png"></div>
 <div class="right-item">
 <a href="/blog/benchmarking-apache-syncope-on-postgresql.html" class="purple">
 <h5 class="item-title">Benchmarking Apache Syncope on PostgreSQL</h5>

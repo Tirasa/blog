@@ -190,7 +190,7 @@
 </p>
 <div style="display: none;" id="date">22 Aug 2017</div>
 <div style="display: none;" id="summary">First post of a new series where simple boilerplate-like examples are shown, with Apache Syncope set up for provisioning to external resources</div>
-<img style="margin: 10px;" align="right" src="/blog/www/gallery/tirasa/blog/abc.png"><p>We are going to see how to create an <strong>Apache&nbsp;Syncope 2.X</strong>
+<img style="margin: 10px;" align="right" src="/www//gallery/tirasa/blog/abc.png"><p>We are going to see how to create an <strong>Apache&nbsp;Syncope 2.X</strong>
 instance that will simply pull a list of users from an external resource and
 propagate them to a second one.</p>
 <h2> Step 1: Create project from maven archetype: </h2>
@@ -248,14 +248,14 @@ directory to have all necessary connector JAR files.</p>
 <p>Now you need to rebuild the application.</p>
 <p>Login to Admin Console, go to Topology and add a new connector by clicking on
 the node where you recognize the path of you project:</p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/addnewconnector.png"><p>Edit the connector as below:</p>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/addnewconnector.png"><p>Edit the connector as below:</p>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/addnewconnector2.png"> <br>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/addnewconnector2.png"> <br>
 
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/conn1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/conn2.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/conn3.png">
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/conn1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/conn2.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/conn3.png">
 </p>
 <p>you should also add some Capabilities:</p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/conn_capabilities.png"><h2> Step 6:
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/conn_capabilities.png"><h2> Step 6:
 Create two MySQL resources in Syncope </h2>
 <p>Create a second similar connector with a different name (for the other
 database you have created above "syncope_backup").</p>
@@ -263,38 +263,38 @@ database you have created above "syncope_backup").</p>
 new resource" from menu.</p>
 <p>At the end you should have 2 resources like these:</p>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/res.png"></p>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/res.png"></p>
 <h2> Step 7: Create some useful "Schema" </h2>
 <p>Go to Configuration -&gt; Types -&gt; Schemas and add the following info:
 </p>
 <p>
 
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/schema1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/schema2.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/schema3.png">
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/schema1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/schema2.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/schema3.png">
 </p>
 <p>Now you need to link the new Schemas to a specific AnyTypeClass so go to
 Configuration -&gt; Types -&gt; AnyTypeClasses and edit BaseUser:</p>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/anytypeclass.jpg"></p>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/anytypeclass.jpg"></p>
 <h2> Step 8: Add provision rules for the first resource </h2>
 <p>Go back to "Topology" section, select MySQL1, click on "Edit provision rules"
 and finally the "+" button:</p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/provrule1.png"><br>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/provrule1.png"><br>
 <br>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/provrule2.png"></p>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/provrule2.png"></p>
 <p>
 <strong>Notice</strong>: before going further, you should know that if you
 will remove a user from Syncope it will be removed from external resource too,
 so if you don't want it to happen you should override capabilities in MySQL1 by
 editing it.</p>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/res1_edit.png"></p>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/res1_edit.png"></p>
 <h2> Step 9: Add provision rules for the second resource </h2>
 <p>Select MySQL2, click "Edit provision rules", then the "+" button:</p>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/provrule2.1.png"></p>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/provrule2.1.png"></p>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/provrule2.2.png">&nbsp;</p>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/provrule2.2.png">&nbsp;</p>
 <h2> Step 10: Create a pull task to import users from "MySQL1" to Syncope: </h2>
 <p>Select MySQL1 and choose "Pull Tasks" from menu, click the "+" button:</p>
 <p>Fill the fields as below, notice that the last step tells Syncope to run the
@@ -302,7 +302,7 @@ task every day at 12pm, but you can change it as you prefer and it is not
 mandatory schedule it.&nbsp;</p>
 <p>
 
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/pulltask1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/pulltask2.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/pulltask3.png">
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/pulltask1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/pulltask2.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/pulltask3.png">
 </p>
 <p>After saving it, click on the created "ImportUsers" task and select "Run",
 now click on the gear icon to run it.</p>
@@ -311,7 +311,7 @@ menu.</p>
 <p>Now the 2 users that you have in the MySQL1 resource are stored in Syncope:
 </p>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/usersafterpulltask.png"></p>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/usersafterpulltask.png"></p>
 <h2> Step 11: Create a push task to propagate users from Syncope to MySQL2:
 </h2>
 <p>As in Step 10, select MySQL2 and choose "Push Tasks" from menu, click the "+"
@@ -319,12 +319,12 @@ button:</p>
 <p>Fill the fields as below:</p>
 <p>
 
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/pushtask1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/pushtask2.png">
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/pushtask1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/pushtask2.png">
 </p>
 <p>Now execute the task, as you did for the "ImportUsers" task, and check in
 your MySQL2 instance that data is synchronized:</p>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/resultmysql2.png"></p>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/resultmysql2.png"></p>
 <h2>Advanced section: </h2>
 <h3>Assign a template to MySQL1 pull task in order to
 automatically propagate users from MySQL1 to MySQL2: </h3>
@@ -333,7 +333,7 @@ automatically propagate users from MySQL1 to MySQL2: </h3>
 "USER" and go on.</p>
 <p>Find the "External resources" step in wizard and edit like this:</p>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/advancedpulltask1.png"></p>
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/advancedpulltask1.png"></p>
 <p>Now, if you have already executed the previous push task for MySQL2, access
 the external resource and remove the rows from it. <br>
 Also it could be necessary to remove all previously synchronized users from
@@ -341,7 +341,7 @@ Syncope too, then run the "ImportUsers" pull task from MySQL1 resource.</p>
 <p>All users will be pulled to Syncope again and propagated to MySQL2 resource.
 The result should be something like this:</p>
 <p>
-<img style="margin: 10px;" src="/blog/www/gallery/tirasa/blog/advancedpulltaskresult.png">
+<img style="margin: 10px;" src="/www//gallery/tirasa/blog/advancedpulltaskresult.png">
 </p>
 <p>
 <strong>Notice</strong>: this way the "fullname" attribute will be correctly
@@ -706,7 +706,7 @@ populated.</p>
 <div class="owl-carousel" id="hshop-slider" style="border-bottom: 1px solid rgba(145,165,180,.6)">
 <div class="item">
 <div class="left-item">
-<img src="/blog/www/gallery/tirasa/blog/notification.png"></div>
+<img src="/www//gallery/tirasa/blog/notification.png"></div>
 <div class="right-item">
 <a href="/blog/apache-syncope-notification-e-mails.html" class="purple">
 <h5 class="item-title">Apache Syncope Notification E-mails</h5>
@@ -716,7 +716,7 @@ populated.</p>
 </div>
 <div class="item">
 <div class="left-item">
-<img src="/blog/www/gallery/tirasa/blog/validation-icon.png"></div>
+<img src="/www//gallery/tirasa/blog/validation-icon.png"></div>
 <div class="right-item">
 <a href="/blog/add-custom-validation-to-syncope-console.html" class="purple">
 <h5 class="item-title">Add custom validation to Apache Syncope Admin Console</h5>
@@ -726,7 +726,7 @@ populated.</p>
 </div>
 <div class="item">
 <div class="left-item">
-<img src="/blog/www/gallery/tirasa/blog/postgresql.png"></div>
+<img src="/www//gallery/tirasa/blog/postgresql.png"></div>
 <div class="right-item">
 <a href="/blog/benchmarking-apache-syncope-on-postgresql.html" class="purple">
 <h5 class="item-title">Benchmarking Apache Syncope on PostgreSQL</h5>
