@@ -260,33 +260,33 @@ and you'll access the <strong>Syncope Admin Console</strong>.</p>
 <h2> Set up an Azure external resource </h2>
 <p>Go to "Topology" and add a new connector (see image below):</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/addazureconnector1.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addazureconnector1.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/addazureconnector1.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/addazureconnector1.png:thumbnail"></a>
 </p>
 <p>You'll be able to see the new Azure bundle, so choose
 "net.tirasa.connid.bundles.azure" from "Bundle" list and fill the other required
 fields:</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/azurebundle.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/azurebundle.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/azurebundle.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/azurebundle.png:thumbnail"></a>
 </p>
 <p>Click on "Next" button and enter the Azure service configuration by filling
 the required parameters (you can find more info about it on related
 <a target="_blank" href="https://connid.atlassian.net/wiki/spaces/BASE/pages/308674561/Azure#Azure-Configuration">ConnId
 Azure connector wiki page</a>), here is an example:</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/addazureconnector2.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addazureconnector2.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/addazureconnector2.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/addazureconnector2.png:thumbnail"></a>
 </p>
 <p>Click on "Next" button again, select connector Capabilities (AUTHENTICATE and
 SYNC are not supported as you can see
 <a target="_blank" href="https://connid.atlassian.net/wiki/spaces/BASE/pages/308674561/Azure#Azure-Supportedoperations">here</a>)
 and click on "Finish":</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/addazureconnector3.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addazureconnector3.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/addazureconnector3.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/addazureconnector3.png:thumbnail"></a>
 </p>
 <p>Now you are ready to create the Azure external resource. <br>
 Click on the just created connector and choose "Add new resource" from right
 menu:</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/addazureres.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addazureres.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/addazureres.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/addazureres.png:thumbnail"></a>
 </p>
 <h3> Dealing with the "objectId" attribute, returned by Azure service upon User
 / Group creations </h3>
@@ -311,7 +311,7 @@ Azure resource. <br>
 So just click on resource node and select "Edit resource" from menu:</p>
 <p>
 
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/addazurerespropagationactions.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/addazurerespropagationactions.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/addazurerespropagationactions.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/addazurerespropagationactions.png:thumbnail"></a>
 
 </p>
 <h2> Add some required Plain Schemas </h2>
@@ -319,7 +319,7 @@ So just click on resource node and select "Edit resource" from menu:</p>
 -&gt; "Schemas"; in the "PLAIN" accordion panel click on the "+" icon. <br>
 Create the "AzureUserId" schema:</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/azureschemauser.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/azureschemauser.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/azureschemauser.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/azureschemauser.png:thumbnail"></a>
 </p>
 <p>We must add it to "BaseUser" AnyTypeClass in order to have it available for
 "USER" AnyType.</p>
@@ -328,7 +328,7 @@ choose "edit" from right menu. <br>
 Add "AzureUserId" to "Selected" sub-panel, in "Plain Schemas" section:</p>
 <p>
 
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/azureschemauseranytypeclass.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/azureschemauseranytypeclass.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/azureschemauseranytypeclass.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/azureschemauseranytypeclass.png:thumbnail"></a>
 
 </p>
 <p>Do the same for "AzureGroupId". <br>
@@ -343,8 +343,8 @@ from right menu.</p>
 click "Next" in the wizard until you'll get to "Mapping" step. <br>
 Now, you can choose a mapping configuration, e.g.</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/azureusermapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/azureusermapping.png:thumbnail"></a>
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/azuregroupmapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/azuregroupmapping.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/azureusermapping.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/azureusermapping.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/azuregroupmapping.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/azuregroupmapping.png:thumbnail"></a>
 </p>
 <h3> Configuration test </h3>
 <p>You can run a simple basic test by exploring the resource and make Syncope
@@ -355,8 +355,8 @@ from menu.</p>
 you'll see some users / groups, in case you have any on the Azure AD. <br>
 Here you can see an example:</p>
 <p>
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/azureuserexplore.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/azureuserexplore.png:thumbnail"></a>
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/azuregroupexplore.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/azuregroupexplore.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/azureuserexplore.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/azureuserexplore.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/azuregroupexplore.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/azuregroupexplore.png:thumbnail"></a>
 </p>
 <h3> About Azure AD required attributes </h3>
 <p>Note that there are some required attributes that a User or Group must have
@@ -414,7 +414,7 @@ to do for Syncope 2.1? <br>
 Well, it is pretty simple! <br>
 You just need to open the resource mapping and you'll see a new field: <br>
 
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/2_1_xusermapping.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/2_1_xusermapping.png:thumbnail"></a> 
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/2_1_xusermapping.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/2_1_xusermapping.png:thumbnail"></a> 
 <br>
 Enter the previously created required schemas ("AzureUserId" for "USER" AnyType
 and "AzureGroupId" for "GROUP" AnyType) in that field, to handle the returned
@@ -433,7 +433,7 @@ Go to Admin Console, on the left panel click "Configuration" -&gt;
 "org.apache.syncope.core.provisioning.java.propagation.AzurePropagationActions"
 JAVA class: <br>
 
-<a onclick="return hs.expand(this)" class="highslide" href="/www//gallery/tirasa/blog/2_1_ximplementationpropagationactions.png"><img style="margin: 10px;" src="/gallery/tirasa/blog/2_1_ximplementationpropagationactions.png:thumbnail"></a>
+<a onclick="return hs.expand(this)" class="highslide" href="/blog/gallery/tirasa/blog/2_1_ximplementationpropagationactions.png"><img style="margin: 10px;" src="/blog/gallery/tirasa/blog/2_1_ximplementationpropagationactions.png:thumbnail"></a>
 
 </p>
 <p>Done, that's all! <br>
